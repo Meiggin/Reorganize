@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul>
+		<li data-good ="0">
+			<p>短袖衬衫</p>
+			<p>1004</p>
+			<button>购物车</button>
+		</li>
+		<li data-good ="1">
+			<p>短袖衬衫2</p>
+			<p>0527</p>
+			<button>购物车</button>
+		</li>
+		<li data-good ="3">
+			<p>短袖衬衫3</p>
+			<p>1004</p>
+			<button>购物车</button>
+		</li>
+		<li data-good ="4">
+			<p>短袖衬衫4</p>
+			<p>1004</p>
+			<button>购物车</button>
+		</li>
+	</ul>
+	<a href="结算页面.html">结算</a>
+	<script>
+		var arr = document.cookie.split("; ");
+		console.log(arr)
+		for(var i = 0;i<arr.length;i++){
+
+			var arr2 = arr[i].split("=")
+			if(arr2[0]=="cardlist"){
+				console.log(arr2[1])
+				console.log(JSON.parse(arr2[1]))
+				cardlist = JSON.parse(arr2[1])
+			}
+		}
+		var ul = document.querySelector("ul");
+		var cardlist =[];
+		ul.addEventListener("click",function(e){
+			console.log(e.target.nodeName.toLowerCase())
+			if(e.target.nodeName.toLowerCase()==="button"){
+
+				var li = e.target.parentNode;
+				var liId = li.getAttribute("data-good");
+				console.log(liId);
+
+				console.log(li.firstElementChild.innerHTML)
+				console.log(li.childNodes[3].innerHTML)
+				for(var i = 0;i<cardlist.length;i++){
+					if(cardlist[i].gid===liId){
+						cardlist[i].num++
+						break;
+					}
+				}
+				console.log(i,cardlist.length)
+				if(i===cardlist.length){
+					var obj = {};
+					obj.gid = liId;
+					obj.name = li.firstElementChild.innerHTML;
+					obj.price = li.childNodes[3].innerHTML;
+					obj.num =1;
+					cardlist.push(obj)
+
+				}
+				console.log(cardlist)
+				document.cookie = "cardlist = "+JSON.stringify(cardlist);
+			}
+		})
+	</script>
+</body>
+</html>
