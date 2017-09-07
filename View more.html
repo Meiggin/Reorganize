@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<button onclick="addLineTop()">查看更多</button>
+		<ul id="ul">
+			<!--innerHTML-->
+		</ul>
+		<button onclick="addLine()">查看更多</button>
+		<script>
+			var arr = [
+				"中国轰6飞至纪伊半岛近海上空 自卫队飞机紧急升空",
+				"为拿千万美元赏金 两名飞行员杀害3名战友 驾80吨轰炸机叛逃",
+				"“37岁妈妈给自己17岁儿子的聊天记录”你们娘俩这是要……",
+				"外国人把裸眼3D玩出花，这14张照片让人不敢相信自己的眼睛"
+			];
+			//根据数组生成li列表
+			function loadMore() {
+				var i = 0;
+				for(; i < arr.length; i++) {
+					document.getElementById("ul").innerHTML += ("<li>" + arr[i] + "</li>");
+				}
+			}
+			//第一次加载内容
+			loadMore()
+			
+			//第n次加载内容
+			function addLine(){
+				//1.增加数组的长度，往数组后面添加内容
+				arr.push("三十年同学聚会——满满的都是期待！");
+				//2.清空li列表
+				document.getElementById("ul").innerHTML = "";
+				//3.重新生成新的里列表，并且插入到DOM结构里面
+				loadMore()
+			}
+			
+			function addLineTop(){
+				//1.增加数组的长度，往数组后面添加内容
+				arr.unshift("全片34分钟没有一个惊吓镜头 但终究把我吓得气都不敢喘");
+				//2.清空li列表
+				document.getElementById("ul").innerHTML = "";
+				//3.重新生成新的里列表，并且插入到DOM结构里面
+				loadMore()
+			}
+		</script>
+	</body>
+
+</html>
