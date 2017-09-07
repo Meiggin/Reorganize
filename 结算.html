@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul></ul>
+	<p></p>
+	<script type="text/javascript">
+		var cardlist = [];
+		var sum = 0;
+		var ul = document.querySelector("ul");
+		var p = document.querySelector("p")
+		var arr = document.cookie.split("; ");
+		console.log(arr)
+		for(var i = 0;i<arr.length;i++){
+
+			var arr2 = arr[i].split("=")
+			if(arr2[0]=="cardlist"){
+				console.log(arr2[1])
+				console.log(JSON.parse(arr2[1]))
+				cardlist = JSON.parse(arr2[1])
+			}
+		}
+		function render(){
+			sum = 0;
+			ul.innerHTML = "";
+			for(var i = 0;i<cardlist.length;i++){
+				ul.innerHTML +=`
+				<li data-good ="${cardlist[i].gid}">
+					<p>${cardlist[i].name}</p>
+					<p>${cardlist[i].price}</p>
+					<p>${cardlist[i].num}</p>
+				</li>
+				`
+				sum+=cardlist[i].num*cardlist[i].price
+			}
+			p.innerHTML = "总价格："+sum
+		}
+		render();
+		console.log(sum)
+		ul.addEventListener("click",function(e){
+			var li = e.target.parentNode;
+			console.log(li)
+			for(var i = 0;i<cardlist.length;i++){
+				if(li.getAttribute("data-good")===cardlist[i].gid){
+					cardlist.splice(i,1);
+					render()
+					document.cookie = "cardlist = "+JSON.stringify(cardlist);
+				}
+			}
+		})
+	</script>
+</body>
+</html>
