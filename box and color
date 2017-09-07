@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div {
+				width: 200px;
+				height: 200px;
+				margin: 200px auto;
+				border-radius: 5px;
+				box-shadow: 0 0 5px;
+				background: #0f0;
+			}
+			
+			span {
+				color: #000;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div>
+			<span id="span">23333</span>
+		</div>
+		<script>
+			var arr = ["red", "blue", "yellow", "green", "black", "orange", "white"];
+			var i = 0;
+						setInterval(function(){
+							if(i===6){
+								i = 0;
+							}
+							document.querySelector("div").style.backgroundColor = arr[i]
+							i++
+						},100)
+			var x = 1;
+			
+			var span = document.getElementById("span");
+			
+			setInterval(function() {
+				console.log(x)
+				span.style.fontSize = Math.abs(x*10)+"px"
+				if(x===6){
+					x = x*-1-1;
+				}else if(x===-1){
+				    x = x*-1-1;
+				}
+				x++
+
+			},1000);
+		</script>
+	</body>
+
+</html>
