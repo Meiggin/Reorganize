@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		img {
+			position: absolute;
+		}
+	</style>
+
+	<body>
+		<img src="img/1.gif" />
+		<script>
+			var img = document.querySelector("img");
+			var animation_routes = [];
+			document.onmousedown = function(e) {
+				var offset = 0;
+				console.log("按下")
+				e.clientX;
+				e.clientY;
+				animation_routes.push({
+					x: e.clientX,
+					y: e.clientY
+				})
+				document.onmousemove = function(e) {
+					animation_routes.push({
+						x: e.clientX,
+						y: e.clientY
+					})
+				}
+				document.onmouseup = function(){
+					document.onmousemove = null;
+					console.log(animation_routes);
+					var timer = setInterval(function(){
+						img.src = "img/2.gif"
+						offset++
+						img.style.left = animation_routes[offset].x + "px";
+						img.style.top = animation_routes[offset].y + "px";
+						console.log(offset)
+						if(offset>=animation_routes.length-1){
+							img.src = "img/1.gif"
+							animation_routes = [];
+							clearInterval(timer)
+						}
+					},50)
+				}
+			}
+		</script>
+	</body>
+
+</html>
