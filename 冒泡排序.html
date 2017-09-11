@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			var arr = [9, 6, 8, 5, 1, 4, 2];
+			for(var i = 0; i < arr.length - 1; i++) {
+				console.log(arr[i])
+				for(var j = 0; j < arr.length - i - 1; j++) {
+					console.log(arr[j],arr[j+1]);
+					if(arr[j]>arr[j+1]){
+						//先把大的存到空的容器上
+						temp = arr[j];
+						//进行交换
+						arr[j] = arr[j+1];
+						arr[j+1] = temp
+					}
+				}
+			}
+			console.log(arr)
+		</script>
+	</body>
+
+</html>
