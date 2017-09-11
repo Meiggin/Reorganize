@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<p id="p1" style="color: red;"></p>
+		<p id="p2" style="color: green;"></p>
+		<script>
+			console.log("进入页面");
+			//网络原因
+			function getData(callback) {
+				setTimeout(function() {
+					console.log("获取后端数据");
+					console.log("拿到数据渲染");
+					var data = "百度一下";
+					callback(data)
+				}, 2000)
+			}
+
+			getData(function(data) {
+				document.getElementById("p2").innerHTML = data;
+			})
+			
+			getData(function(data) {
+				document.getElementById("p1").innerHTML = data;
+				//document.getElementById("p2").innerHTML = data;
+			})
+		</script>
+	</body>
+
+</html>
