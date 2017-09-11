@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin:0px;
+				padding:0px;
+				list-style: none;
+			}
+			.baidu{
+				width: 560px;
+    			height: 305px;
+    			border: 1px solid red;
+    			margin:50px auto;
+    			position: relative;
+			}
+			.baidu ul li{
+				position: absolute;
+				left:0px;top:0px;
+				display:none;
+			}
+			.baidu ul li img{
+				width: 560px;
+    			height: 305px;
+    			display: block;
+			}
+			.baidu ol {
+				position: absolute;
+				width: 240px;
+				left:50%;
+				bottom:20px;
+				margin-left:-120px;
+			}
+			.baidu ol li{
+				width: 20px;
+				height: 20px;
+				background: lightblue;
+				border-radius:50%;
+				float: left;
+				margin-right:10px;
+			}
+			.baidu ol li.active{
+				background: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="baidu">
+			<ul>
+				<li style="display: block;"><img src="https://imgsa.baidu.com/news/crop%3D3%2C1%2C751%2C388/sign=4c48ab194036acaf4dafccbc41eaa121/a044ad345982b2b75705d1e43aadcbef76099b7c.jpg" alt="" /></li>
+				<li><img src="https://imgsa.baidu.com/news/q%3D100/sign=ab1a75dbac86c9170e035639f93c70c6/c995d143ad4bd1134d20261151afa40f4bfb0527.jpg" alt="" /></li>
+				<li><img src="https://imgsa.baidu.com/news/q%3D100/sign=3697b2273f9b033b2a88f8da25cf3620/9a504fc2d562853507607d029bef76c6a7ef6315.jpg" alt="" /></li>
+				<li><img src="https://imgsa.baidu.com/news/q%3D100/sign=bed91ffdfb1f3a295cc8d1cea924bce3/cc11728b4710b912fa7148ddc8fdfc0392452264.jpg" alt="" /></li>
+				<li><img src="https://imgsa.baidu.com/news/q%3D100/sign=7fdf0c57a6345982c38ae1923cf4310b/5fdf8db1cb134954e12170475d4e9258d1094ad2.jpg" alt="" /></li>
+				<li><img src="https://imgsa.baidu.com/news/q%3D100/sign=842cebdc30c79f3d89e1e0308aa1cdbc/5bafa40f4bfbfbede675985c73f0f736afc31fe0.jpg" alt="" /></li>
+				<li><img src="https://imgsa.baidu.com/news/q%3D100/sign=52760d0b3d7adab43bd01f43bbd4b36b/91529822720e0cf37da5f0d80146f21fbe09aa47.jpg" alt="" /></li>
+				<li><img src="https://imgsa.baidu.com/news/q%3D100/sign=cb3b67fea064034f09cdc6069fc27980/0bd162d9f2d3572c911f35ff8113632762d0c310.jpg" alt="" /></li>
+			</ul>
+			<ol>
+				<li class="active"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ol>
+			
+			<!--<a href="javascript:;">&lt;</a>
+			<a href="javascript:;">&gt;</a>-->
+		</div>
+		<script type="text/javascript">
+			//分析：
+			//结构：图片和切换的小按钮一致的（一一匹配 ）。   左右箭头
+			//效果的思路：
+			//事件(小按钮的事件的类型(onmouseover/onclick))
+			//实现1:小按钮红色背景的切换（className）
+			//实现2:对应的图片显示出来(display)
+			//核心思路：点击对应的小按钮出现对应的图片（this知道当前点击那个按钮）
+			//图片怎么直到那个按钮：给对应的按钮添加自定义的属性，让图片获取当前按钮下的属性。
+			
+			/*var aBtns=document.getElementsByTagName('ol')[0].getElementsByTagName('li');
+			var aPics=document.getElementsByTagName('ul')[0].getElementsByTagName('li');
+			var num=0;
+			for(var i=0;i<aBtns.length;i++){
+				aBtns[i].index=i;//自定义属性(自定义索引)
+				aBtns[i].onclick=function(){
+					//this:当前操作的按钮对象。
+					//alert(i);//8
+					for(var i=0;i<aBtns.length;i++){//所有的按钮类名消失
+						aBtns[i].className='';
+						aPics[i].style.display='none';
+					}
+					this.className='active';//当前的添加上
+					aPics[this.index].style.display='block';
+					
+				};
+			}*/
+			
+			var aBtns=document.getElementsByTagName('ol')[0].getElementsByTagName('li');
+			var aPics=document.getElementsByTagName('ul')[0].getElementsByTagName('li');
+			var num=0;
+			for(var i=0;i<aBtns.length;i++){
+				aBtns[i].index=i;//自定义属性(自定义索引)
+				aBtns[i].onclick=function(){
+					//this:当前操作的按钮对象。
+					//alert(i);//8
+					num=this.index;
+					for(var i=0;i<aBtns.length;i++){//所有的按钮类名消失
+						aBtns[i].className='';
+						aPics[i].style.display='none';
+					}
+					aBtns[num].className='active';//当前的添加上
+					aPics[num].style.display='block';
+					
+				};
+			}
+			
+			
+		</script>
+	</body>
+</html>
