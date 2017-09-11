@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			function people() {
+				var name;
+				var age;
+				
+				function setName(name) {
+					name = name
+				}
+				function setAge(age) {
+					age = age
+				}
+				return {
+					setName:setName,
+					setAge:setAge
+				}
+			}
+			
+			var setPeople = people()
+			console.log(setPeople)
+			setPeople.setName("laoyao")
+			setPeople.setAge(99)
+		</script>
+	</body>
+
+</html>
