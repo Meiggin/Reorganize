@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var i = 1;
+			var sum = 0;
+			var timeer = setInterval(function(){
+				sum+=i
+				if(i===100){
+					clearInterval(timeer);
+					console.log(sum)
+				}
+				i++;
+			},0)
+		</script>
+	</body>
+</html>
