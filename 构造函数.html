@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			
+			//1.
+			/*function a(name){
+				var name = "lushuai"//局部变量 私有变量
+				this.name = name;//全局变量 公有变量
+			}
+			
+			window.a("laoyao")
+			console.log(name)*/
+			
+			//2。构造函数
+			function a(name){
+				//var obj = {}
+				var name2 = "lushuai"//局部变量 私有变量
+				this.name = name;//全局变量 公有变量
+				var self = this;
+				function c(){
+					console.log(name2)
+					//里面的this指向是window
+					self
+				}
+				//return obj
+			}
+			
+			var b = new a("laoyao")
+			console.log(b)
+		</script>
+	</body>
+</html>
