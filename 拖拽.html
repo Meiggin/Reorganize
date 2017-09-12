@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		img{position: absolute;}
+	</style>
+</head>
+<body>
+	<img src="1.jpg">
+	<script type="text/javascript">
+		window.onload=function(){
+			var oimg = document.querySelector("img");
+			var shortx = null;
+			var shorty = null;
+			oimg.onmousedown = function(e){
+				var e = e||window.event;
+				shortx=e.offsetX;
+				shorty=e.offsetY;
+				document.onmousemove=function(e){
+					var e = e||window.event;
+					var left1 = e.clientX-shortx
+					var top1 = e.clientY-shortx
+					if(left1<20){
+						left1=0
+					}else if(left1>=document.documentElement.clientWidth-oimg.offsetWidth){
+						left1=document.documentElement.clientWidth-oimg.offsetWidth;
+					}
+					if(top1<20){
+						top1=0
+					}else if(top1>=document.documentElement.clientHeight-oimg.offsetHeight){
+						top1=document.documentElement.clientHeight-oimg.offsetHeight;
+					}
+					oimg.style.left = left1+"px";
+					oimg.style.top = top1+"px";
+				}
+				document.onmouseup=function(){
+					document.onmousemove=null;
+					document.onmouseup=null;
+				}
+				return false;
+			}
+		}
+	</script>
+</body>
+</html>
