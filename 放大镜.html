@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+	<style type="text/css">
+	*{margin:0;padding:0;}
+	section{position: relative;
+		display:flex;justify-content: space-between;
+		width:600px;height:600px;
+	}
+	#fangda{width:400px;height:400px;border:1px solid #000;display:none;float:right;margin-top:-550px;margin-right:50px;background: url(img/1.jpg) no-repeat;background-size:1600px 1600px;}
+	#meiggin{width:200px;height:200px;border:1px solid #000;position:absolute;left:0px;top:0;display:none;}
+	</style>
+</head>
+<body>
+	<section>
+		<img src="img/1.jpg">
+		<div id="meiggin"></div>		
+		
+	</section>
+	<div id="fangda"></div>	
+	<script type="text/javascript">
+		var box1 = document.querySelector("#meiggin");
+		var box2 = document.querySelector("#fangda");
+		var box = document.querySelector("section")
+		box.onmouseover= function(){
+			
+			box1.style.display = "block"
+			box2.style.display = "block";
+			
+		}
+		box.onmousemove=function(e){
+				var e = e || window.event;
+				console.log('aa');
+				
+				box1.style.left = e.clientX -100+ 'px';
+				box1.style.top = e.clientY -100+ 'px';
+				if(box1.offsetLeft<=0){
+					box1.style.left=0
+				}else if(box1.offsetLeft>=399){
+					box1.style.left=399+"px"
+				}
+				if(box1.offsetTop<=0){
+					box1.style.top=0
+				}else if(box1.offsetTop>=399){
+					box1.style.top=399+"px"
+				}
+				var disX = box1.offsetLeft*3;
+				var disY = box1.offsetTop*3;
+				console.log(disX+'px '+disY+'px;')
+				box2.style.backgroundPosition = (-disX)+'px -'+disY+'px';
+
+			}
+		box.onmouseout= function(){
+
+			box1.style.display = "none"
+			box2.style.display = "none"
+		
+		}
+
+		</script>
+</body>
+	
+</html>
