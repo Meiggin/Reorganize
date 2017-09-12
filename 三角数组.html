@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+<script>
+	var box = document.getElementById('box');
+	var arr1 = [];
+	
+	var arr2 = [];
+	var arr3 = [];
+	var j = 1;
+	for(let i =1;i<26;i++){		
+		arr3.push(i);
+		if(j == 5){
+			arr1.push(arr3);
+			arr3 = [];
+			j=0;
+		}
+		j++;
+	}
+	 // console.log(arr1);
+
+	for(let i = 4;i>=0;i--){
+		arr1[arr1.length-1-i].splice(arr1.length-i,i)
+		//Array.splice()会对原数组造成改变
+		var arr4 = arr1[arr1.length-1-i];
+		arr2.push(arr4);
+	}
+	for(let i of arr2){
+		let createSpan = '';
+		let createDiv =document.createElement('p');
+		console.log(i);
+		for(let j of i){
+
+			createSpan += `<span>&nbsp;${j}&nbsp;</span>`;
+			console.log(createSpan)
+		}
+
+		createDiv.innerHTML = createSpan;
+		box.appendChild(createDiv);
+	}
+</script>
+</html>
