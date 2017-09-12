@@ -40,9 +40,24 @@
 				border-radius:50%;
 				float: left;
 				margin-right:10px;
+				cursor: pointer;
 			}
 			.baidu ol li.active{
 				background: red;
+			}
+			#left,#right{
+				font-size: 60px;
+				color:#fff;
+				text-decoration: none;
+				position: absolute;
+				top:120px;
+				display: none;
+			}
+			#left{
+				left:20px;
+			}
+			#right{
+				right:20px;
 			}
 		</style>
 	</head>
@@ -69,8 +84,8 @@
 				<li></li>
 			</ol>
 			
-			<!--<a href="javascript:;">&lt;</a>
-			<a href="javascript:;">&gt;</a>-->
+			<a href="javascript:;" id="left">&lt;</a>
+			<a href="javascript:;" id="right">&gt;</a>
 		</div>
 		<script type="text/javascript">
 			//分析：
@@ -102,24 +117,78 @@
 			
 			var aBtns=document.getElementsByTagName('ol')[0].getElementsByTagName('li');
 			var aPics=document.getElementsByTagName('ul')[0].getElementsByTagName('li');
+			var baidu=document.querySelector('.baidu');
+			var oLeft=document.getElementById('left');
+			var oRight=document.getElementById('right');
 			var num=0;
 			for(var i=0;i<aBtns.length;i++){
-				aBtns[i].index=i;//自定义属性(自定义索引)
+				aBtns[i].index=i;//自定义属性(自定义索引)																										
 				aBtns[i].onclick=function(){
-					//this:当前操作的按钮对象。
-					//alert(i);//8
-					num=this.index;
-					for(var i=0;i<aBtns.length;i++){//所有的按钮类名消失
-						aBtns[i].className='';
-						aPics[i].style.display='none';
-					}
-					aBtns[num].className='active';//当前的添加上
-					aPics[num].style.display='block';
-					
+					num=this.index;//当前操作索引
+					lunbo();
 				};
 			}
+			function lunbo(){
+				for(var i=0;i<aBtns.length;i++){
+					aBtns[i].className='';
+					aPics[i].style.display='none';
+				}
+				aBtns[num].className='active';
+				aPics[num].style.display='block';
+			}
+			
+			//箭头显示与隐藏
+			/*baidu.onmouseover=show;
+			baidu.onmouseout=hide;
 			
 			
+			function show(){
+				oLeft.style.display='block';
+				oRight.style.display='block';
+			}
+
+			function hide(){
+				oLeft.style.display='none';
+				oRight.style.display='none';
+			}*/
+			
+			baidu.onmouseover=function (){
+				oLeft.style.display='block';
+				oRight.style.display='block';
+				clearInterval(timer);
+			};
+			
+			baidu.onmouseout=function (){
+				oLeft.style.display='none';
+				oRight.style.display='none';
+				timer=setInterval(function(){
+					oRight.onclick();//右键触发
+				},1000);
+			};
+			
+			
+			//左右箭头切换
+			oRight.onclick=function(){
+				if(num>=aBtns.length-1){
+					num=0;
+				}else{
+					num++;
+				}
+				lunbo();
+			}
+			
+			oLeft.onclick=function(){
+				if(num<=0){
+					num=aBtns.length-1;
+				}else{
+					num--;
+				}
+				lunbo();
+			}
+			//自动播放
+			var timer=setInterval(function(){
+				oRight.onclick();//右键触发
+			},2000);
 		</script>
 	</body>
 </html>
