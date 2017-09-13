@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding:0px;margin: 0px;
+			}
+			.box{
+				width: 100px;
+				height:100px;
+				background: red;
+				/*position: absolute;
+				left:0px;
+				top:0px;*/
+				font-size:12px;
+				margin-bottom: 10px;
+				border:1px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			缓冲运动：离目标越远，速度越快。反之，慢下拉(速度越来越小)
+		-->
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box">我是中国人</div>
+		<div class="box"></div>
+		<div style="width: 1px;height: 500px; background: black;position: absolute;left:1000px;top:0px;"></div>
+		<script type="text/javascript">
+			var aDiv=document.querySelectorAll('.box');
+			var timer=null;
+			aDiv[0].onclick=function(){
+				move(this,'width',1000);
+			};
+			aDiv[1].onclick=function(){
+				move(this,'height',1000);
+			};
+			aDiv[2].onclick=function(){
+				move(this,'fontSize',100);
+			};
+			aDiv[3].onclick=function(){
+				move(this,'borderWidth',100);
+			};
+			
+			//alert(oDiv.offsetLeft);
+			//alert(getComputedStyle(oDiv)['left']);//100px  chrome firefox
+			//alert(oDiv.currentStyle['left']);//ie8及以下的版本
+			
+			//获取元素的兼容问题
+			
+			
+			function getstyle(obj,attr){
+				if(obj.currentStyle){
+					return oDiv.currentStyle[attr];
+				}else{
+					return getComputedStyle(obj)[attr];
+				}
+			}
+
+			function move(obj,attr,target){
+				clearInterval(timer);//防止重复点击元素。
+				timer=setInterval(function(){
+					//求初始值
+					var current=parseInt(getstyle(obj,attr));
+					//求速度
+					var speed=(target-current)/5;
+					speed=speed>0?Math.ceil(speed):Math.floor(speed);
+					//关闭定时器
+					if(current==target){
+						clearInterval(timer);
+					}
+					obj.style[attr]=current+speed+'px';
+				},30);
+			}
+		</script>
+	</body>
+</html>
