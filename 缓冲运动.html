@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.box{
+				width: 100px;
+				height:100px;
+				background: red;
+				position: absolute;
+				left:0px;
+				top:0px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			缓冲运动：离目标越远，速度越快。反之，慢下拉(速度越来越小)
+		-->
+		<div class="box"></div>
+		<div style="width: 1px;height: 500px; background: black;position: absolute;left:600px;top:0px;"></div>
+		<script type="text/javascript">
+			var oDiv=document.querySelector('.box');
+			var timer=null;
+			oDiv.onclick=function(){
+				clearInterval(timer);//防止重复点击元素。
+				timer=setInterval(function(){
+					//speed=Math.ceil((600-oDiv.offsetLeft)/5);
+					//speed=Math.floor((600-oDiv.offsetLeft)/5);
+					//求速度
+					var speed=(600-oDiv.offsetLeft)/5;
+					speed=speed>0?Math.ceil(speed):Math.floor(speed);
+					//关闭定时器
+					if(oDiv.offsetLeft==600){
+						clearInterval(timer);
+					}
+					oDiv.style.left=oDiv.offsetLeft+speed+'px';
+				},30);
+			}
+		</script>
+	</body>
+</html>
