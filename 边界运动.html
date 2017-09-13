@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.box{
+				width: 100px;
+				height:100px;
+				background: red;
+				border-radius: 50%;
+				position: absolute;
+				left:0px;
+				top:0px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box"></div>
+		<script type="text/javascript">
+			var oDiv=document.querySelector('.box');
+			var timer=null;
+			var speedx=0;//速度
+			var speedy=0;
+			var shortx=0;//短线
+			var shorty=0;
+			var prevx=0;//前一个值，鼠标走过的地方。
+			var prevy=0;
+			oDiv.onmousedown=function(ev){
+				var ev=ev||window.event;
+				shortx=ev.offsetX;
+				shorty=ev.offsetY;
+				//前一个值进行初始化
+				prevx=ev.clientX;
+				prevy=ev.clientY;
+				document.onmousemove=function(ev){
+					var ev=ev||window.event;
+					var mleft=ev.clientX-shortx;
+					var mtop=ev.clientY-shorty;
+					
+					speedx=ev.clientX-prevx;
+					speedy=ev.clientY-prevy;
+					
+					prevx=ev.clientX;//鼠标位置变成前一个值。
+					prevy=ev.clientY;
+					
+					if(mleft<0){
+						mleft=0;
+					}else if(mleft>=document.documentElement.clientWidth-oDiv.offsetWidth){
+						mleft=document.documentElement.clientWidth-oDiv.offsetWidth;
+					}
+					
+					if(mtop<0){
+						mtop=0;
+					}else if(mtop>=document.documentElement.clientHeight-oDiv.offsetHeight){
+						mtop=document.documentElement.clientHeight-oDiv.offsetHeight;
+					}
+					
+					/*var cdiv=document.createElement('div');
+					cdiv.style.cssText="width:5px;height:5px;background: red;position:absolute;left:"+mleft+"px;top:"+mtop+"px;"
+					document.body.appendChild(cdiv);*/
+					oDiv.style.left=mleft+'px';
+					oDiv.style.top=mtop+'px';
+				}
+				document.onmouseup=function(){
+					document.onmousemove=null;
+					document.onmouseup=null;
+					pzmove();//调用
+				}
+				return false;
+			}
+			
+			
+			function pzmove(){
+				clearInterval(timer);
+				timer=setInterval(function(){
+					//oDiv.offsetLeft:每隔30毫秒重新获取box的left值。
+					speedy+=4;//重力加速度
+					var x=oDiv.offsetLeft+speedx;
+					var y=oDiv.offsetTop+speedy;
+					if(y<0){
+						y=0;
+						speedy*=-1;//反方向运动
+					}else if(y>=document.documentElement.clientHeight-oDiv.offsetHeight){
+						y=document.documentElement.clientHeight-oDiv.offsetHeight;
+						speedy*=-0.9;//反方向运动  力的损耗
+						speedx*=0.9;//力的损耗
+					}
+					
+					if(x<0){
+						x=0;
+						speedx*=-1;//反方向运动
+					}else if(x>=document.documentElement.clientWidth-oDiv.offsetWidth){
+						x=document.documentElement.clientWidth-oDiv.offsetWidth;
+						speedx*=-1;//反方向运动
+					}
+					
+					if(Math.abs(speedx)<1){
+						speedx=0;
+					}
+					
+					if(Math.abs(speedy)<1){
+						speedy=0;
+					}
+					
+					if(speedx==0&& speedy==0 && y==document.documentElement.clientHeight-oDiv.offsetHeight){
+						clearInterval(timer);
+					}
+					
+					oDiv.style.left=x+'px';
+					oDiv.style.top=y+'px';
+				},30);
+			}
+		</script>
+	</body>
+</html>
