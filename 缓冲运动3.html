@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding:0px;margin: 0px;
+			}
+			.box{
+				width: 100px;
+				height:100px;
+				background: red;
+				/*position: absolute;
+				left:0px;
+				top:0px;
+				opacity: 0.1;
+				filter:alpha(opacity=10);*/
+				margin-bottom: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			缓冲运动：离目标越远，速度越快。反之，慢下拉(速度越来越小)
+		-->
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<script type="text/javascript">
+			var aDiv=document.querySelectorAll('.box');
+			aDiv[0].onmouseover=function(){
+				move(this,'width',1000);
+			};
+			aDiv[1].onmouseover=function(){
+				move(this,'width',1000);
+			};
+			aDiv[2].onmouseover=function(){
+				move(this,'width',1000);
+			};
+			aDiv[3].onmouseover=function(){
+				move(this,'width',1000);
+			};
+			
+			aDiv[0].onmouseout=function(){
+				move(this,'width',100);
+			};
+			aDiv[1].onmouseout=function(){
+				move(this,'width',100);
+			};
+			aDiv[2].onmouseout=function(){
+				move(this,'width',100);
+			};
+			aDiv[3].onmouseout=function(){
+				move(this,'width',100);
+			};
+
+		
+			function getstyle(obj,attr){
+				if(obj.currentStyle){
+					return obj.currentStyle[attr];
+				}else{
+					return getComputedStyle(obj)[attr];
+				}
+			}
+			
+			
+			
+			//每一个盒子一个定时器：多物体运动
+			function move(obj,attr,target){//attr如果是opacity，target扩大100倍
+				clearInterval(obj.timer);//防止重复点击元素。
+				obj.timer=setInterval(function(){
+					//求初始值
+					var current=null;
+					if(attr=='opacity'){
+						current=Math.round(getstyle(obj,attr)*100);//扩大了100倍
+					}else{
+						current=parseInt(getstyle(obj,attr));
+					}
+					
+					//求速度
+					var speed=(target-current)/5;
+					speed=speed>0?Math.ceil(speed):Math.floor(speed);
+					//关闭定时器
+					if(current==target){
+						clearInterval(obj.timer);
+					}
+					
+					if(attr=='opacity'){
+						//还原上面扩大了100倍
+						obj.style.opacity=(current+speed)/100;
+						obj.style.filter='alpha(opacity='+(current+speed)+')';
+					}else{
+						obj.style[attr]=current+speed+'px';
+					}
+					
+				},30);
+			}
+		</script>
+	</body>
+</html>
