@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{padding:0;margin:0}
+ul,li{padding:0;margin:0;list-style:none}
+img{width:40px;height:40px}
+#list{width:400px;overflow:hidden;border:1px solid #ccc;margin:30px auto}
+#list li{height:50px;border-bottom:1px solid #ccc}
+#list li img{float:left;}
+#list li #p1{float:left;margin-left:20px}
+#list li div{float:left;margin-left:20px}
+#wrap{width:100%;height:100%;position:fixed;top:0;margin:0;background:rgba(0,0,0,0.5);display:none}
+#cont{width:500px;height:450px;position:absolute;left:50%;top:50%;margin-left:-250px;margin-top:-200px;background:#fff;}
+textarea{width:430px;height:330px;margin-top:20px;margin-left:23px;padding:10px}
+#ax{position:absolute;top:0;right:10px;font-size:24px;text-decoration:none;color:#333}
+#title{width:500px;height:40px;background:#ccc;color:#FFF;text-align:center}
+#btn{width:70px;height:30px}
+</style>
+<script>
+    window.onload=function(){
+        var oUl=document.getElementById('list');
+        var oWrap=document.getElementById('wrap');
+        var oCont=document.getElementById('cont');
+        var oTxt=document.getElementById('txt');
+        var oAx=document.getElementById('ax');
+        var oBtn=document.getElementById('btn');
+        var oBtn1=document.getElementById('btn1');
+        var oTitle=document.getElementById('title');
+        function toDub(n){
+            if(n<10){
+                return '0'+n;	
+            }else{
+                return ''+n;	
+            }	
+        }
+        function getTim(){
+            var oDate=new Date;
+            var str=oDate.getFullYear()+'-'+toDub(oDate.getMonth()+1)+'-'+toDub(oDate.getDate());
+            return str;	
+        }
+        oBtn1.onclick=function(){
+            if(oTxt.value==''){
+                alert('请输入内容')	
+            }
+            else{
+                var oLi=document.createElement('li');
+                oLi.innerHTML='<img src="images/1.jpg"/><p id="p1">'+oTxt.value+'</p><div>'+getTim()+'</p><a href="javascript:;">删除</a></div>'	;
+                oUl.appendChild(oLi);
+                var oClose=oLi.getElementsByTagName('a')[0];
+                oClose.onclick=function(){
+                    oUl.removeChild(oLi);	
+                }
+                oTxt.value='';
+                oWrap.style.display='none';
+            }
+        }
+        oTitle.onmousedown=function(ev){
+            var oEvent=event||ev;
+            var disX=oEvent.clientX-oCont.offsetLeft;
+            var disY=oEvent.clientY-oCont.offsetTop;
+            document.onmousemove=function(ev){
+                var oEvent=event||ev;
+                oCont.style.left=oEvent.clientX-disX+250+'px';
+                oCont.style.top=oEvent.clientY-disY+200+'px';	
+            }
+            document.onmouseup=function(){
+                document.onmousemove=null;	
+                document.onmouseup=null;
+            }
+        }
+        oBtn.onclick=function(){
+            oWrap.style.display='block'	;
+        }
+        oAx.onclick=function(){
+            oWrap.style.display='none'		
+        }	
+    }
+</script>
+</head>
+
+<body>
+<ul id="list">
+	<li><img src="images/1.jpg"/><p id="p1">一起去玩吧过年吧</p><div><p>2016-04-07</p><a href="javascript:;">删除</a></div></li>
+    <li><img src="images/1.jpg"/><p id="p1">一起去玩吧过年吧</p><div><p>2016-04-07</p><a href="javascript:;">删除</a></div></li>
+</ul>
+<div style="text-align:center;margin-top:-10px"><input type="button" value="输入" id="btn"/></div>
+<div id="wrap">
+	<div id="cont">
+     <div id="title">title</div>
+    	<textarea id="txt"></textarea>
+        <a id="ax" href="javascript:;">X</a>
+        <div style="text-align:center"><input type="button" value="确认提交" id="btn1">
+    </div>
+    </div>
+</div>
+</body>
+</html>
