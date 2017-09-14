@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				width: 100px;
+				height: 100px;
+				background: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<script type="text/javascript">
+			function getstyle(obj,attr){
+				if(obj.currentStyle){
+					return obj.currentStyle[attr];
+				}else{
+					return getComputedStyle(obj)[attr];
+				}
+			}
+			
+			//每一个盒子一个定时器：多物体运动
+			function move(obj,attr,target,fn){//attr如果是opacity，target扩大100倍
+				clearInterval(obj.timer);//防止重复点击元素。
+				obj.timer=setInterval(function(){
+					//求初始值
+					var current=null;
+					if(attr=='opacity'){
+						current=Math.round(getstyle(obj,attr)*100);//扩大了100倍
+					}else{
+						current=parseInt(getstyle(obj,attr));
+					}
+					
+					//求速度
+					var speed=(target-current)/5;
+					speed=speed>0?Math.ceil(speed):Math.floor(speed);
+					//关闭定时器
+					if(current==target){
+						clearInterval(obj.timer);//一个运动完成了，定时器关闭了。
+						/*if(fn){
+							fn();
+						}*/
+						fn&&fn();//如果fn存在，调用fn();
+					}
+					
+					if(attr=='opacity'){
+						//还原上面扩大了100倍
+						obj.style.opacity=(current+speed)/100;
+						obj.style.filter='alpha(opacity='+(current+speed)+')';
+					}else{
+						obj.style[attr]=current+speed+'px';
+					}
+					
+				},30);
+			}
+			
+			var oBox=document.getElementById('box');
+			/*oBox.onmouseover=function(){
+				move(oBox,'width',500,function(){
+					move(oBox,'height',500);
+				})
+			};
+			
+			oBox.onmouseout=function(){
+				move(oBox,'height',100,function(){
+					move(oBox,'width',100);
+				});
+			}*/
+			
+			oBox.onmouseover=function(){//多属性的运动
+				move(oBox,'width',500);
+				move(oBox,'height',500);
+			};
+		</script>
+	</body>
+</html>
