@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			
+			//1.setInterval(函数,时间)
+			var interval = function(){
+				console.log("test")
+			}
+			//for()
+			//递归
+			//一般不要设置为0毫秒，相当于for和递归的无限循环
+			//setInterval(interval,1000)
+			
+			//2.
+			//setInterval("interval()",1000)
+			
+			//3.
+			setInterval(function(){
+				console.log("test")
+			},1000)
+		</script>
+	</body>
+</html>
