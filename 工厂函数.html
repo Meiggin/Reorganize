@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//老姚对象
+			/*var obj = {
+				name:"laoyao",
+				age:99,
+				skill:["ps","js"]
+			}*/
+			
+			//老陆对象
+			/*var obj2 = {
+				name:"lushuai",
+				age:9,
+				skill:["html","css"]
+			}*/
+			//....两个对象都有相同的特征，重复生成n个对象，是低效的
+			//工厂函数
+			function Shuaige(name,age,skill){
+				var obj = {};
+				//共同的特征
+				obj.name = name;
+				obj.age = age;
+				obj.skill = skill;
+				obj.sex = "男";
+				console.log("test")
+				return obj
+			}
+			/*
+			 1.手动生成一个对象var obj = {};
+			 2.this指向不变（指向window）
+			 3.执行内部的代码， 给属性添加方法
+			 4.手动返回一个对象
+			 * */
+			//诞生第一个对象
+			var lushuai = Shuaige("lushuai",9,["html","css"]);
+			var laoyao = Shuaige("laoyao",99,["ps","js"]);
+			
+			console.log(lushuai);
+			console.log(laoyao);
+		</script>
+	</body>
+</html>
