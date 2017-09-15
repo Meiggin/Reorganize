@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<ul id="news">
+			
+		</ul>
+		<script>
+			var arr = [{
+					title: "中国轰6飞至纪伊半岛近海上空 自卫队飞机紧急升空",
+					datee: "星期天"
+				},
+				{
+					title: "为拿千万美元赏金 两名飞行员杀害3名战友 驾80吨轰炸机叛逃",
+					datee: "星期六"
+				},
+				{
+					title: "37岁妈妈给自己17岁儿子的聊天记录”你们娘俩这是要……",
+					datee: "星期二"
+				},
+				{
+					title: "外国人把裸眼3D玩出花，这14张照片让人不敢相信自己的眼睛",
+					datee: "星期一"
+				}
+			];
+			console.log(arr)
+			arr.length
+			/*	item:遍历的每一个单项
+				index:索引值
+			*/
+			arr.forEach(function(item, index) {
+				console.log(item, index);
+				document.getElementById("news").innerHTML += ("<p>"+item.title+"</p>")
+			})
+		</script>
+	</body>
+
+</html>
