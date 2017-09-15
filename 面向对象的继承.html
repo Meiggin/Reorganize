@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			/*var father = {
+													name: "laoyao",
+													age:88
+												}
+												
+												var child = father;
+												child.skill = ["ps", "js"];
+												
+												console.log(father);
+												console.log(child);
+												
+												var child = {
+													name: "laoyao",
+													age: 88,
+													skill: ["ps", "js"],
+												}*/
+
+			function People(name, age) {
+				this.name = name;
+				this.age = age;
+			}
+			//原型链
+			People.prototype.eat = function() {
+				console.log(this.eat)
+			}
+			//每一次实例化的时候，原型链的方法都不会重新生成一遍
+			//只会重新生成构造函数里面的东西
+			People.prototype.skill = ["html", "css"];
+			var laoyao = new People("laoyao", 9);
+			laoyao.eat()
+			var lushuai = new People("lushuai", 99);
+			lushuai.eat()
+
+			console.log(laoyao);
+			console.log(lushuai);
+		</script>
+	</body>
+
+</html>
