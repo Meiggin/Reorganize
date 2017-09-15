@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<p id="time"></p>
+		<button id="btn1" disabled>立即抢购</button>
+		<button id="btn2" style="display: none;">立即抢购</button>
+		<script>
+			var time = 5;
+			var timer = setInterval(function(){
+				document.getElementById("time").innerHTML = time
+				if(time===0){
+					clearInterval(timer);
+					document.getElementById("btn1").style.display = "none"
+					document.getElementById("btn2").style.display = "block"
+					console.log(time)
+				}
+				time--
+			},1000)
+		</script>
+	</body>
+</html>
