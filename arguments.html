@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var a = 1;
+			var total = 0
+			function sum(){
+				//console.log(arguments.callee())//arguments.callee===sum
+				if(a<=100){
+					total+=a
+					a++;
+					//sum();
+					arguments.callee()
+				}else{
+					console.log(total)
+					return
+				}
+			}
+			sum();
+		</script>
+	</body>
+</html>
