@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			/*//1
+			console.log("找到披萨店")
+			setInterval(function() {
+				console.log("预约xxx秒后拿到披萨");
+				console.log("见朋友");
+			}, 1000)
+
+			//2
+			console.log("找到披萨店")
+			setInterval(function() {
+				console.log("预约xxx秒后拿到披萨");
+
+				function meeting() {
+					console.log("见朋友")
+				}
+				meeting()
+			}, 1000)
+
+			//3
+			console.log("找到披萨店")
+			setInterval(function() {
+				console.log("预约xxx秒后拿到披萨");
+				(function() {
+					console.log("见朋友")
+				})()
+			}, 1000)
+
+			//4
+			console.log("找到披萨店")
+
+			function shop() {
+				setInterval(function() {
+					console.log("预约xxx秒后拿到披萨");
+					(function() {
+						console.log("见朋友")
+					})()
+				}, 1000)
+			}
+			shop()*/
+
+			//5
+			console.log("找到披萨店")
+			function shop(callback) {
+				this.name = "laoyao"
+				setTimeout(function() {
+					console.log("预约xxx秒后拿到披萨");
+					//回调函数
+					callback()
+				}, 1000)
+			}
+			var obj = new shop(function() {
+				console.log("见y朋友")
+			});
+			console.log(obj)
+			/*shop(function() {
+				console.log("见y朋友")
+			})
+			shop(function() {
+				console.log("见x朋友")
+			})
+			shop(function() {
+				console.log("见z朋友")
+			})*/
+		</script>
+	</body>
+
+</html>
