@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <link href="css/public.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/public.js"></script>
+</head>
+<body>
+
+
+    <ul id="main">
+       <div class="margin clear">
+               <li class="box">
+                   <h3><a href="#">Node.js v4 LTS 成为 Ghost推荐版本</a></h3>
+                   <h4>
+                       <span>作者：</span>
+                       <a href="#">王赛</a>
+                       <b>·2016年7月26日</b>
+                   </h4>
+                   <p>从这周起，我们将ghost推荐node.js版本升级为node.js v4 LTS。我们这样做其实已经落后于计划了。然而，进过大量测试之后，我们确信ghost可以在node.js v4平台上流畅的运行并且内存消耗比原来也减少了。目前，GHOST(PRO)上托
+                   </p>
+                   <button class="te3" onclick="cal()">发布微博</button>
+                   <div class="xia">
+                   </div>
+               </li>
+</section>
+               <div id="wrap">
+                <div id="cont">
+                   <div id="title">title</div>
+                   <textarea id="txt"></textarea>
+                   <a id="ax" href="javascript:;">X</a>
+                   <div style="text-align:center"><input type="button" value="确认提交" id="btn1">
+                   </div>
+               </div>
+           </div>
+<script type="text/javascript">
+    var wrap = document.getElementById("wrap")
+    var ax = document.getElementById("ax")
+    var btn1 = document.getElementById("btn1")
+    var ul = document.getElementById("main")
+    var txt = document.getElementById("txt")
+    var li = document.querySelector("ul li")
+    var title = document.getElementById("title")
+    var cont = document.getElementById("cont")
+    function cal(){
+        wrap.style.display = "block"
+    }
+    ax.onclick = function (){
+        wrap.style.display = "none"
+    }
+    btn1.onclick = function(){
+        if(txt.value==""){
+            alert('没内容不许提交')  
+        }else{
+             wrap.style.display = "none"
+             li.innerHTML += `
+                <li class="box">
+                   <h3><a href="#">Node.js v4 LTS 成为 Ghost推荐版本</a></h3>
+                   <h4>
+                       <span>作者：</span>
+                       <a href="#">王赛</a>
+                       <b>·2016年7月26日</b>
+                   </h4>
+                   <p>${txt.value}</p>
+                   <button class="te3" onclick="cal()">发布微博</button>
+                   <div class="xia">
+                   </div>
+               </li>
+             `
+        }
+    }
+
+    title.onmousedown=function(e){
+            var e=event||ev;
+            var disX=e.clientX-cont.offsetLeft;
+            var disY=e.clientY-cont.offsetTop;
+            document.onmousemove=function(e){
+                var e=event||ev;
+                cont.style.left=e.clientX-disX+250+'px';
+                cont.style.top=e.clientY-disY+200+'px';   
+            }
+            document.onmouseup=function(){
+                document.onmousemove=null;  
+                document.onmouseup=null;
+            }
+        }
+
+</script>
+
+
+
+</body>
+</html>
