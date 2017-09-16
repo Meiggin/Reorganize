@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//y引用类型
+			var obj = {
+				name:"yao",
+				age:99
+			}
+			//浅拷贝
+			//var obj1 = obj;
+			var obj1 = {};
+			//深拷贝
+			Object.assign(obj1,obj);
+			console.log(obj1)
+		</script>
+	</body>
+</html>
