@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{list-style: none;margin:0;padding:0;}
+		ul{display:flex;justify-content:space-between;padding:0 100px;}
+		li{position: relative;}
+		img{width:200px;display:block;height:100px;}
+		button{width: 200px;font: 14px/20px "";}
+		div{position: fixed;right:0;top:50%;width:100px;height:100px;background:red;text-align: center;font:14px/100px "";}
+	</style>
+</head>
+<body>
+	<ul>
+		<li>
+			<img src="img/1.png">
+			<button>添加至购物车</button>
+		</li>
+		<li>
+			<img src="img/2.png">
+			<button>添加至购物车</button>
+		</li>
+		<li>
+			<img src="img/3.png">
+			<button>添加至购物车</button>
+		</li>
+		<li>
+			<img src="img/4.png">
+			<button>添加至购物车</button>
+		</li>
+	</ul>
+	<div>
+		购物车
+	</div>
+	<script type="text/javascript">
+		var ulli1 = document.querySelectorAll("ul li img")[0]
+		var btn = document.querySelectorAll("ul li button")[0]
+		// console.log(ulli1)
+		var box = document.querySelectorAll("div")[0];
+		// console.log(box)
+		var node = ulli1.cloneNode(true);
+		// console.log(node)
+		document.body.appendChild(node)
+		
+		node.style.cssText = `width:100px;height:50px;opacity:0.5;position:absolute;top:0px;left:100px;`
+		console.log(btn)
+		btn.onclick=function(){
+			var current={
+				cx:node.offsetLeft,
+				cy:node.offsetTop
+			}
+			var target={
+				x:box.offsetLeft-current.cx,
+				y:box.offsetTop-current.cy
+			}
+			var a=-0.0005;
+			var b=(target.y-a*target.x*target.x)/target.x;
+			var x=0;
+			var timer=setInterval(function(){
+				x+=10;
+				node.style.left=current.cx+x+'px';
+				node.style.top=current.cy+a*x*x+b*x+'px';
+				if(x==target.x){
+					clearInterval(timer);
+					node.style.display = "none"
+				}
+			},15);
+		}
+		
+	</script>
+</body>
+</html>
