@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding:0px;margin:0px;
+			}
+			ul{
+				list-style: none;
+				width:1175px;
+				margin: 0 auto;
+			}
+			ul li{
+				float: left;
+				width: 235px;
+			}
+			ul li div{
+				margin: 5px 5px 5px 0;
+			}
+			
+			ul li img{
+				width: 230px;
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<script type="text/javascript">
+			var arr=[
+					{"src":"img1/1.jpg","alt":"1","height":"343px"},
+					{"src":"img1/2.jpg","alt":"2","height":"300px"},
+					{"src":"img1/3.jpg","alt":"3","height":"230px"},
+					{"src":"img1/4.jpg","alt":"4","height":"230px"},
+					{"src":"img1/5.jpg","alt":"5","height":"306px"},
+					{"src":"img1/6.jpg","alt":"6","height":"333px"},
+					{"src":"img1/7.jpg","alt":"7","height":"335px"},
+					{"src":"img1/8.jpg","alt":"8","height":"172px"},
+					{"src":"img1/9.jpg","alt":"9","height":"172px"},
+					{"src":"img1/10.jpg","alt":"10","height":"345px"},
+					{"src":"img1/11.jpg","alt":"11","height":"340px"},
+					{"src":"img1/12.jpg","alt":"12","height":"153px"},
+					{"src":"img1/13.jpg","alt":"13","height":"345px"},
+					{"src":"img1/14.jpg","alt":"14","height":"316px"},
+					{"src":"img1/15.jpg","alt":"15","height":"327px"},
+					{"src":"img1/16.jpg","alt":"16","height":"345px"},
+					{"src":"img1/17.jpg","alt":"17","height":"172px"},
+					{"src":"img1/18.jpg","alt":"18","height":"282px"},
+					{"src":"img1/19.jpg","alt":"19","height":"224px"},
+					{"src":"img1/20.jpg","alt":"20","height":"344px"}
+			];
+			
+			var aLi=document.getElementsByTagName('li');//类数组
+			
+			/*var arrLi=[].slice.apply(aLi);//将类数组转换成真正的数组
+			arrLi.push('hello');
+			alert(arrLi);*/
+			
+			/*
+			 获取数组的最小值
+			function getArrminIndex(array){
+				var minIndex=0;//假设最小值的索引
+				for(var i=0;i<array.length;i++){
+					if(array[i]<array[minIndex]){
+						minIndex=i;
+					}
+				}
+				return minIndex;//返回最小的索引
+			}*/
+			
+			//获取最小的li的高度
+			function getMinLi(aLi){//[li,li,li,li,li]
+				var minIndex=0;//假设最小值的索引
+				var minValue=aLi[minIndex].offsetHeight;//最小li的高度
+				for(var i=0;i<aLi.length;i++){
+					if(aLi[i].offsetHeight<minValue){
+						minValue=aLi[i].offsetHeight;
+						minIndex=i;
+					}
+				}
+				return minIndex;//返回最小的索引
+			}
+			createImg();
+			
+			function createImg(){//创建div的函数
+				for(var i=0;i<arr.length;i++){
+					var cdiv=document.createElement('div');
+					var cimg=document.createElement('img');
+					cimg.src=arr[i].src;
+					cimg.style.height=arr[i].height;
+					cdiv.appendChild(cimg);
+					aLi[getMinLi(aLi)].appendChild(cdiv);//创建的结果给最小高度的li里面追加
+				}
+			}
+			
+			window.onscroll=function(){//懒加载
+				var ch=document.documentElement.clientHeight;//可视区的高
+				var scrolltop=document.documentElement.scrollTop||document.body.scrollTop;//滚动条件
+				var minheight=aLi[getMinLi(aLi)].offsetHeight;//最小高度的li
+				if(minheight<ch+scrolltop){
+					createImg();
+				}
+			}
+			
+			
+		</script>
+	</body>
+</html>
