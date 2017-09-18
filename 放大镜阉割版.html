@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding:0px;margin:0px;
+			}
+			body{
+				padding: 50px;
+			}
+			.clearfix:after{
+				content:'\20';
+				clear:both;
+				display: block;
+				height: 0;
+				font-size:0px;
+			}
+			.spic{
+				width: 300px;height:300px;border: 1px solid red;
+				float: left;
+				margin-right: 10px;
+				position: relative;
+				cursor: move;
+			}
+			.smallscale{
+				background: rgba(0,0,255,0.3);
+				position: absolute;
+				left:0px;
+				top:0px;
+				visibility: hidden;
+				
+			}
+			.spic img{
+				width: 300px;height:300px;
+			}
+			.bpic{
+				width: 400px;height:400px;border: 1px solid red;
+				float: left;
+				position: relative;
+				visibility: hidden;
+				overflow: hidden;
+			}
+			#img1{
+				position: absolute;
+				left:0px;top:0px;
+				width: 600px;
+				height: 600px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrap clearfix">
+			<div class="spic">
+				<img src="apple.jpg" alt="" />
+				<div class="smallscale"></div>
+			</div>
+			<div class="bpic">
+				<img src="apple.jpg" alt="" id="img1"/>
+			</div>
+		</div>
+		<script type="text/javascript">
+			//思路：
+			//布局：二个盒子：（小图/大图） +  放大镜（尺寸是未知的） +共同的图片
+			//效果本身：鼠标经过小图，对应的大图进行放大匹配
+			
+			//步骤1：左边：小图+小放      右边：大图+大放
+			//步骤2：小图/小放=大图/大放
+			
+			var oWrap=document.querySelector('.wrap');
+			var spic=document.querySelector('.spic');
+			var bpic=document.querySelector('.bpic');
+			var smallscale=document.querySelector('.smallscale');
+			var img1=document.querySelector('#img1');
+
+			
+			//1.鼠标进过spic，显示smallscale和bpic
+			spic.onmouseover=function(){
+				smallscale.style.visibility='visible';
+				bpic.style.visibility='visible';
+				
+				//2.设置小放的尺寸。
+				smallscale.style.width=spic.offsetWidth*bpic.offsetWidth/img1.offsetWidth+'px';
+				smallscale.style.height=spic.offsetHeight*bpic.offsetHeight/img1.offsetHeight+'px';
+				//3.移动的比例,  大放/小放        大图/小图
+				var scale=img1.offsetWidth/spic.offsetWidth;
+				//4.让小放跟随鼠标移动
+				this.onmousemove=function(ev){
+					var ev=ev||window.event;
+					//限定范围
+					var mleft=ev.clientX-oWrap.offsetLeft-smallscale.offsetWidth/2;
+					var mtop=ev.clientY-oWrap.offsetTop-smallscale.offsetHeight/2;
+					if(mleft<0){
+						mleft=0;
+					}else if(mleft>=spic.offsetWidth-smallscale.offsetWidth){
+						mleft=spic.offsetWidth-smallscale.offsetWidth-2;//2:边框
+					}
+					
+					if(mtop<0){
+						mtop=0;
+					}else if(mtop>=spic.offsetHeight-smallscale.offsetHeight){
+						mtop=spic.offsetHeight-smallscale.offsetHeight-2;//2:边框
+					}
+					
+					smallscale.style.left=mleft+'px';
+					smallscale.style.top=mtop+'px';
+					//最后一步：赋值，小放移动的值*比例赋值给大图
+					img1.style.left=-scale*mleft+'px';
+					img1.style.top=-scale*mtop+'px';
+				}
+			};
+			spic.onmouseout=function(){
+				smallscale.style.visibility='hidden';
+				bpic.style.visibility='hidden';
+			};
+		</script>
+	</body>
+</html>
