@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.box1{
+				width: 100px;height:100px;background: red;position: absolute;left:50px;top:600px;
+			}
+			.box2{
+				width: 100px;height:100px;background: blue;position: absolute;left:1200px;top:300px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box1"></div>
+		<div class="box2"></div>
+		<script type="text/javascript">
+			//x,y坐标，left和top值
+			//y = Ax^2 + Bx + C==>y=ax^2+bx;(0,0)  ==>a:曲率（自己设置0.001-0.009）
+			
+			//求x,y-->b
+			var oDiv1=document.getElementsByTagName('div')[0];
+			var oDiv2=document.getElementsByTagName('div')[1];
+			//获取起始坐标
+			var current={
+				cx:oDiv1.offsetLeft,
+				cy:oDiv1.offsetTop
+			}
+			
+			//获取目标点的坐标
+			//求x,y
+			var target={
+				x:oDiv2.offsetLeft-current.cx,
+				y:oDiv2.offsetTop-current.cy
+			}
+			
+			var a=0.0014;
+			//y=ax^2+bx;==>b=(y-a*x*x)/x;
+			var b=(target.y-a*target.x*target.x)/target.x;
+			
+			var x=0;
+			var timer=setInterval(function(){
+				x+=10;
+				oDiv1.style.left=current.cx+x+'px';
+				oDiv1.style.top=current.cy+a*x*x+b*x+'px';
+				if(x==target.x){
+					clearInterval(timer);
+				}
+			},30);
+		</script>
+	</body>
+</html>
