@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0px;padding:0px;
+			}
+			.box{
+				width: 800px;
+				height: 108px;
+				margin: 50px auto;
+				position: relative;
+				border:1px solid red;
+				overflow: hidden;
+			}
+			.box ul{
+				position: absolute;
+				left:0px;top:0px;
+			}
+			li{
+				list-style: none;
+				float: left;
+			}
+			img{width: 200px;height: 108px; display: block;}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<ul>
+				<li><img src="img/1.jpg"></li>
+				<li><img src="img/2.jpg"></li>
+				<li><img src="img/3.webp"></li>
+				<li><img src="img/4.webp"></li>
+			</ul>
+		</div>
+		
+		<script type="text/javascript">
+			var oBox=document.getElementsByTagName('div')[0];
+			var oUl=oBox.getElementsByTagName('ul')[0];
+			oUl.innerHTML+=oUl.innerHTML;
+			var aLi=oUl.getElementsByTagName('li');
+			oUl.style.width=aLi[0].offsetWidth*aLi.length+'px';//动态设置ul的width
+			var speed=2;//速度
+			
+			var timer=setInterval(function(){
+				if(oUl.offsetLeft<-oUl.offsetWidth/2){
+					oUl.style.left=0;
+				}
+				
+				if(oUl.offsetLeft>0){
+					oUl.style.left=-oUl.offsetWidth/2+'px';
+				}
+				
+				oUl.style.left=oUl.offsetLeft+speed+'px';
+				
+				
+			},30);
+			document.onmousemove=function(ev){
+				var ev=ev||window.event;
+				if(ev.clientX>document.documentElement.clientWidth/2){
+					speed=2;
+				}else{
+					speed=-2;
+				}
+			}
+			
+			oBox.onmouseover=function(){
+				clearInterval(timer);
+			}
+			oBox.onmouseout=function(){
+				timer=setInterval(function(){
+					if(oUl.offsetLeft<-oUl.offsetWidth/2){
+						oUl.style.left=0;
+					}
+					
+					if(oUl.offsetLeft>0){
+						oUl.style.left=-oUl.offsetWidth/2+'px';
+					}
+					
+					oUl.style.left=oUl.offsetLeft+speed+'px';
+					
+					
+				},30)
+			}
+		</script>
+	</body>
+</html>
