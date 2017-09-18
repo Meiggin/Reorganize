@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.box{
+				width: 50px;height:50px;background: red;position:absolute;left:600px;top:300px;
+			}
+		</style>
+		<script type="text/javascript">
+		
+		</script>
+	</head>
+	<body>
+		<div class="box"></div>
+		<script type="text/javascript">
+			var oDiv=document.getElementsByTagName('div')[0];
+			var num=0;//角度
+			var a=500;
+			var b=300;
+			var r=100;
+			var timer=setInterval(function(){
+				num++;
+				var x=Math.sin(num*Math.PI/180)*r;
+				var y=Math.cos(num*Math.PI/180)*r;
+				oDiv.style.left=a+y+'px';
+				oDiv.style.top=b+x+'px';
+				var cdiv=document.createElement('div');
+				cdiv.style.cssText='width:5px;height: 5px;background: blue;position: absolute;';
+				cdiv.style.left=a+y+'px';
+				cdiv.style.top=b+x+'px';
+				document.body.appendChild(cdiv);
+			},30);
+			
+		</script>
+	</body>
+</html>
