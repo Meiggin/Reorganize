@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.box{
+				width: 50px;height:50px;background: red;position:absolute;left:100px;top:400px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box"></div>
+		<script type="text/javascript">
+			var oDiv=document.getElementsByTagName('div')[0];
+			var speedx=15;
+			var speedy=-25;
+			var timer=setInterval(function(){
+				oDiv.style.left=oDiv.offsetLeft+speedx+'px';
+				oDiv.style.top=oDiv.offsetTop+speedy+'px';
+				if(oDiv.offsetTop>=500){
+					clearInterval(timer);
+				}
+				speedy++;
+			},30)
+		</script>
+	</body>
+</html>
