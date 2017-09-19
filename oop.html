@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	
+	</head>
+	<body>
+			<div id="box">1111111111111111111111</div>
+			<div class="box">222222222222222222222</div>
+		
+		<script src="public.js" type="text/javascript" charset="utf-8"></script>
+			<script type="text/javascript">
+			//一切皆对象：属性+方法()  变量和函数()
+			
+			
+			//对象：Object的新建
+			/*var obj1=new Object();//构造函数创建
+			obj1.name='zhangsan';//属性
+			obj1.showname=function(){
+				alert(this.name)//zhangsan
+			};//方法
+			
+			var obj2={//字面量创建
+				name:'wangwu',
+				showname:function(){
+					alert(this.name)//wangwu
+				}
+			};*/
+			
+			
+			//this:函数内部--调用时决定指向
+			//1.普通函数的this-->window  /  undefined（严格模式下面）
+			//2.对象下面的this-->上一级的对象。
+			//3.事件处理函数this-->当前操作的元素对象。
+			//4.构造函数里面-->new 出来的实例对象。
+			//5.箭头函数this-->无法改变(定义时决定)
+			//call,apply,bind三个方法改变this指向。
+			//注意事项:事件处理函数里面的this  和   定时器里面的this
+			/*var oBox=document.getElementById('box');
+			oBox.onclick=function(){
+				var that=this;//修改this的指向。
+				setTimeout(function(){
+					that.innerHTML='222222222222222';
+				},1000)
+			}*/
+			
+			
+			
+			
+			//问题：避免使用全局变量和函数--避免冲突
+			//1.命名空间--通过对象的命名区分,缺点：名字太长
+			//2.闭包--自执行的函数(垃圾回收机制失效)+面向对象
+			//3.面向对象
+			//4.模块化（sea.js/require.js）
+			
+			
+			
+			/*var zhangsan={};
+			zhangsan.tool={};
+			zhangsan.tool.hehe={
+				fn:function(){
+					alert('fn');
+				},
+				fn1:function(){
+					alert('fn1');
+				}
+			};
+			
+			zhangsan.tool.hehe.fn();
+			*/
+			
+			//alert(js.tool.$('box').innerHTML);
+			//alert(js.tool.getclass('box')[0].innerHTML);
+			//js.cookie.setcookie('name','zhaosi',7);
+			
+			/*(function(){
+				var a=100;
+				var fn=function(){
+					alert(1);
+				}
+			})();
+			
+			(function(){
+				var a=100;
+				var fn=function(){
+					alert(2);
+				}
+			})();*/
+			
+			/*alert(a);
+			fn();*/
+		</script>
+	</body>
+</html>
