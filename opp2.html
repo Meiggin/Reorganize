@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var arr=new Array(1,2,3);
+			var arr1=new Array(4,5,6);
+			var arr2=new Array(4,5,6);
+			arr.push();
+			arr1.push();
+			arr2.push();
+			//Array:构造函数：也是函数，同时也叫做类。特点：new和首字母大写
+			//查看构造函数--constructor
+			//alert(arr.constructor);//function Array() { [native code] }
+			//arr:实例对象,具体的,写入内存
+			//对象：属性和方法
+			//arr.length
+			//arr.push()/pop/......
+			//alert(arr.push==arr1.push);//true
+			/*class Person{
+			}
+			alert(typeof Person);//function*/
+			
+			
+			//对象的新建
+			/*var obj=new Object();//新建一个空对象
+			obj.name='zhangsan';
+			obj.showName=function(){
+				alert(this.name);
+			}
+		
+			var obj1=new Object();//新建一个空对象
+			obj1.name='wangwu';
+			obj1.showName=function(){
+				alert(this.name);
+			}
+			
+			var obj2=new Object();//新建一个空对象
+			obj2.name='tianqi';
+			obj2.showName=function(){
+				alert(this.name);
+			}*/
+			
+			/*function CreatePerson(name){
+				var obj=new Object();//新建一个空对象
+				obj.name=name;
+				obj.showName=function(){
+					alert(this.name);
+				}
+				return obj;
+			}
+			
+			var p1=new CreatePerson('zhangsan');
+			var p2=new CreatePerson('wangwu');
+			var p3=new CreatePerson('tianqi');
+			p1.showName();
+			p2.showName();
+			p3.showName();*/
+			
+			//封装：工厂模式，工程模式解决封装的问题，无法区分对象（Array,date,RegExp），所有的对象都是由object创建的。
+			
+			function CreatePerson(name,age){//CreatePerson:构造函数
+				//var this=new Object();//新建一个空对象
+				this.name=name;//并且this变量会绑定在实例对象上
+				this.age=age;
+				this.showName=function(){
+					alert(this.name);
+				};
+				this.showAge=function(){
+					alert(this.age);
+				}
+				//return this;//新创建的对象由 this 所引用，并且最后隐式的返回 this
+			}
+			//CreatePerson:构造函数   p1,p2,p3:实例对象，构造函数里面this指向他们(实例对象)
+			var p1=new CreatePerson('zhangsan',1000);
+			var p2=new CreatePerson('wangwu',200);
+			var p3=new CreatePerson('tianqi',100);
+			alert(p1.name);
+			p1.showName();
+			//结论：系统对象的方法不是写在构造函数里面，因为构造函数里面的每个方法，实例对象调用都要重新创建一次。
+			//alert(new Date().constructor);//function Date() { [native code] }
+			
+			/*p1.showName();
+			p2.showAge();
+			p3.showName();*/
+			//alert(p1.showName==p2.showName);//false
+			//alert(p1.constructor);
+			 /*new 操作符调用构造函数的时候，函数内部发生以下变化：
+		 	 1、创建一个空对象，并且 this 变量引用该对象，同时还继承了该函数的原型。
+		 	 2、属性和方法被加入到 this 引用的对象中。
+		 	 3、新创建的对象由 this 所引用，并且最后隐式的返回 this 。 */
+			//Object的弊端：多个对象，出现代码冗余，重复。
+		</script>
+	</body>
+</html>
