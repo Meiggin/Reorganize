@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;padding: 0;list-style: none;
+			}
+			.banner{
+				width: 790px;
+				height: 340px;
+				position: relative;
+				border: 1px solid orange;
+				margin:10px auto;
+				overflow: hidden;
+			}
+			.banner ul {
+				position:absolute;
+				left:0px;top:0px;
+				width: 7900px;
+			}
+			.banner ul li{
+				float:left;
+			}
+			
+			.banner ol{
+				position: absolute;
+				width: 180px;
+				height: 20px;
+				left:50%;
+				margin-left: -90px;
+				bottom:20px;
+			}
+			.banner ol li{
+				float: left;
+				width: 20px;
+				height: 20px;
+				border-radius: 50%;
+				background: #000;
+				margin: 0 5px;
+				text-indent: -99999px;
+				cursor: pointer;
+			}
+			.banner ol li.active{
+				background: blue;
+			}
+			#right,#left{
+				font-size: 100px;
+				color: #fff;
+				font-family: verdana;
+				position: absolute;
+				text-decoration: none;
+				top:110px;
+				display: none;
+			}
+			#left{
+				left:20px;
+			}
+			#right{
+				right:20px;
+			}
+			#right:hover,#left:hover{
+				color: #000;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="banner">
+			<ul>
+				<li><a href="#"><img src="img/1.jpg" /></a></li>
+				<li><a href="#"><img src="img/2.jpg" /></a></li>
+				<li><a href="#"><img src="img/3.jpg" /></a></li>
+				<li><a href="#"><img src="img/4.jpg" /></a></li>
+				<li><a href="#"><img src="img/5.jpg" /></a></li>
+				<li><a href="#"><img src="img/6.jpg" /></a></li>
+			</ul>
+			<ol>
+				<li class="active">1</li>
+				<li>1</li>
+				<li>1</li>
+				<li>1</li>
+				<li>1</li>
+				<li>1</li>
+			</ol>
+			<a href="javascript:;" id="left">&lt;</a>
+			<a href="javascript:;" id="right">&gt;</a>
+		</div>
+		<script src="public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//1.变量变成属性，函数变成方法
+			//2.注意事件处理函数里面的this以及定时器的this指向问题
+			//3.事件处理函数不能直接应用实例的方法，套一层函数，在调用
+			function Lunbo(){
+				this.oBanner=tool.getclass('banner')[0];
+				this.aPic=this.oBanner.getElementsByTagName('ul')[0].getElementsByTagName('li');
+				this.aBtn=this.oBanner.getElementsByTagName('ol')[0].getElementsByTagName('li');
+				this.left=document.getElementById('left');
+				this.right=document.getElementById('right');
+				this.num=0;//存放当前的索引
+				this.timer=null;
+				var that=this;
+				//alert(this);//[object object]实例对象
+				this.init=function(){//初始化
+					for(var i=0;i<this.aBtn.length;i++){
+						this.aBtn[i].index=i;
+						this.aBtn[i].onclick=function(){//this-->this.aBtn[i]
+							//alert(this);//aBtn
+							that.num=this.index;//接收值
+							that.tabswitch();
+							/*for(var i=0;i<that.aBtn.length;i++){
+								that.aBtn[i].className='';
+								that.aPic[i].style.display='none';
+							}
+							this.className='active';
+							that.aPic[that.num].style.display='block';*/
+						}
+					}
+					
+					this.oBanner.onmouseover=function(){
+						that.show();
+						clearInterval(that.timer);
+					};
+					
+					this.oBanner.onmouseout=function(){
+						that.hide();
+						that.timer=setInterval(function(){
+							that.right.onclick();
+						},2000);
+					};
+					this.left.onclick=function(){
+						if(that.num==0){
+							that.num=that.aBtn.length-1;
+						}else{
+							that.num--;
+						}
+						that.tabswitch();
+					};
+					this.right.onclick=function(){
+						if(that.num==that.aBtn.length-1){
+							that.num=0;
+						}else{
+							that.num++;
+						}
+						
+						that.tabswitch();
+					};
+					this.timer=setInterval(function(){
+						that.right.onclick();
+					},2000);
+				};
+				
+				this.show=function(){
+					//alert(this);//直接给实例调用:[object object]
+					//alert(this);//[object HTMLDivElement]
+					this.left.style.display='block';
+					this.right.style.display='block';
+				};
+				this.hide=function(){
+					//alert(this);//直接给实例调用:[object object]
+					//alert(this);//[object HTMLDivElement]
+					this.left.style.display='none';
+					this.right.style.display='none';
+				};
+				this.tabswitch=function(){
+					for(var i=0;i<this.aBtn.length;i++){
+						this.aBtn[i].className='';
+						this.aPic[i].style.display='none';
+					}
+					this.aBtn[this.num].className='active';
+					this.aPic[this.num].style.display='block';
+				}
+				
+			}
+			
+			//new Lunbo().init();
+			var l1=new Lunbo();
+			l1.init();
+		</script>
+	</body>
+</html>
