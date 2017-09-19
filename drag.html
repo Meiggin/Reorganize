@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		*{
+				padding:0px;margin:0px;
+			}
+			html,body{
+				height: 100%;
+			}
+			body{
+				overflow: hidden;
+			}
+	</style>
+	<body>
+		<script src="public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function Drag(){
+				var that=this;
+				this.create=function(){
+					this.creatediv=document.createElement('div');
+					this.creatediv.style.cssText='width:'+tool.ranNum(50,200)+'px;height:'+tool.ranNum(50,200)+'px;background:rgb('+tool.ranNum(0,255)+','+tool.ranNum(0,255)+','+tool.ranNum(0,255)+');position:absolute;';
+					this.creatediv.style.left=tool.ranNum(0,(document.documentElement.clientWidth-parseInt(this.creatediv.style.width)))+'px';
+					this.creatediv.style.top=tool.ranNum(0,(document.documentElement.clientHeight-parseInt(this.creatediv.style.height)))+'px';
+					document.body.appendChild(this.creatediv);
+					this.drag();
+				};
+				this.drag=function(){
+					this.shortx=0;
+					this.shorty=0;
+					this.creatediv.onmousedown=function(ev){
+						var ev=ev||window.event;
+						that.shortx=ev.offsetX;
+						that.shorty=ev.offsetY;
+						document.onmousemove=function(ev){
+							var ev=ev||window.event;
+							that.creatediv.style.left=ev.clientX-that.shortx+'px';
+							that.creatediv.style.top=ev.clientY-that.shorty+'px';
+						};
+						document.onmouseup=function(){
+							document.onmousemove=null;
+							document.onmouseup=null;
+						}
+						return false;
+					}
+				}
+			}
+			
+			document.onkeydown=function(ev){
+				var ev=ev||window.event;
+				if(ev.keyCode==32){
+					new Drag().create();
+				}
+			}
+		</script>
+	</body>
+</html>
