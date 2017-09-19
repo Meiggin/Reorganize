@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding:0px;margin:0px;
+			}
+			html{
+				height: 100%;
+			}
+			body{
+				height: 100%;
+				overflow: hidden;
+				background: #000000;
+			}
+		</style>
+	</head>
+	<body>
+		<script src="public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//新建构造函数
+			//构造函数里面的属性所有的实例都能访问，如果是变量，不能保证都能访问(全局/局部)
+			function Firework(x,y){
+				this.x=x;//水平位置的属性
+				this.y=y;//垂直位置的属性
+				this.clientheight=document.documentElement.clientHeight;//可视区
+				var that=this;
+				this.createfirework=function(){//创建一个烟花
+					this.cfire=document.createElement('div');
+					this.cfire.style.cssText='width:5px;height:5px;background:#fff;position:absolute;left:'+this.x+'px;top:'+this.clientheight+'px;';//设置样式
+					document.body.appendChild(this.cfire);//追加
+					this.move();//运动
+				};
+				this.move=function(){//烟花运动
+					move(this.cfire,{top:this.y},function(){
+						document.body.removeChild(that.cfire);//烟花消失
+						that.frag();
+					});
+				};
+				/*this.frag=function(){//随机一堆的div,代表碎片。
+					this.num=tool.ranNum(30,60);//获取随机碎片数量
+					this.per=2*Math.PI/this.num;   //每个碎片的弧度
+					for(var i=0;i<this.num;i++){//随机创建30-60个碎片
+						this.fragment=document.createElement('div');
+						this.fragment.style.cssText='width:5px;height:5px;background:rgb('+tool.ranNum(0,255)+','+tool.ranNum(0,255)+','+tool.ranNum(0,255)+');position:absolute;left:'+this.x+'px;top:'+this.y+'px;';
+						document.body.appendChild(this.fragment);
+						this.boom(this.fragment,i);
+					}
+				};
+				this.boom=function(obj,i){//碎片散开
+					var r=0;
+					obj.timer=setInterval(function(){
+						r+=3;//半径累加
+						obj.style.left=that.x+Math.sin(that.per*i)*r+'px';
+						obj.style.top=that.y+Math.cos(that.per*i)*r+'px';
+						if(r>=200){
+							clearInterval(obj.timer);//关闭定时器
+							document.body.removeChild(obj)//删除碎片
+						}
+					},20);
+				}*/
+				this.frag=function(){//随机一堆的div,代表碎片。
+					this.num=tool.ranNum(30,60);//获取随机碎片数量
+					this.per=2*Math.PI/this.num;   //每个碎片的弧度
+					for(var i=0;i<this.num;i++){//随机创建30-60个碎片
+						this.fragment=document.createElement('div');
+						this.fragment.style.cssText='width:5px;height:5px;background:rgb('+tool.ranNum(0,255)+','+tool.ranNum(0,255)+','+tool.ranNum(0,255)+');position:absolute;left:'+this.x+'px;top:'+this.y+'px;';
+						document.body.appendChild(this.fragment);
+						this.boom(this.fragment,i);
+					}
+				};
+				//x=16(sint)³
+				//y=13cost-5cos2t-2cos3t-cos4t
+				this.boom=function(obj,i){//碎片散开
+					var r=0;
+					obj.timer=setInterval(function(){
+						r+=0.5;//半径累加
+						obj.style.left=that.x+16*Math.pow(Math.sin(that.per*i),3)*r+'px';
+						obj.style.top=that.y-( 13*Math.cos(that.per*i)-5*Math.cos(2*that.per*i)-2*Math.cos(3*that.per*i)-Math.cos(4*that.per*i) )*r+'px';
+						if(r>=20){
+							clearInterval(obj.timer);//关闭定时器
+							document.body.removeChild(obj)//删除碎片
+						}
+					},20);
+				}
+				
+				
+				
+				
+			}
+			
+			
+			//实例化构造函数
+			document.onclick=function(ev){//点击可视区动作
+				var ev=ev||window.event;
+				var firework=new Firework(ev.clientX,ev.clientY);//将鼠标的位置传入
+				firework.createfirework();//调用方法。
+			}
+			
+			
+			/*function 你好(){
+				alert('我不好');
+			}
+			你好();*/
+		</script>
+	</body>
+</html>
