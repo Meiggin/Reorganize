@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding:0px;margin:0px;
+			}
+			html{
+				height: 100%;
+			}
+			body{
+				height: 100%;
+				overflow: hidden;
+				background: #000000;
+			}
+		</style>
+	</head>
+	<body>
+		<script src="public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//新建构造函数
+			//构造函数里面的属性所有的实例都能访问，如果是变量，不能保证都能访问(全局/局部)
+			function Firework(x,y){
+				this.x=x;//水平位置的属性
+				this.y=y;//垂直位置的属性
+				this.clientheight=document.documentElement.clientHeight;//可视区
+				var that=this;
+				this.createfirework=function(){//创建一个烟花
+					this.cfire=document.createElement('div');
+					this.cfire.style.cssText='width:5px;height:5px;background:#fff;position:absolute;left:'+this.x+'px;top:'+this.clientheight+'px;';//设置样式
+					document.body.appendChild(this.cfire);//追加
+					this.move();//运动
+				};
+				this.move=function(){//烟花运动
+					move(this.cfire,{top:this.y},function(){
+						document.body.removeChild(that.cfire);//烟花消失
+						that.frag();
+					});
+				};
+				this.frag=function(){//随机一堆的div,代表碎片。
+					for(var i=0;i<tool.ranNum(30,60);i++){//随机创建30-60个碎片
+						this.fragment=document.createElement('div');
+						this.fragment.style.cssText='width:5px;height:5px;background:rgb('+tool.ranNum(0,255)+','+tool.ranNum(0,255)+','+tool.ranNum(0,255)+');position:absolute;left:'+this.x+'px;top:'+this.y+'px;';
+						document.body.appendChild(this.fragment);
+						this.boom(this.fragment);
+					}
+				};
+				this.boom=function(obj){//碎片散开
+					//随机产生正负的速度值
+					var speedx=parseInt((Math.random()>0.5?'-':'') + tool.ranNum(1,15));
+					var speedy=parseInt((Math.random()>0.5?'-':'') + tool.ranNum(1,15));
+					//获取初始值
+					var initx=this.x;
+					var inity=this.y;
+					obj.timer=setInterval(function(){//开启定时器，让碎片运动
+						//碎片移动的值。
+						initx+=speedx;
+						inity+=speedy++;//++模拟重力加速度
+						if(inity>=that.clientheight){
+							clearInterval(obj.timer);//关闭定时器
+							document.body.removeChild(obj)//删除碎片
+						}
+						obj.style.left=initx+'px';//赋值
+						obj.style.top=inity+'px';
+						
+					},20);
+				}
+			}
+			
+			
+			//实例化构造函数
+			document.onclick=function(ev){//点击可视区动作
+				var ev=ev||window.event;
+				var firework=new Firework(ev.clientX,ev.clientY);//将鼠标的位置传入
+				firework.createfirework();//调用方法。
+			}
+			
+		</script>
+	</body>
+</html>
