@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    * {
+        padding: 0px;
+        margin: 0px;
+    }
+    
+    .wrap {
+        width: 1000px;
+        height: 500px;
+        margin: 0 auto;
+        position: relative;
+    }
+    
+    #spic {
+        width: 400px;
+        height: 400px;
+        border: 1px solid #000;
+        float: left;
+        position: relative;
+    }
+    
+    #spic img {
+        width: 400px;
+        height: 400px;
+    }
+    
+    #sf {
+        background: orange;
+        opacity: 0.3;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        visibility: hidden;
+    }
+    
+    #bf {
+        width: 400px;
+        height: 500px;
+        border: 1px solid #000;
+        float: left;
+        overflow: hidden;
+        position: relative;
+        left: 10px;
+        visibility: hidden;
+    }
+    
+    #bf img {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+    
+    #ulist {
+        position: absolute;
+        left: 0px;
+        bottom: 15px;
+        width: 402px;
+        height: 56px;
+        overflow: hidden;
+    }
+    
+    #ulist a {
+        float: left;
+        width: 10px;
+        height: 54px;
+        border: 1px solid #ccc;
+        text-decoration: none;
+        line-height: 56px;
+        text-align: center;
+        background: #fff;
+    }
+    
+    #list {
+        float: left;
+        margin-left: 18px;
+        width: 372px;
+        position: relative;
+    }
+    
+    ul {
+        list-style: none;
+        float: left;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+    
+    ul li {
+        float: left;
+        width: 56px;
+        height: 56px;
+        padding-right: 6px;
+    }
+    
+    ul li img {
+        width: 52px;
+        height: 52px;
+        border: 1px solid #ccc;
+    }
+    
+    #right {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        color: #333;
+    }
+    
+    #left {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        z-index: 2;
+        color: #fff;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div id="spic">
+            <img src="images/1.jpg" alt="">
+            <div id="sf"></div>
+        </div>
+        <div id="bf">
+            <img src="images/1.jpg" alt="" id="bpic">
+        </div>
+        <div id="ulist">
+            <a href="javascript:;" id="left">&lt;</a>
+            <div id="list">
+                <ul>
+                    <li><img src="images/1.jpg" alt=""></li>
+                    <li><img src="images/6.jpg" alt=""></li>
+                    <li><img src="images/3.jpg" alt=""></li>
+                    <li><img src="images/4.jpg" alt=""></li>
+                    <li><img src="images/5.jpg" alt=""></li>
+                    <li><img src="images/1.jpg" alt=""></li>
+                    <li><img src="images/3.jpg" alt=""></li>
+                    <li><img src="images/2.jpg" alt=""></li>
+                    <li><img src="images/1.jpg" alt=""></li>
+                    <li><img src="images/6.jpg" alt=""></li>
+                </ul>
+            </div>
+            <a href="javascript:;" id="right">&gt;</a>
+        </div>
+    </div>
+    <script src="public.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+    	//Uncaught TypeError: Cannot set property 'onclick' of null  
+    	//Uncaught ReferenceError: a is not defined
+    	//Uncaught SyntaxError: Unexpected string
+    	function Zoom(){
+    		this.wrap=document.querySelector('.wrap');//包含框
+    		this.spic=document.querySelector('#spic');//小图
+    		this.sf=document.querySelector('#sf');//小放
+    		this.bf=document.querySelector('#bf');//大放
+    		this.bpic=document.querySelector('#bpic');//大图
+    		this.oUl=document.querySelector('ul');//大图
+    		this.aLi=document.querySelectorAll('li');
+    		this.left=document.querySelector('#left');//箭头左
+    		this.right=document.querySelector('#right');//箭头右
+    		var that=this;
+    		this.init=function(){//初始化
+    			this.spic.onmouseover=function(){
+    				that.show();
+    				that.sfsize();
+    				that.spic.onmousemove=function(ev){
+    					var ev=ev||window.event;
+    					that.sfmove(ev)
+    				}
+    			};
+    			this.spic.onmouseout=function(){
+    				that.hide();
+    			};
+    			for(var i=0;i<this.aLi.length;i++){
+    				this.aLi[i].onclick=function(){
+    					var aLisrc=this.getElementsByTagName('img')[0].src;//获取当前点击的li下面每张图片对应的src属性
+    					that.spic.getElementsByTagName('img')[0].src=aLisrc;//赋值
+    					that.bpic.src=aLisrc;//赋值
+    				}
+    			}
+    			this.liwidth=this.aLi[0].offsetWidth;//一个li的宽度
+    			this.oUl.style.width=this.aLi.length*this.liwidth+'px';//ul的宽度
+    			var num=6;//可视的图片的个数。
+    			if(num>this.aLi.length){
+    				that.right.style.color='#fff';
+    			}
+    			this.left.onclick=function(){
+    				if(num>6){//图片的个数超过6
+    					num--;
+    					if(num==6){
+    						that.left.style.color='#fff';
+    					}
+    					that.right.style.color='#333';
+    				}
+    				move(that.oUl,{left:-that.liwidth*(num-6)});
+    			};
+    			this.right.onclick=function(){
+    				if(num<that.aLi.length){//图片的个数超过6
+    					num++;
+    					if(num==that.aLi.length){
+    						that.right.style.color='#fff';
+    					}
+    					that.left.style.color='#333';
+    				}
+    				move(that.oUl,{left:-that.liwidth*(num-6)});
+    			}
+    		};
+    		this.show=function(){
+    			this.sf.style.visibility='visible';
+    			this.bf.style.visibility='visible';
+    		};
+    		this.hide=function(){
+    			this.sf.style.visibility='hidden';
+    			this.bf.style.visibility='hidden';
+    		};
+    		this.sfsize=function(){
+    			this.sf.style.width=this.spic.offsetWidth*this.bf.offsetWidth/this.bpic.offsetWidth+'px';
+    			this.sf.style.height=this.spic.offsetHeight*this.bf.offsetHeight/this.bpic.offsetHeight+'px';
+    		this.scale=this.bf.offsetWidth/this.sf.offsetWidth; //比例
+    		
+    		};
+    		this.sfmove=function(ev){
+    			var x=ev.clientX-this.wrap.offsetLeft-this.sf.offsetWidth/2;
+    			var y=ev.clientY-this.wrap.offsetTop-this.sf.offsetHeight/2;
+    			if(x<0){
+    				x=0;
+    			}else if(x>=this.spic.offsetWidth-this.sf.offsetWidth){
+    				x=this.spic.offsetWidth-this.sf.offsetWidth-2;
+    			}
+    			if(y<0){
+    				y=0;
+    			}else if(y>=this.spic.offsetHeight-this.sf.offsetHeight){
+    				y=this.spic.offsetHeight-this.sf.offsetHeight-2;
+    			}
+    			this.sf.style.left=x+'px';
+    			this.sf.style.top=y+'px';
+    			this.bpic.style.left=-this.scale*x+'px';
+    			this.bpic.style.top=-this.scale*y+'px';
+    		}
+    	}
+    	
+    	new Zoom().init();
+    </script>
+</body>
+
+</html>
