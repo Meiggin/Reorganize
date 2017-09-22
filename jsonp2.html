@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<button>加载数据</button>
+		<script type="text/javascript">
+			//script标签不存在跨域，引入任何资源，如果资源是js能够识别的代码，可以使用。
+			function hehe(arr){
+				console.log(arr);//获取数据
+			}
+		</script>
+		<!--<script src="4.jsonp.php" type="text/javascript" charset="utf-8"></script>-->
+		<!--<script src="1.rar" type="text/javascript" charset="utf-8"></script>-->
+		
+		<!--函数没有前置问题的，script标签有，一定要在引入数据之前创建函数-->
+		
+		<script type="text/javascript">
+			document.getElementsByTagName('button')[0].onclick=function(){
+				var cscript=document.createElement('script');
+				cscript.src='4.jsonp.php?callback=hehe';
+				document.body.appendChild(cscript);
+			}
+		</script>
+		
+		<!--hehe(data)-->
+		
+		<!--<script type="text/javascript">
+			function fn(arr){
+				alert(arr);
+			}
+			fn([1,2,3,4]);
+		</script>-->
+	</body>
+</html>
