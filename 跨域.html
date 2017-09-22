@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" id="city" />
+		<button>获取天气预报</button>
+		<div class="box"></div>
+		<script src="public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//跨域的报错：Access-Control-Allow-Origin   
+			/*ajax({
+				//url:'http://localhost/js1707/Day%2023/2.php.php',
+				//url:'http://www.sojson.com/open/api/weather/json.shtml?city=杭州',//出现跨域
+				url:'2.php.php',//解决方式：后端代理
+				success:function(d){
+					var obj=JSON.parse(d);
+					var html='<h2>'+obj.city+'</h2>';
+					html+='<table border="1">';
+					
+					for(var i=0;i<obj.data.forecast.length;i++){//obj.data.forecast.length==5
+						html+='<tr>';
+							for(var attr in obj.data.forecast[i]){
+								html+='<td>'+obj.data.forecast[i][attr]+'</td>';
+							}
+						html+='</tr>';
+					}
+					html+='</table>';
+					document.querySelector('.box').innerHTML=html;
+				}
+			})*/
+			
+			document.querySelector('button').onclick=function(){
+				var cityname=document.querySelector('input').value;
+				ajax({
+					url:'2.php.php',
+					data:{
+						city:cityname
+					},
+					success:function(d){
+					var obj=eval('('+d+')');
+						var html='<h2>'+obj.city+'</h2>';
+						html+='<table border="1">';
+						for(var i=0;i<obj.data.forecast.length;i++){//obj.data.forecast.length==5
+							html+='<tr>';
+								for(var attr in obj.data.forecast[i]){
+									html+='<td>'+obj.data.forecast[i][attr]+'</td>';
+								}
+							html+='</tr>';
+						}
+						html+='</table>';
+						document.querySelector('.box').innerHTML=html;
+					}
+				})
+			};
+		</script>
+	</body>
+</html>
