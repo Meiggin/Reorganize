@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			//1.
+			/*function a(){
+				console.log(aaaa)
+			}*/
+
+			//2.
+			/*var a = function(){
+				console.log(aaaa)
+			}*/
+			//3
+			var a = () => console.log("aaaa")
+			a()
+
+			let arr = ["a", "b", "c"];
+			arr.forEach((item, index) => console.log(item));
+
+			setInterval(() => {
+				console.log("1111")
+			}, 1000)
+
+			/*var obj = {
+				name: "laoyao",
+				setName: (name)=>{
+					this.name = name;
+					console.log(name)
+				}
+			}
+			
+			obj.setName("aaaaa")*/
+			var obj = {
+				name: "laoyao",
+				setName(name){
+					this.name = name;
+					console.log(name)
+				}
+			}
+			
+			obj.setName("aaaaa")
+		</script>
+	</body>
+
+</html>
