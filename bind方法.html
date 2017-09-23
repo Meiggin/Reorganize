@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<button>OK</button>
+		<script>
+			/*window.setInterval(function() {
+				console.log(this)
+			}, 1000)*/
+			var obj = {
+				name:"laoyao"
+			}
+			var button = document.querySelector("button");
+			button.onclick = function() {
+				//console.log(this);
+				var self = this;
+				window.setTimeout(function() {
+					console.log(this)
+					this.innerHTML = "KO"
+					//console.log(this)
+				}.bind(obj), 1000)
+			}
+		</script>
+	</body>
+
+</html>
