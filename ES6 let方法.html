@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			var a = 1;
+			for(let b = 0; b <= 3; b++) {
+				//var c = 0
+				//a++;
+				setTimeout(function() {
+					console.log(b)
+				}, 1000)
+			}
+			//let产生块级作用域
+			if(true){
+				let d = 1
+			}
+			function a(){
+				//let
+			}
+			switch(){
+				//let
+			}
+			//console.log(b)
+			console.log(d)
+			//console.log(a, b, c)
+		</script>
+	</body>
+
+</html>
