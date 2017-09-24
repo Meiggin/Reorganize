@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		
+		div {
+			display: none;
+			border: 1px solid;
+			position: absolute;
+			z-index: 99;
+			width: 200px;
+		}
+		
+		input {
+			width: 200px;
+		}
+	</style>
+
+	<body>
+		<input />
+		<div>
+			<ul>
+
+			</ul>
+		</div>
+		<script>
+			var arr = ["sdasdasd", "asdasdsa", "ddddddd"];
+			for(var i = 0; i < arr.length; i++) {
+				document.querySelector("div ul").innerHTML += ("<li>" + arr[i] + "</li>")
+			}
+			for(var j = 0; j < arr.length; j++) {
+				console.log(document.querySelectorAll("li"))
+				document.querySelectorAll("li")[j].onclick = function() {
+					document.querySelector("input").value = this.innerHTML;
+				}
+			}
+			document.querySelector("input").onfocus = function() {
+				document.querySelector("div").style.display = "block";
+			}
+
+			document.querySelector("input").onblur = function() {
+				setTimeout(function(){
+					document.querySelector("div").style.display = "none";
+				},1000)
+			}
+		</script>
+	</body>
+
+</html>
