@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			document.oncontextmenu = function(e) {
+				console.log("右键被按下");
+				console.log(e.button)
+				if(e.button==2){
+					
+				}
+				return false;
+			}
+		</script>
+	</body>
+
+</html>
