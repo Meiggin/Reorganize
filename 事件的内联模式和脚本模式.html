@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<!--内联的写法-->
+		<button onclick='func("aaaa")'>Ok</button>
+		<!--内联的写法-->
+		<script>
+			function func(data) {
+				console.log(data)
+			}
+		</script>
+
+		<!--外联 脚本模式-->
+		<script>
+			window.onload = function() {
+				document.getElementById("btn2").setAttribute("onclick", "func()")
+				document.getElementById("btn2").onclick = function() {
+					console.log("kkkkkk")
+				}
+				function func2() {
+					console.log("kkkkkk")
+				}
+				document.getElementById("btn2").onclick = func2;
+			}
+		</script>
+		<button id="btn2">Ok</button>
+	</body>
+
+</html>
