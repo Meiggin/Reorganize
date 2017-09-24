@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<table>
+			<thead>
+				<tr>
+					<th>标题</th>
+					<th>内容</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>asdas</th>
+					<th>asdas</th>
+					<th><button>Ok1</button></th>
+				</tr>
+				<tr>
+					<th>ytyuytu</th>
+					<th>ytyuytu</th>
+					<th><button>Ok2</button></th>
+				</tr>
+				<tr>
+					<th>eeee</th>
+					<th>uuuu</th>
+					<th><button>Ok3</button></th>
+				</tr>
+			</tbody>
+		</table>
+		<script>
+			var buttons = document.querySelectorAll("table button")
+			console.log(buttons)
+			for(var i = 0; i < buttons.length; i++) {
+				buttons[i].onclick = function() {
+					console.log(this.parentNode.parentNode)
+					//父.removeChild(子)
+					//子节点.parentNode(子节点)
+					this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode)
+				}
+			}
+		</script>
+	</body>
+
+</html>
