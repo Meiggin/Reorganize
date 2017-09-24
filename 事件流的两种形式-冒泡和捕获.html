@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		body,
+		html {
+			margin: 0;
+			padding: 0;
+		}
+		
+		body {
+			height: 1000px;
+			width: 100%;
+			background-color: blue;
+		}
+		
+		div {
+			margin: 50px;
+			background-color: yellow;
+			height: 500px;
+			width: 100%;
+		}
+	</style>
+
+	<body>
+		body
+		<div>
+			div
+			<button>button</button>
+		</div>
+		<script>
+			//事件冒泡 就是子往父一直找直到找到window 也就是从里往外找
+			//button->div->body->document->window
+
+			//事件捕获 就是父往子一直找 也就是从外往里找
+			//如果我点击了body标签
+			//body->div->button
+
+			document.querySelector("button").onclick = function(e) {
+				console.log("你点击了button")
+			}
+			document.querySelector("div").onclick = function(e) {
+				console.log("你点击了div")
+			}
+			document.querySelector("body").onclick = function() {
+				console.log("你点击了body")
+			}
+			document.onclick = function(e) {
+				//阻止冒泡事件的兼容性的写法
+				var e = evt || window.event;
+				e.stopPropagation?e.stopPropagation():e.cancelBubble=true;
+				console.log("你点击了DOM结构")
+				e.stopPropagation(); 
+			}
+			window.onclick = function() {
+				console.log("你点击了浏览器")
+			}
+		</script>
+	</body>
+
+</html>
