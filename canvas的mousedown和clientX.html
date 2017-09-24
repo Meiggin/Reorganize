@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		html,
+		body {
+			margin: 0;
+			padding: 0
+		}
+		
+		canvas {
+			width: 500px;
+			height: 500px;
+			background-color: yellow;
+		}
+	</style>
+
+	<body>
+		<canvas></canvas>
+		<script>
+			//拿画布节点
+			var canvas = document.querySelector("canvas");
+			//等同于一根笔
+			var ctx = canvas.getContext("2d");
+			//生成一个矩形
+			/*ctx.rect(0,0,50,100);
+			ctx.stroke();*/
+
+			canvas.onmousedown = function(e) {
+				var e = e || event;
+				var dix = e.offsetX;
+				var diy = e.offsetY;
+				//console.log(e.clientX,e.clientY)
+				//起点  onMouseDown
+				ctx.beginPath();
+				ctx.moveTo(dix, diy);
+				document.onmousemove = function(e) {
+					/*pop.style.left = e.clientX - dix + "px";
+					pop.style.top = e.clientY - diy + "px";*/
+					//终点 onMouseMove
+					ctx.lineTo(e.clientX - dix, e.clientY - diy);
+					ctx.stroke();
+				}
+			}
+
+			canvas.onmouseup = function() {
+				document.onmousemove = null
+			}
+		</script>
+	</body>
+
+</html>
