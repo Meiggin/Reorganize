@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body id="un">
+		<a href="1.html">a</a>
+		
+		<input id="select1" />
+		<textarea id="select2"></textarea>
+		<!--<select>
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+		</select>-->
+		<!--
+			页面刷新
+			页面关闭
+			页面跳转
+		-->
+		<script>
+			window.onload = function() {
+				console.log('页面已经加载完毕');
+			};
+
+			window.onunload = function() {
+				console.log("页面已经卸载")
+			}
+			
+			//输入框的内容被选中的时候触发
+			document.getElementById("select1").onselect = function(){
+				console.log("被选中")
+			}
+			
+			document.getElementById("select2").onselect = function(){
+				console.log("被选中")
+			}
+			
+			/*document.getElementById("select1").onkeyup = function(){
+				console.log(this.value)
+				console.log("键盘输入时候触发")
+			}*/
+			
+			/*document.getElementById("select1").oninput = function(){
+				console.log(this.value)
+				console.log("键盘输入时候触发")
+			}*/
+			
+			document.getElementById("select1").onchange = function(){
+				console.log(this.value)
+				console.log("文本框中内容改变了并且失去焦点")
+			}
+		</script>
+	</body>
+
+</html>
