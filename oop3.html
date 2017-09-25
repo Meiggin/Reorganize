@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//创建自定义的对象。
+			var arr1=new Array();
+			var arr2=new Array();
+			//alert(arr1.push===arr2.push);//true
+			
+			/*var arr1=new Array();
+			var arr2=new Array();*/
+			
+			
+			/*var obj1=new Object();
+			obj1.name='zhangsan';
+			
+			var obj2=new Object();
+			obj2.name='zhangsan';
+			
+			var obj3=new Object();
+			obj3.name='zhangsan';*/
+			
+			//创建多个对象出现代码冗余的问题。利用封装解决
+			//引入工厂模式
+			
+			/*function createPerson(){
+				var obj=new Object(name);
+				obj.name=name;
+				obj.showname=function(){
+					alert(this.name);
+				}
+				return obj;
+			}*/
+			
+			//工程模式无法识别的对象的类型，所有的对象都是object创建出来，像array,date对应一样，有自己的类型
+			
+			//构造函数：首字母大写，new关键字调用
+			/*function CreatePerson(name){
+				//var this=new Object();
+				this.name=name;
+				this.showName=function(){
+					alert(this.name);
+				}
+				//return obj;
+				//return this;
+			}
+			
+			var c1=new CreatePerson('zhangsan');
+			var c2=new CreatePerson('wangwu');
+			c1.showName();
+			c2.showName();
+			alert(c1.showName==c2.showName);//false*/
+			
+			//构造函数弊端：实例的方法每次都要重新创建。
+			//原型：prototype,每一个函数都有一个原型。原型下面放置的公有的属性和方法。而且prototype是一个对象属性。
+			//属性一般都是不相同，方法一般是相同的。可以将相同的方法写到原型下面。
+			
+			
+			//混合方法开发对象：构造函数+原型
+			
+			function CreatePerson(num){//构造函数里面的属性和方法都是实例对象私有的。
+				this.num=num;
+				//this.age=age;//私有属性的优先级高于原型下的。
+			}
+			Object.prototype.num=1000;
+			CreatePerson.prototype.num=100;//属性一般是私有的
+			
+			CreatePerson.prototype.showName=function(){//原型下的方法，共有，公有的。
+				alert(this.name);
+			};
+			
+			CreatePerson.prototype.showAge=function(){//原型下的方法，共有，公有的。
+				alert(this.age);
+			};
+			
+			
+			var c1=new CreatePerson('10');
+			var c2=new CreatePerson('wangwu2222');
+			/*c1.showName();
+			c2.showName();
+			alert(c1.showName==c2.showName);//true*/
+			
+			alert(c1.num);
+			
+			
+			
+		</script>
+	</body>
+</html>
