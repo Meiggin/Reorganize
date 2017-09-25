@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+		/*function datastr(dataobj){
+			var arr=[];
+			for(var attr in dataobj){
+				arr.push(attr+'='+dataobj[attr]);
+			}
+			return arr.join('&');
+		}
+		
+		function ajax(obj){
+			obj.type=obj.type || 'get'
+			
+			if(typeof obj.data!='string'){
+				obj.data=datastr(obj.data);
+			}else{
+				obj.data=obj.data|| '';
+			}
+			var ajax=null;
+			try{
+				ajax=new XMLHttpRequest();
+			}catch(e){
+				ajax=new ActiveXObject('Microsoft.XMLHTTP');
+			}
+			if(obj.type=='get' && obj.data){
+				obj.url+='?'+obj.data;
+			}
+			
+			ajax.open(obj.type,obj.url,true);
+			
+			if(obj.type=='get'){
+				ajax.send();
+			}else{
+				ajax.setRequestHeader('content-type','application/x-www-form-urlencoded');
+				ajax.send(obj.data);
+			}
+			
+			ajax.onreadystatechange=function(){
+				if(ajax.readyState==4){
+					if(ajax.status==200){
+						obj.success&&obj.success(ajax.responseText);
+					}else{
+						obj.error&&obj.error(ajax.status);
+					}
+				}
+			}
+		}
+		
+		
+		ajax({
+			type:'get',
+			url:'php.php',
+			data:{
+				width:200,
+				height:300
+			},
+			success:function(data){
+				document.body.innerHTML=data;
+			},
+			error:function(e){
+				alert(e);
+			}
+		});*/
+		
+		
+		//promise改造ajax依赖调用
+		function datastr(dataobj){
+			var arr=[];
+			for(var attr in dataobj){
+				arr.push(attr+'='+dataobj[attr]);
+			}
+			return arr.join('&');
+		}
+		
+		function ajax(obj){
+			var promise=new Promise(function(resolve,reject){
+				obj.type=obj.type || 'get'
+			
+				if(typeof obj.data!='string'){
+					obj.data=datastr(obj.data);
+				}else{
+					obj.data=obj.data|| '';
+				}
+				var ajax=null;
+				try{
+					ajax=new XMLHttpRequest();
+				}catch(e){
+					ajax=new ActiveXObject('Microsoft.XMLHTTP');
+				}
+				if(obj.type=='get' && obj.data){
+					obj.url+='?'+obj.data;
+				}
+				
+				ajax.open(obj.type,obj.url,true);
+				
+				if(obj.type=='get'){
+					ajax.send();
+				}else{
+					ajax.setRequestHeader('content-type','application/x-www-form-urlencoded');
+					ajax.send(obj.data);
+				}
+				
+				ajax.onreadystatechange=function(){
+					if(ajax.readyState==4){
+						if(ajax.status==200){
+							//obj.success&&obj.success(ajax.responseText);
+							resolve(ajax.responseText)
+						}else{
+							//obj.error&&obj.error(ajax.status);
+							reject(new Error('接口地址有误！'));
+						}
+					}
+				}
+			});
+			
+			return promise;
+			
+		}
+		
+		
+		ajax({
+			type:'get',
+			url:'php.php',
+			data:{
+				width:200,
+				height:300
+			}
+		}).then(function(data){//解决
+			document.body.innerHTML=data;
+		}).catch(function(e){//未解决
+			console.log(e);
+		});
+		</script>
+	</body>
+</html>
