@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			/*var str='https://imgsa.baidu.com//crop%3D0%2C0%2C663%2C352/sign=5126f364da1373f0e17035df993f67cb/0eb30f2442a7d93348f08f6ca64bd11373f00150.jpg';
+			var promise=new Promise(function(resolve,reject){
+				var oImg=new Image();//创建图片对象   document.createElement('img')
+				oImg.src=str;
+				oImg.onload=function(){//图片加载完成
+					resolve(oImg);
+				};
+				oImg.onerror=function(){//图片加载失败
+					reject(new Error('图片加载失败'));
+				}
+			});
+			
+			promise.then(function(img){
+				document.body.appendChild(img);
+			})*/
+			
+			
+			var arr=[
+				'https://imgsa.baidu.com/news/crop%3D0%2C0%2C663%2C352/sign=5126f364da1373f0e17035df993f67cb/0eb30f2442a7d93348f08f6ca64bd11373f00150.jpg',
+				'https://imgsa.baidu.com/news/crop%3D1%2C4%2C662%2C348/sign=0cc5f23c682762d09471feff9ddd24ce/63d9f2d3572c11df0cc5f23c682762d0f703c29d.jpg',
+				'https://imgsa.baidu.com/news/q%3D100/sign=65a1827b5d4e9258a03482eeac83d1d1/d31b0ef41bd5ad6eb1460ef58acb39dbb6fd3c75.jpg',
+				'https://imgsa.baidu.com/news/q%3D100/sign=fd5c263fb212c8fcb2f3f2cdcc0292b4/aec379310a55b3196413d66a48a98226cefc17c2.jpg'
+			];
+			
+			function loadimg(url){
+				var promise=new Promise(function(resolve,reject){
+					var oImg=new Image();//创建图片对象 
+					oImg.src=url;
+					oImg.onload=function(){//图片加载完成
+						resolve(oImg);
+					};
+					oImg.onerror=function(){//图片加载失败
+						reject(new Error('图片加载失败'));
+					}
+				});
+				return promise;
+			}
+			//只有数组里面的每个状态都变成resolve，则新的 Promise 实例状态才会变成resolve
+			var pro=Promise.all([loadimg(arr[0]),loadimg(arr[1]),loadimg(arr[2]),loadimg(arr[3])]);
+			pro.then(function(imgs){
+				imgs.forEach(function(value){
+					document.body.appendChild(value);
+				});
+			}).catch(function(e){
+				console.log(e);
+			});
+		</script>
+	</body>
+</html>
