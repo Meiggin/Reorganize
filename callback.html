@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			/*setTimeout(function(){
+				console.log('first');
+			},0);
+			console.log('second');*/
+			
+			
+			/*setTimeout(function(){
+				console.log('first');
+				console.log('second');
+			},0);*/
+			
+			/*function fn(callback){
+				setTimeout(function(){
+					console.log('first');
+					callback();
+				},1000);
+			}
+			
+			fn(function(){
+				console.log('我是回调函数里面的内容');
+			});*/
+			
+			
+			/*function fn(callback){
+				setTimeout(function(){
+					console.log('first');
+					callback && typeof(callback)=='function' && callback();//函数存在，类型是function 才执行
+				},1000);
+			}
+			
+			function fn1(){
+				console.log('我是回调函数里面的内容');
+			}
+			
+			fn(fn1);*/
+			
+			
+			
+			
+			
+			
+			//回调让异步操作带有顺序。
+			
+			/*function fn(callback){
+				setTimeout(function(){
+					console.log('first');
+					callback && typeof(callback)=='function' && callback();//函数存在，类型是function 才执行
+				},2000);
+			}
+			
+			fn(function (){//回调函数的嵌套：可读性很差。
+				console.log('我是回调函数里面的内容11111111111111');
+				fn(function(){
+					console.log('我是回调函数里面的内容22222222222222');
+					fn(function(){
+						console.log('我是回调函数里面的内容33333333333333');
+						fn(function(){
+							console.log('我是回调函数里面的内容444444444444444');
+						})
+					})
+				})
+			});*/
+			
+			
+			
+		/*	function fn(){
+				//promise三种状态:pending(进行中)  resolve(解决，成功)  reject(未解决，失败)
+				var promise=new Promise(function(resolve,reject){//新建promise对象
+					setTimeout(function(){
+						console.log('first');
+						resolve();//成功
+					},2000);
+				});
+				
+				
+				return promise;//一定返回promise对象，promise (then  catch ) 
+			}*/
+			
+			/*
+			fn().then(function(){//then：promise下面的原型下的方法。  第一个参数：成功时执行的函数
+				console.log('我是成功函数里面的内容');
+			},function(){//第一个参数：失败时执行的函数
+				console.log('我是失败函数里面的内容');
+			});*/
+			
+			
+			/*fn().then(function(){//成功时执行的函数      resolve
+				console.log('我是成功函数里面的内容');
+			}).catch(function(){//失败时执行的函数     reject
+				console.log('我是失败函数里面的内容');
+			})*/
+			
+			/*fn().then(function(){
+				console.log('我是回调函数里面的内容11111111111111');
+				return fn();//再次返回promise对象，调用then方法
+			}).then(function(){
+				console.log('我是回调函数里面的内容222222222222222222222');
+				return fn();
+			}).then(function(){
+				console.log('我是回调函数里面的内容3333333333333333333333333333333');
+				return fn();
+			}).then(function(){
+				console.log('我是回调函数里面的内容444444444444444444444444444444444');
+			})
+			*/
+			
+			
+			
+			function fn(){
+				var pro=new Promise(function(resolve,reject){
+					setTimeout(function(){
+						console.log('first');
+						resolve();
+					},1000);
+				});
+				return pro;
+			}
+			
+			function fn1(){
+				console.log('我是回调函数里面的内容');
+			}
+			
+			fn().then(fn1);
+		</script>
+	</body>
+</html>
