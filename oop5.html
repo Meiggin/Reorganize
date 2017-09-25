@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var arr1=new Array('a','b','c','a','b','d','c');
+			var arr2=new Array(1,4,7,2,5,8,3,6,9,9,6,3,8,5,2,7,4,1);
+			Array.prototype.push=function(){//覆盖
+				
+			}
+
+			Array.prototype.add=function(){
+				for(var i=0;i<arguments.length;i++){
+					this[this.length]=arguments[i];
+				}
+				return this.length;
+			}
+			
+			
+			Array.prototype.unique=function(){//数据去重的方法。
+				var arr2=[];
+				for(var i=0;i<this.length;i++){
+					if(arr2.indexOf(this[i])==-1){
+						arr2.add(this[i]);
+					}
+				}
+				return arr2;
+			}
+
+			//alert(arr1.add('c','d','e'));
+			
+			
+			
+			alert(arr2.unique());
+			
+			//alert(arr1);
+		</script>
+	</body>
+</html>
