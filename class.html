@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			/*function Person(name,age){
+				this.name=name;
+				this.age=age;
+			}
+			Person.prototype.showinfo=function(){
+				return '我的名字是：'+this.name+', 我今年'+this.age+'岁';
+			}
+			
+			alert(new Person('zhangsan',100).showinfo());*/
+			
+			/*class Person{//语法糖
+				constructor(name,age){//es的构造函数
+					this.name=name;
+					this.age=age;
+				}
+				showinfo(){//前面没有符号。
+					return '我的名字是：'+this.name+', 我今年'+this.age+'岁';
+				}
+				showname(){
+					
+				}
+			}*/
+			
+			
+			/*class Student extends Person{
+				constructor(name,age,grade){
+					super(name,age);//继承的关键字，属性和方法  
+					this.grade=grade;//顺便一定要在super下面，否则this出错。
+				}
+				showinfo1(){
+					return super.showinfo()+',我的班级是:'+this.grade;//super.showinfo()调用的父类下面的某个方法。
+				}
+			}*/
+			
+			//new Person('wangwu',1000);
+			//alert(typeof Person);//function
+			alert(new Student('zhaosi',2000,'1707').showinfo1());
+		</script>
+	</body>
+</html>
