@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0px;
+				margin:0px;
+			}
+			#plane{
+				width: 320px;
+				height: 568px;
+				background: url(img/background.png);
+				margin: 30px auto 0px;
+				position: relative;
+				cursor: none;
+				overflow: hidden;
+			}
+			#plane span{
+				position: absolute;
+				right: 10px;
+				top:10px;
+			}
+			#plane span strong{
+				font-weight: normal;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="plane">
+			<span>分数：<strong>0</strong> 分</span>
+		</div>
+		<script src="myplane.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>
