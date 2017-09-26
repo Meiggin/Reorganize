@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function Fn(x){
+				this.x=x;
+			}
+			Fn.prototype.y=100;
+			Object.prototype.z=1000;
+			
+			Object.prototype.hehe=function(){
+				alert('hehe');
+			}
+			
+			
+			Fn.prototype.show=function(){
+				alert(this.x);
+			}
+			
+			var f1=new Fn(10);
+			
+			
+			function Fn1(x){
+				this.x=x;
+			}
+			
+			var f2=new Fn1(10);
+			//alert(f1 instanceof Fn);//true
+			//alert(f1 instanceof Object);//true
+			
+			
+			//f1.hehe();
+			
+			
+			//alert(f1.toString);//function toString() { [native code] }
+			
+			//alert(f1.constructor);//输出实例的构造函数
+			
+			/*var arr=[];
+			alert(arr.hehe());*/
+			
+//		  hasOwnProperty()  : 看是不是对象自身下面的属性， 只在属性存在于实例中时才返回 true。 
+			//alert(f1.hasOwnProperty('x'));//true
+			//alert(f1.hasOwnProperty('y'));//原型下   false
+			//alert(f1.hasOwnProperty('z'));//Object下的   false
+//		in操作符用来判断某个属性属于某个实例对象，可以是对象的直接属性，也可以是通过prototype继承的属性(包括Object下面的属性)。
+			//alert('x' in f1);//往原型链去找
+			//alert('y' in f1);
+			//alert('z' in f1);
+//		toString() :系统对象下面都是自带的 , 系统对象都有toString(),自己写的对象都是通过原型链找Object下面的，可以把对象转成字符串，可以做进制转换或者类型的判断。
+			/*alert(Object.prototype.toString.call('hello').slice(8,-1));//[object String]
+			alert(Object.prototype.toString.call(5));//[object Number]
+			alert(Object.prototype.toString.call(/\d/));//[object Number]
+			alert(Object.prototype.toString.call([]));//[object Number]
+			alert(Object.prototype.toString.call({}));//[object Number]
+			alert(Object.prototype.toString.call(function(){}));//[object Number]
+			alert(Object.prototype.toString.call(true));//[object Number]
+			alert(Object.prototype.toString.call(new Date));//[object Number]*/
+			//alert(Object.prototype.toString.call(Symbol('hello')));//[object Number]
+		/*	alert(Object.prototype.toString.call(undefined));//[object Number]
+			alert(Object.prototype.toString.call(null));//[object Number]*/
+			
+			
+//		constructor：实例对象的构造函数  (实例对象.constructor)
+			//alert(f1.constructor);
+//		instanceof：判断一个对象是否是一个构造函数（类）的实例。(会找原型链)
+			var arr=[];
+			//alert(arr instanceof Array);
+			//alert(arr instanceof Object);
+//		isPrototypeOf (): 判断一个实例对象是否指向了该构造函数的原型对象。
+			alert(Fn.prototype.isPrototypeOf(f1));//true
+			alert(Fn.prototype.isPrototypeOf(f2));//false
+			alert(Fn1.prototype.isPrototypeOf(f2));//true
+		</script>
+	</body>
+</html>
