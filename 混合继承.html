@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.box{
+				width: 100px;height: 100px;background: red; position: absolute;
+			}
+			.box1{
+				width: 100px;height: 100px;background: blue; position: absolute; left: 250px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">我是自由的</div>
+		<div class="box1">我是被困的</div>
+		<script type="text/javascript">
+			function Drag(cname){
+				this.oDiv=document.querySelector(cname);
+				this.shortx=null;
+				this.shorty=null;
+				this.clientW=document.documentElement.clientWidth;
+				this.clientH=document.documentElement.clientHeight;
+			}
+			Drag.prototype.init=function(){
+				var that=this;
+				this.oDiv.onmousedown=function(ev){
+					var ev=ev||window.event;
+					that.shortx=ev.offsetX;
+					that.shorty=ev.offsetY;
+					document.onmousemove=function(ev){
+						var ev=ev||window.event;
+						that.move(ev);
+					};
+					document.onmouseup=function(){
+						document.onmousemove=null;
+						document.onmouseup=null;
+					}
+					return false;
+				}
+			};
+			
+			Drag.prototype.move=function(ev){
+				this.oDiv.style.left=ev.clientX-this.shortx+'px';
+				this.oDiv.style.top=ev.clientY-this.shorty+'px';
+			}
+			
+			
+			function LimitDrag(cname){
+				Drag.call(this,cname);//属性的继承
+			}
+			
+			
+			/*for(var i in Drag.prototype){//继承
+				LimitDrag.prototype[i]=Drag.prototype[i];
+			}*/
+			/*extend(Drag.prototype,LimitDrag.prototype);//方法的继承
+			function extend(obj1,obj2){
+				for(var i in obj1){
+					obj2[i]=obj1[i];
+				}
+			}*/
+			
+			/*用原型链实现对原型属性和方法的继承，而通过借用构造函数来实现对实例属性的继承。
+			即将父类的实例赋值给子类的原型。同时会将父类的构造函数赋值给子类的原型。
+			子类的方法和属性会覆盖继承的方法和属性。*/
+			
+			LimitDrag.prototype=new Drag();//new Drag的实例指向了LimitDrag.prototype
+			
+			//alert(LimitDrag.prototype.constructor);
+			LimitDrag.prototype.constructor=LimitDrag;
+			alert(LimitDrag.prototype.constructor);//将子类的构造函数改变过来。
+			LimitDrag.prototype.move=function(ev){
+				var x=ev.clientX-this.shortx;
+				var y=ev.clientY-this.shorty;
+				if(x<0){
+					x=0;
+				}else if(x>=this.clientW-this.oDiv.offsetWidth){
+					x=this.clientW-this.oDiv.offsetWidth;
+				}
+				
+				if(y<0){
+					y=0;
+				}else if(y>=this.clientH-this.oDiv.offsetHeight){
+					y=this.clientH-this.oDiv.offsetHeight;
+				}
+				
+				this.oDiv.style.left=x+'px';
+				this.oDiv.style.top=y+'px';
+			}
+			var d1=new Drag('.box');
+			d1.init();
+			//alert(d1.constructor);
+			var s1=new LimitDrag('.box1');
+			s1.init();
+			//alert(s1.constructor);
+		</script>
+	</body>
+</html>
