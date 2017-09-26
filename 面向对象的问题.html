@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//var fn=function(){};
+			//var obj={};
+			//alert(fn instanceof Function);//true
+			//alert(obj instanceof Object);//true
+			//alert(fn instanceof Object);//true  函数也是一个对象，同时又是构造器
+			//alert(obj instanceof Function);//false;
+			//alert(Object instanceof Function);//true    函数也是一个对象，同时又是构造器
+			//alert(Function instanceof Object);//true    
+			
+			
+			/*var arr=[1,2,3];
+			var arr1=arr;//地址传递
+			
+			arr1.push(4);
+			
+			alert(arr1);//1,2,3,4
+			alert(arr);//1,2,3,4*/
+			
+			
+			
+		/*	var arr=[1,2,3];
+			var arr1=[];
+			
+			for(var i in arr){
+				arr1[i]=arr[i];
+			}
+			
+			arr1.push(4);
+			
+			alert(arr1);//1,2,3,4
+			alert(arr);//1,2,3,4*/
+			
+			var arr=[1,2,3];
+			var arr1=[];
+			
+			function extend(obj1,obj2){
+				for(var i in obj1){
+					obj2[i]=obj1[i];
+				}
+			}
+			
+			
+			extend(arr,arr1);
+			alert(arr);
+			arr1.push(4);
+			alert(arr1);
+		</script>
+	</body>
+</html>
