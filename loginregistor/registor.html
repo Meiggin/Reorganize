@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			body{
+				font-size: 12px;
+				font-family: "微软雅黑";
+			}
+			fieldset{
+				width: 520px;
+				margin: 0 auto;
+			}
+			label{
+				width: 70px;
+				float: left;
+			}
+		</style>
+	</head>
+	<body>
+		<fieldset>
+			<legend>用户注册</legend>
+			<form action="reg1.php" method="post">
+				<p>
+					<label for="username">用户名：</label>
+					<input type="text" name="username" id="username" autocomplete="off">
+					<span>(必填，3-15字符长度，支持汉字、字母、数字及_)</span>
+				</p>
+				<p>
+					<label for="password">密码：</label>
+					<input type="password" name="password" id="password" autocomplete="off"/>
+					<span>(必填，不得少于6位)</span>
+				</p>
+				<p>
+					<label for="repass">密码重复：</label>
+					<input type="password" name="repass" id="repass"/>
+				</p>
+				<p>
+					<label for="email">邮箱：</label>
+					<input type="text" name="email" id="email" autocomplete="off"/>
+					<span>(必填)</span>
+				</p>
+				<p>
+					<input type="submit" value="注册" name="submit" />
+				</p>
+			</form>
+		</fieldset>
+		<!--<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>-->
+		<!--<script src="js/public.js" type="text/javascript" charset="utf-8"></script>-->
+		<script src="public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//表单验证。
+			(function(){
+				var username=document.getElementById('username');
+				var bstop=true;//开关，标志
+				username.onblur=function(){
+					var uservalue=this.value;//用户名的值
+					var span=this.parentNode.getElementsByTagName('span')[0];
+					var reg=/^([\u4e00-\u9fa5]|[\w\-]){3,15}$/;
+					if(uservalue!=''){
+						if(reg.test(uservalue)){//不能为空，格式正确
+							ajax({
+								type:'post',
+								url:'http://127.0.0.1/js1707/Day%2026/loginregistor/reg1.php',
+								data:{
+									name:uservalue//给后端
+								},
+								success:function(data){
+									if(data){
+										span.innerHTML='用户名已经存在';
+										span.style.color='red';
+										bstop=true;
+									}else{
+										span.innerHTML='√';
+										span.style.color='green';
+										bstop=false;
+									}
+								},
+								error:function(e){
+									alert(e);
+								}
+							});
+						}else{//格式错误。
+							span.innerHTML='格式不正确';
+							span.style.color='red';
+							bstop=true;
+						}
+					}else{//用户名为空
+						span.innerHTML='请输入用户名';
+						span.style.color='red';
+						bstop=true;
+					}
+				};
+				
+				document.getElementsByTagName('form')[0].onsubmit=function(){
+					if(username.value==''){//点击提交按钮，显示错误
+						document.getElementsByTagName('span')[0].innerHTML='请输入用户名';
+						document.getElementsByTagName('span')[0].style.color='red';
+					}
+					if(bstop){//bstop=true阻止跳转
+						return false;
+					}
+				}
+			})();
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			/*//表单验证-用户名
+			$(function(){
+				var bstop=true;//不通过
+				var usereg=/^([\u4e00-\u9fa5]|[a-zA-Z0-9\_\-]){3,15}$/;
+				$('#username').on('blur',function(){
+					var username=$(this).val();
+					if(username!=''){
+						if(usereg.test(username)){
+							$.ajax({
+								type:'post',
+								url:'reg.php',
+								data:{
+									name:username
+								},
+								success:function(data){
+									if(!data){
+										$('#username').next('span').css('color','green').html('√');
+										bstop=false;
+									}else{
+										$('#username').next('span').css('color','red').html('该用户名已经存在');
+										bstop=true;
+									}
+								}
+							})
+						}else{
+							$(this).next('span').css('color','red').html('格式不正确');
+							bstop=true;
+						}
+					}else{
+						$(this).next('span').css('color','red').html('用户名不能为空');
+						bstop=true;
+					}
+				});
+				$('form').on('submit',function(){
+					if(bstop){
+						return false;//阻止按钮跳转。
+					}
+				});
+			});*/
+		</script>
+	</body>
+</html>
