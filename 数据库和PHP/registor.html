@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			body{
+				font-size: 12px;
+				font-family: "微软雅黑";
+			}
+			fieldset{
+				width: 520px;
+				margin: 0 auto;
+			}
+			label{
+				width: 70px;
+				float: left;
+			}
+		</style>
+	</head>
+	<body>
+		<fieldset>
+			<legend>用户注册</legend>
+			<form action="1.mysql.php" method="post">
+				<p>
+					<label for="username">用户名：</label>
+					<input type="text" name="username" id="username"/>
+					<span>(必填，3-15字符长度，支持汉字、字母、数字及_)</span>
+				</p>
+				<p>
+					<label for="password">密码：</label>
+					<input type="password" name="password" id="password"/>
+					<span>(必填，不得少于6位)</span>
+				</p>
+				<p>
+					<label for="repass">密码重复：</label>
+					<input type="password" name="repass" id="repass"/>
+				</p>
+				<p>
+					<label for="email">邮箱：</label>
+					<input type="text" name="email" id="email"/>
+					<span>(必填)</span>
+				</p>
+				<p>
+					<input type="submit" value="注册" name="submit" />
+				</p>
+			</form>
+		</fieldset>
+		<!--<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//表单验证-用户名
+			$(function(){
+				var bstop=true;//不通过
+				var usereg=/^([\u4e00-\u9fa5]|[a-zA-Z0-9\_\-]){3,15}$/;
+				$('#username').on('blur',function(){
+					var username=$(this).val();
+					if(username!=''){
+						if(usereg.test(username)){
+							$.ajax({
+								type:'post',
+								url:'reg.php',
+								data:{
+									name:username
+								},
+								success:function(data){
+									if(!data){
+										$('#username').next('span').css('color','green').html('√');
+										bstop=false;
+									}else{
+										$('#username').next('span').css('color','red').html('该用户名已经存在');
+										bstop=true;
+									}
+								}
+							})
+						}else{
+							$(this).next('span').css('color','red').html('格式不正确');
+							bstop=true;
+						}
+					}else{
+						$(this).next('span').css('color','red').html('用户名不能为空');
+						bstop=true;
+					}
+				});
+				$('form').on('submit',function(){
+					if(bstop){
+						return false;//阻止按钮跳转。
+					}
+				});
+			});
+		</script>-->
+	</body>
+</html>

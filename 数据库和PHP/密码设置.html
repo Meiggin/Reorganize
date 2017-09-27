@@ -1,0 +1,73 @@
+ <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text"  /><span></span>
+		<script type="text/javascript">
+			//等级：弱(同类型)，中（2种类型），强（4种）
+			//字符类型：数字，大小写字母，特殊字符
+			//事件：onchange改变    onkeyup弹起    oninput内容发生变化触发。
+			var oInput=document.getElementsByTagName('input')[0];
+			var oSpan=document.getElementsByTagName('span')[0];
+			oInput.onfocus=function(){
+				if(oInput.value==''){
+					oSpan.innerHTML='请输入6-20位的密码';
+				}
+			}
+			oInput.onblur=function(){
+				if(oInput.value==''){
+					oSpan.innerHTML='密码不能为空';
+				}
+			}
+			oInput.onkeyup=function(){
+				var strtype=0;//总计
+				var num=true;
+				var str2=true;
+				var str1=true;
+				var other=true;
+				var str=oInput.value;
+				if(str!=''){
+					if(str.length>=6){
+						for(var i=0;i<str.length;i++){
+							if(str.charCodeAt(i)>=48 && str.charCodeAt(i)<=57){
+								if(num){
+									strtype++;//执行一次
+									num=false;
+								}
+							}else if(str.charCodeAt(i)>=65 && str.charCodeAt(i)<=90){
+								if(str2){
+									strtype++;
+									str2=false;
+								}
+							}else if(str.charCodeAt(i)>=97 && str.charCodeAt(i)<=122){
+								if(str1){
+									strtype++;
+									str1=false;
+								}
+							}else{
+								if(other){
+									strtype++;
+									other=false;
+								}
+							}
+						}
+						switch(strtype){
+							case 1:  oSpan.innerHTML='弱';break;
+							case 2:  
+							case 3:  oSpan.innerHTML='中';break;
+							case 4:  oSpan.innerHTML='强';break;
+						}
+					}else{
+						oSpan.innerHTML='密码长度不够';
+					}
+				}
+			
+				
+				
+			}
+		</script>
+	</body>
+</html>

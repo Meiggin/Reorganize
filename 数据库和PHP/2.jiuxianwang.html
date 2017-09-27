@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding:0px;margin:0px;
+			}
+			li{list-style: none; float: left; width:250px; text-align: center; border: 1px solid red;
+			height: 420px;
+			
+			 overflow: hidden;}
+			li img{
+				
+				padding: 2px;
+				display: block;
+				width: 250px;
+				height: 300px;
+			}
+			li p{line-height: 28px;}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			
+		</div>
+		<script src="public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			ajax({
+				type:'get',
+				url:'http://127.0.0.1/js1707/Day%2026/3.jiuxianwang.php',
+				success:function(data){
+					var arr=JSON.parse(data);
+					var html='<ul>';
+					for(var i=0;i<arr.length;i++){
+						html+='<li>'+
+							'<img src="'+arr[i].src+'">'+
+							'<p>'+arr[i].title+'</p>'+
+							'<span>'+arr[i].price+'</span>'+
+							'</li>';
+					}
+					html+='</ul>';
+					document.querySelector('.box').innerHTML=html;
+				}
+			})
+		</script>
+	</body>
+</html>
