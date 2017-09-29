@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+    }
+    
+    #box {
+        margin: auto;
+        width: 490px;
+        height: 340px;
+        border: 1px solid #000000;
+        position: relative;
+    }
+    
+    div.item {
+        width: 150px;
+        height: 100px;
+        margin: 5px;
+        float: left;
+        border: 1px solid lightgray;
+        z-index: 1;
+        cursor: move;
+    }
+    
+    div.moving {/*拖拽后的样式*/
+        border: 1px dashed gray;
+        background: white;
+    }
+    
+    div.draging {/*图片拖拽出来后的样式*/
+        width: 150px;
+        height: 100px;
+        position: absolute;
+        z-index: 500;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div class="item"><img src="img/0.jpg" width="150" height="100"></div>
+        <div class="item"><img src="img/1.jpg" width="150" height="100"></div>
+        <div class="item"><img src="img/2.jpg" width="150" height="100"></div>
+        <div class="item"><img src="img/3.jpg" width="150" height="100"></div>
+        <div class="item"><img src="img/4.jpg" width="150" height="100"></div>
+        <div class="item"><img src="img/5.jpg" width="150" height="100"></div>
+        <div class="item"><img src="img/6.jpg" width="150" height="100"></div>
+        <div class="item"><img src="img/7.jpg" width="150" height="100"></div>
+        <div class="item"><img src="img/8.jpg" width="150" height="100"></div>
+    </div>
+    <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+    <script type="text/javascript">
+    	//回调函数出现连续操作产生bug问题，开关
+   		$(function(){
+   			var bstop=true;//保证每一次的交换已经完成了
+   			$(document.body).on('mousedown',function(){
+   				return false;
+   			})
+   			$('#box div').on('mousedown',function(ev){
+   				if(bstop){
+   					bstop=false;
+   					var that=$(this);
+	   				var shortx=ev.offsetX;//拖拽的短线
+	   				var shorty=ev.offsetY;
+	   				var $clonediv=$(this).clone();//克隆当前点击的图片
+	   				$clonediv.addClass('draging').css({//给当前的克隆的图片设置位置
+	   					left:$(this).position().left,
+	   					top:$(this).position().top
+	   				})
+	   				$('#box').append($clonediv);//追加
+	   				$(this).addClass('moving').html('');//被克隆的图片清空，添加虚线框
+	   				$(document).on('mousemove',function(ev){//拖拽克隆的图片
+	   					$clonediv.css({
+	   						left:ev.pageX-shortx-$('#box').offset().left,
+	   						top:ev.pageY-shorty-$('#box').offset().top
+	   					});
+	   				});
+	   				$(document).on('mouseup',function(){
+	   					$(document).off('mousemove');//取消事件
+	   					$(document).off('mouseup');//取消事件
+	   					var minindex=0;//初始化
+	   					var minvalue=1000;
+	   					$('#box div').not(':last').each(function(){//通过遍历找最近的图片的索引
+	   						var mindistance=Math.sqrt(Math.pow($clonediv.position().left-$(this).position().left,2)+Math.pow($clonediv.position().top-$(this).position().top,2));
+	   						if(mindistance<minvalue){
+	   							minvalue=mindistance;
+	   							minindex=$(this).index();//距离最小的图片的索引
+	   						}
+	   					});
+	   					//that.index():移动的盒子的索引
+	   					if(minindex==that.index()){//判断当前克隆的索引和求的最小的索引相等的时候
+	   						$clonediv.animate(that.position(),100,function(){//回到原来的位置
+	   							that.removeClass('moving').html($clonediv.html());//取消类添加图片
+	   							$clonediv.remove();//移除克隆的盒子。
+	   							bstop=true;//交换完成
+	   						});
+	   					}else{
+	   						var $minbox=$('#box div').eq(minindex);
+	   						var $clonediv2=$minbox.clone();
+	   						$clonediv2.addClass('draging').css({
+	   							left:$minbox.position().left,
+	   							top:$minbox.position().top
+	   						});
+	   						$('#box').append($clonediv2);
+	   						$minbox.addClass('moving').html('');
+	   						
+	   						$clonediv.animate($minbox.position(),100,function(){
+	   							$minbox.removeClass('moving').html($clonediv.html());
+	   							$clonediv.remove();
+	   							bstop=true;//交换完成
+	   						});
+	   						
+	   						$clonediv2.animate(that.position(),100,function(){
+	   							that.removeClass('moving').html($clonediv2.html());
+	   							$clonediv2.remove();
+	   							bstop=true;//交换完成
+	   						});
+	   					}
+	   				});
+   				
+   				}
+   				return false;//取消默认事件+取消冒泡+return
+   			});
+   		});
+    </script>
+</body>
+
+</html>
