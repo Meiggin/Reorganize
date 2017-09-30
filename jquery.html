@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width:200px;height:300px;border:1px solid red; display:none;
+			}
+			.active{
+				background:red;
+			}
+		</style>
+		<script src="jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			//jq和原生js简单的区别
+			//window.onload=function(){}
+			//var oDiv=document.getElementById('div');  ->   $(oDiv):jquery对象
+			//jQuery(document).ready();  --->  $();
+			//jQuery===$
+			
+			/*window.onload=function(){
+				var aBtn=document.getElementsByTagName('button');
+				var aDiv=document.getElementsByTagName('div');
+				for(var i=0;i<aBtn.length;i++){
+					aBtn[i].index=i;
+					aBtn[i].onclick=function(){
+						for(var i=0;i<aBtn.length;i++){
+							aBtn[i].className='';
+							aDiv[i].style.display='none';
+						}
+						aBtn[this.index].className='active';
+						aDiv[this.index].style.display='block';
+					}
+				}
+			}*/
+			
+		/*	$(function(){
+				$('button').click(function(){//给所有的按钮添加点击事件
+					$(this).addClass('active').siblings('button').removeClass('active');
+					$('div').eq($(this).index('button')).css('display','block').siblings('div').css('display','none');
+				});
+			});*/
+			
+			/*$(function(){
+				alert($('button').eq(0).html());
+			});*/
+
+		</script>
+		
+		<button class="active">1111111</button>
+		<button>2222222</button>
+		<button>3333333</button>
+		<div style="display:block;">111111111111111111111</div>
+		<div>222222222222222222222</div>
+		<div>333333333333333333333</div>
+		<script type="text/javascript">
+			//jq转原生--通过索引或者get方法
+				//alert($('button').size());
+				
+				//alert($('button')[0].innerHTML);
+				
+				//alert($('button').get(1).innerHTML);
+				
+			//原生转jq--用$()包起来，变成jq对象
+			var btn=document.getElementsByTagName('button')[0];
+			alert($(btn).html());
+			
+			
+			//jquery下面的方法分为两大类：一类是实例方法，对象.方法()   一类是工具方法： $.ajax()
+		</script>
+	</body>
+</html>
