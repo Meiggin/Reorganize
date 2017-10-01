@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			console.log(a)//undefined
+			var a = 1;//全局变量
+			function b(){
+				console.log(a)//undefined
+				var a = 2;//定义和赋值 局部变量
+				//a = 2//赋值
+				console.log(a)//2
+			}
+			console.log(a)//1
+			b()
+			
+			
+			function c(){
+				
+				console.log(d)
+			}
+			c();
+			var d = 6
+		</script>
+	</body>
+</html>
