@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			/*//string
+									var a = (function(){
+										return "abc"
+									})()
+									
+									//num
+									var b = (function(){
+										return 1
+									})()
+									console.log(a)
+									console.log(b)*/
+			/*var num = 1; //全局变量占用内存
+			var sum = 0; //全局变量占用内存
+			for(; num <= 100; num++) {
+				sum += num
+			}
+			console.log(sum)*/
+
+			(function() {
+				//类全局
+				var num = 1; //全局变量占用内存
+				var sum = 0; //全局变量占用内存
+				for(; num <= 100; num++) {
+					sum += num
+				}
+				console.log(sum)
+				
+				function a(){
+					
+				}
+			})()
+		</script>
+	</body>
+
+</html>
