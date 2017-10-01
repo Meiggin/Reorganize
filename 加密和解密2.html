@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<input id="input">
+		<button onclick="jiaM()">加密</button>
+
+		<button onclick="jieM()">解密</button>
+		<script>
+			var arr = [];
+
+			function jiaM() {
+				//获取回来的字符串
+				var input = document.getElementById("input").value;
+				/*
+				 a  b  c
+				 97 98 99
+				 * */
+				for(var i = 0; i < input.length; i++) {
+					console.log(input[i])
+					arr.push(input.charCodeAt(i)*2)
+				}
+				console.log(arr)
+			}
+
+			function jieM() {
+				var str = "";
+				console.log(arr);
+				for(var j = 0; j < arr.length; j++) {
+					str += String.fromCharCode(arr[j]/2)
+				}
+				console.log(str)
+			}
+		</script>
+	</body>
+
+</html>
