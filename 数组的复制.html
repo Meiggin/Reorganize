@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			//基本类型的复制
+			var a = 1;
+			var b = a;
+			//引用类型 浅拷贝
+			var arr = ["a", "b", "c"];
+			var arr2 = arr;
+			arr2[0] = "d";
+			console.log(arr);
+			console.log(arr2);
+
+			//深拷贝
+			var arr3 = [];
+			for(var i = 0; i < arr3.length; i++) {
+				arr3.push(arr[i])
+			}
+		</script>
+	</body>
+
+</html>
