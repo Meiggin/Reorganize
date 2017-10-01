@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//1.str.substring(start,end); 截取字符串 范围是[start, end)
+			var str = "abcdefghij";
+			console.log(str.substring(0,3));
+			//如果只有一个参数, 则表示到字符串最后
+			console.log(str.substring(0));
+			
+			//2.str.split(separator, howmany); 根据分隔符、拆分成数组
+			var str = "a-b.c-d";
+			console.log(str.split("."))
+			
+			//3.str.toLowerCase();
+			var str = "aBcDeeFFgGHh";
+			console.log(str.toLowerCase());
+			console.log(str.toUpperCase());
+		</script>
+	</body>
+</html>
