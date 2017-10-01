@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			/*function a(){
+				//
+				this.b = 1;
+			}
+			window.a()//this.window
+			
+			
+			var obj = {
+				a:function(){
+					this//obj
+				}
+			}
+			obj.a();*/
+			
+			
+			//构造函数
+			var cc = "abc";
+			function b(name){
+				this.cc = name
+				console.log(this.cc)
+			}
+			//b()//Sting()
+			
+			var obj = {
+				name:"cba",
+				a:function(){
+					console.log(this.name)
+					this.name//obj
+				}
+			}
+			obj.a();
+			
+			
+			//
+			new b("abc");//new String()
+			console.log(new b("abc"))
+		</script>
+	</body>
+</html>
