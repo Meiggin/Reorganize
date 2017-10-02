@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<header data-title="今日头条" >
+		</header>
+		
+		<header data-title="腾讯新闻" >
+		</header>
+		
+		<header data-title="你好" >
+		</header>
+		<script>
+			//var header = document.querySelectorAll("header")
+			//console.log(header[0].getAttribute("data-title"))
+			function headerCp(){
+				var header = document.querySelectorAll("header")
+				for(var i = 0;i<header.length;i++){
+					header[i].innerHTML = header[i].getAttribute("data-title");
+					if(header[i].getAttribute("isshow")){
+						header[i].innerHTML+="很好"
+					}
+				}
+			}
+			headerCp()
+		</script>
+	</body>
+</html>
