@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input onkeyup="check()" />
+		<input onkeyup="check()" />
+		<input disabled type="button" value="登录" />
+		
+		<p id="p1">p1</p>
+		<script>
+			//用属性值操作方法控制disabled属性值
+			function check(){
+				var input1 = document.querySelectorAll("input")[0].value;
+				var input2 = document.querySelectorAll("input")[1].value
+				var input3 = document.querySelectorAll("input")[2];
+				if(input1&&input2){
+					input3.removeAttribute("disabled")
+					console.log(1)
+				}else{
+					input3.setAttribute("disabled","true")
+					console.log(0)
+				}
+			}
+			document.querySelector("p").setAttribute("id","p111111")
+		</script>
+	</body>
+</html>
