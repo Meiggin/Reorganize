@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			//1.创建的时间只有一种方法，就是new Date();
+			//Date注意要大写
+			/*var arr = new Array();
+			var str = new String();
+			var func = new Function();*/
+			var d = new Date();
+			console.log(d)
+
+			//2.创建日期对象并指定时间 
+			//转化为JS能处理的时间格式
+			var d2 = new Date("2015-08-22 06:54:59");
+			console.log(d2)
+			var d3 = new Date(2016, 04, 13, 14, 34);
+			
+			//3.Date对象的方法 
+			console.log("------------Date对象的方法------------");
+			var date = new Date();
+			console.log(date.toDateString())
+			//以特定的格式显示星期几、 月、 日和年
+			date.toTimeString();
+			console.log(date.toTimeString())
+			//以特定的格式显示时、 分、 秒和时区
+			console.log(date.toLocaleDateString())
+			//以特定地区格式显示年、 月、 日
+			console.log(date.toLocaleTimeString())
+			//以特定地区格式显示时、 分、 秒
+			console.log(date.toUTCString())
+		</script>
+	</body>
+
+</html>
