@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			//this是根据调用者来决定指向，如果obj调用就是指向obj,如果是window就是指向window
+			//1.window
+			var a = 1;
+			this.a //window
+
+			//2.window
+			function b() {
+				console.log(this) //window
+			}
+			window.b()
+
+			//3.obj
+			var obj = {
+				b: function() {
+					console.log(this)
+				}
+			}
+			obj.b()
+
+			//3.obj
+			var obj = {
+				b: function() {
+					(function() {
+						console.log(this)
+					})()
+				}
+			}
+			obj.b()
+		</script>
+	</body>
+
+</html>
