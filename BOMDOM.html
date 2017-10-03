@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding:0px;margin:0px;
+			}
+			#box{
+				position: absolute;
+				width: 300px;
+				height: 200px;
+				background: red;
+			}
+			header{
+				width: 100%;
+				height: 200px;
+				background: orange;
+			}
+			nav{
+				width: 100%;
+				height: 60px;
+				background: red;
+			}
+			article{
+				width: 100%;
+				height: 2000px;
+				background: green;
+			}
+		</style>
+		<script type="text/javascript">
+			/*window.onload=window.onresize=function(){
+			var oBox=document.getElementById('box');
+				oBox.style.left=(document.documentElement.clientWidth-oBox.offsetWidth)/2+'px';
+				oBox.style.top=(document.documentElement.clientHeight-oBox.offsetHeight)/2+'px';
+				
+				window.onscroll=function(){
+					var scrolltop=document.documentElement.scrollTop||document.body.scrollTop;
+					oBox.style.left=(document.documentElement.clientWidth-oBox.offsetWidth)/2+'px';
+					oBox.style.top=scrolltop+(document.documentElement.clientHeight-oBox.offsetHeight)/2+'px';
+				}
+			}*/
+		</script>
+	</head>
+	<body style="height: 3000px;">
+		<!--<div id="box"></div>-->
+		<header>离广告结束还有：<strong>5</strong> 秒</header>
+		<nav>导航</nav>
+		<article>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+			<p>1111111111111111111111111111</p>
+		</article>
+		<script>
+			//BOM:操作浏览器
+			//可视区:document.documentElement.clientWidth/clientHeight
+			//滚动条(兼容):document.documentElement.scrollTop/document.body.scrollTop
+			//window.onscroll
+			//window.onresize
+			//setInterval/setTimeout
+			//获取元素：document.documentElement/document.body/document.title
+			/*var oNav=document.getElementsByTagName('nav')[0];
+			window.onscroll=function(){
+				var scrolltop=document.documentElement.scrollTop||document.body.scrollTop;
+				if(scrolltop>=200){
+					oNav.style.position='fixed';
+					oNav.style.top=0;
+				}else{
+					oNav.style.position='static';
+				}
+			}*/
+			var header=document.getElementsByTagName('header')[0];
+			var strong=header.getElementsByTagName('strong')[0];
+			/*setTimeout(function(){
+				header.style.display='none';
+			},10000)*/
+			
+			
+			/*var timer=setInterval(function(){
+				var num=parseInt(strong.innerHTML);
+				num--;
+				if(num<=0){
+					clearInterval(timer);
+					header.style.display='none';
+				}
+				strong.innerHTML=num;
+			},1000)*/
+		</script>
+	</body>
+</html>
