@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="jquery.color.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			div{
+				width:200px;
+				height:200px;
+				background:red;
+				/*border: 10px solid black;
+				padding: 50px;
+				margin: 100px;*/
+					
+			}
+		</style>
+		<script type="text/javascript">
+			/*属性
+			attr(name|pro|key,val|fn) ：可以读写自定义的属性和默认属性
+			removeAttr(name) 
+			prop(n|p|k,v|f) ：读写元素的属性（布尔值 表单），自定义属性不可以用
+			removeProp(name) */
+			
+//			attr('src')//一个值，获取
+//			attr('src','http://wwwbaidu.com')//二个值，设置
+			
+			
+			/*CSS 类
+			addClass(class|fn) 
+			removeClass([class|fn]) 
+			toggleClass(class|fn[,sw]) ；切换类，如果类存在，就删除，不存在，新建
+			
+			HTML代码/文本/值
+			html([val|fn])   innerHTML
+			text([val|fn])   innerText
+			val([val|fn|arr])  获取表单的值。*/
+			//css(name|pro|[,val|fn])1.9* 
+			
+			
+			//offset() :offset().left/offst().top   相对于可视区的偏移
+			//position() : position().left/position().top    相对于父级定位的偏移。
+//			scrollTop([val]) :滚动条离顶部的距离
+//			scrollLeft([val]) 
+
+//			height([val|fn]) 
+//			width([val|fn]) ：内容的宽
+//			innerHeight() 
+//			innerWidth() ：内容的宽+padding
+//			outerHeight([soptions]) 
+//			outerWidth([options]) ：内容的宽+padding+border
+//			outerWidth(true) ：内容的宽+padding+border+margin
+
+
+
+			
+			
+		</script>
+	</head>
+	<body>
+		<div>111111</div>
+		<script type="text/javascript">
+			$('div').hover(function(){
+				//$('div').toggleClass('hehe');
+				//$('div').css('background','red').css('height','200');
+				/*$('div').css({
+					width:200,
+					height:200,
+					background:'red'
+				});*/
+				
+			/*	alert($('div').width());
+				alert($('div').innerWidth());
+				alert($('div').outerWidth());
+				alert($('div').outerWidth(true));*/
+				
+				$('div').stop(true,true).animate({
+					width:1000,
+					height:500,
+					backgroundColor:'blue'
+				})
+			},function(){
+				$('div').stop(true,true).animate({
+					width:200,
+					height:200,
+					backgroundColor:'red'
+				})
+			});
+		</script>
+	</body>
+</html>
