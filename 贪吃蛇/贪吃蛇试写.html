@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0
+			}
+			
+			header {
+				width: 1000px;
+				overflow: hidden;
+				padding: 10px 50px;
+				margin: 0 auto;
+			}
+			
+			button {
+				margin: 0 150px;
+				font: 16px/32px "";
+				padding: 0 10px;
+				float: left;
+				cursor: pointer;
+			}
+			
+			b {
+				float: left;
+				margin-left: 100px;
+				font: 16px/32px "";
+				display: none;
+			}
+			
+			.map {
+				width: 1000px;
+				height: 700px;
+				box-shadow: 0 0 20px #000;
+				margin: 10px auto;
+				position: relative;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<button>开始</button>
+			<button>结束</button>
+			<b>0</b>
+		</header>
+		<section class="map"></section>
+		<script src="public.js"></script>
+		<script>
+			function Game() {
+				//1.点击开始键进行实例化，开始新游戏
+				//2.创建蛇（坐标随机，但为了避免出现在边界，上下左右各去一部分）
+				//3.创建食物（坐标随机，但不能出现在蛇身之上）
+				//4.蛇进行运动（蛇头是导向，往后依次运动到他的前一个兄弟元素的位置）
+				//4.1蛇运动方向的变更（通过speedX和speedY的值综合keycode来改变speedX和speedY实现）
+				//4.2蛇吃食物（检测是否吃到食物，吃到食物后创建一节新的蛇身并追加到尾部，原来的食物消失，并且重新随机生成食物）
+				//4.3碰撞检测（检测蛇头是否碰撞到蛇身以及蛇头是否碰到边界）
+				//5.结束键清空地图，隐藏分数栏
+				this.control = document.getElementsByTagName("header")[0]
+				this.score = document.getElementsByTagName("b")[0]
+				this.num = 0;
+				this.start = document.getElementsByTagName("button")[0]
+				this.endIt = document.getElementsByTagName("button")[1]
+				this.gameMap = document.getElementsByClassName("map")[0]
+				this.timer = null
+				this.speedX = 10
+				this.speedY = 0
+			}
+			Game.prototype.createNewGame = function() {
+				this.gameMap.innerHTML = ""
+				this.score.innerHTML = 0
+				this.score.style.display = "block"
+				this.createSnake()
+				this.createFood()
+				this.move()
+				this.clearGame()
+
+			}
+			Game.prototype.createSnake = function() {
+				var snake = document.createElement("p")
+				this.gameMap.appendChild(snake)
+				snake.style.cssText = "width:10px;height:10px;background:orange;position:absolute;"
+				snake.style.left = tool.ranNum(50, this.gameMap.offsetWidth - 50) + "px"
+				snake.style.top = tool.ranNum(50, this.gameMap.offsetHeight - 50) + "px"
+				this.snakeSections = document.getElementsByTagName("p")
+			}
+			Game.prototype.createFood = function() {
+				this.snakeSections = document.getElementsByTagName("p")
+				this.food = document.createElement("div")
+				this.gameMap.appendChild(this.food)
+				this.food.style.cssText = "width:10px;height:10px;background:red;position:absolute;"
+				var left = tool.ranNum(0, this.gameMap.offsetWidth - this.food.offsetWidth)
+				var top = tool.ranNum(0, this.gameMap.offsetHeight - this.food.offsetHeight)
+				for(var i = 0; i < this.snakeSections.length; i++) {
+					while(left == this.snakeSections[i].offsetLeft && top == this.snakeSections[i].offsetTop) {
+						left = tool.ranNum(0, this.gameMap.offsetWidth - this.food.offsetWidth)
+						top = tool.ranNum(0, this.gameMap.offsetHeight - this.food.offsetHeight)
+					}
+				}
+				this.food.style.left = left + "px"
+				this.food.style.top = top + "px"
+			}
+			Game.prototype.move = function() {
+				var that = this
+				clearInterval(this.timer)
+				this.timer = setInterval(function() {
+					that.snakeSections = document.getElementsByTagName("p")
+					for(var i = that.snakeSections.length - 1; i >= 1; i--) {
+						that.snakeSections[i].style.left = that.snakeSections[i - 1].style.left
+						that.snakeSections[i].style.top = that.snakeSections[i - 1].style.top
+					}
+					that.snakeSections[0].style.left = (that.snakeSections[0].offsetLeft + that.speedX) + "px"
+					that.snakeSections[0].style.top = (that.snakeSections[0].offsetTop + that.speedY) + "px"
+					that.changeDirection()
+					that.eat()
+					that.hitcheck()
+				}, 100)
+			}
+			Game.prototype.changeDirection = function() {
+				var that = this
+				window.onkeydown = function(e) {
+					var e = e || event
+					if(e.keyCode == 37 && that.speedY != 0) {
+						that.speedX = -10;
+						that.speedY = 0
+					} else if(e.keyCode == 38 && that.speedX != 0) {
+						that.speedX = 0;
+						that.speedY = -10
+					} else if(e.keyCode == 39 && that.speedY != 0) {
+						that.speedX = 10;
+						that.speedY = 0
+					} else if(e.keyCode == 40 && that.speedX != 0) {
+						that.speedX = 0;
+						that.speedY = 10
+					}
+				}
+			}
+			Game.prototype.eat = function() {
+				if(Math.abs(this.snakeSections[0].offsetLeft - this.food.offsetLeft) < 10 && Math.abs(this.snakeSections[0].offsetTop - this.food.offsetTop) < 10) {
+					this.snakeSections = document.getElementsByTagName("p")
+					this.gameMap.removeChild(this.food)
+					var newBody = document.createElement("p")
+					this.gameMap.appendChild(newBody)
+					newBody.style.cssText = "width:10px;height:10px;background:cyan;position:absolute;box-sizing:border-box;border:1px solid #000;"
+					var left = this.snakeSections[this.snakeSections.length - 2].offsetLeft
+					var top = this.snakeSections[this.snakeSections.length - 2].offsetTop
+					newBody.style.left = left + "px"
+					newBody.style.top = top + "px"
+					this.num++
+					this.score.innerHTML = this.num
+					this.createFood()
+				}
+			}
+			Game.prototype.hitcheck = function() {
+				for(var i = 3; i < this.snakeSections.length; i++) {
+					if(hit(this.snakeSections[0], this.snakeSections[i])) {
+						clearInterval(this.timer)
+						alert("GAME OVER")
+					}
+				}
+				if(this.snakeSections[0].offsetLeft < 0 || this.snakeSections[0].offsetLeft > this.gameMap.offsetWidth - this.snakeSections[0].offsetWidth || this.snakeSections[0].offsetTop < 0 || this.snakeSections[0].offsetTop > this.gameMap.offsetHeight - this.snakeSections[0].offsetHeight) {
+					clearInterval(this.timer)
+					alert("GAME OVER")
+				}
+			}
+			Game.prototype.clearGame = function() {
+				var that = this
+				this.endIt.onclick = function() {
+					clearInterval(that.timer)
+					that.gameMap.innerHTML = ""
+					that.score.style.display = "none"
+				}
+			}
+
+			document.getElementsByTagName("button")[0].onclick = function() {
+				new Game().createNewGame()
+			}
+		</script>
+	</body>
+
+</html>
