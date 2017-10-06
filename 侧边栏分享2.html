@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding:0px;margin: 0px;
+			}
+			.box{
+				width: 300px;height: 400px;background: red;position: absolute;
+				left:-300px;
+				top:100px;
+			}
+			.box span{
+				width: 20px;height:60px;background: blue;position: absolute;
+				top:50%;
+				margin-top: -30px;
+				right: -20px;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<span>分享到</span>
+		</div>
+		<script type="text/javascript">
+			
+			var oSpan=document.getElementsByTagName('span')[0];
+			var oDiv=document.getElementsByTagName('div')[0];
+			oDiv.onmouseover=function(){
+				move(oDiv,'left',0);
+			}
+			oDiv.onmouseout=function(){
+				move(oDiv,'left',-300);
+			}
+			
+			
+			function getstyle(obj,attr){
+				if(obj.currentStyle){
+					return obj.currentStyle[attr];
+				}else{
+					return getComputedStyle(obj)[attr];
+				}
+			}
+			
+			
+			
+			//每一个盒子一个定时器：多物体运动
+			function move(obj,attr,target){//attr如果是opacity，target扩大100倍
+				clearInterval(obj.timer);//防止重复点击元素。
+				obj.timer=setInterval(function(){
+					//求初始值
+					var current=null;
+					if(attr=='opacity'){
+						current=Math.round(getstyle(obj,attr)*100);//扩大了100倍
+					}else{
+						current=parseInt(getstyle(obj,attr));
+					}
+					
+					//求速度
+					var speed=(target-current)/5;
+					speed=speed>0?Math.ceil(speed):Math.floor(speed);
+					//关闭定时器
+					if(current==target){
+						clearInterval(obj.timer);
+					}
+					
+					if(attr=='opacity'){
+						//还原上面扩大了100倍
+						obj.style.opacity=(current+speed)/100;
+						obj.style.filter='alpha(opacity='+(current+speed)+')';
+					}else{
+						obj.style[attr]=current+speed+'px';
+					}
+					
+				},30);
+			}
+		</script>
+	</body>
+</html>
