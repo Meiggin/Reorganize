@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin:0px;
+				padding:0px;
+				list-style: none;
+			}
+			.baidu{
+				width: 560px;
+    			height: 305px;
+    			border: 1px solid red;
+    			margin:50px auto;
+    			position: relative;
+    			overflow: hidden;
+			}
+			.baidu ul{
+				position: absolute;
+				left:0px;
+				top:0px;
+			}
+			.baidu ul li{
+				float: left;
+				width: 560px;
+    			height: 305px;
+			}
+			.baidu ul li img{
+				width: 560px;
+    			height: 305px;
+    			display: block;
+			}
+			.baidu ol {
+				position: absolute;
+				width: 240px;
+				left:50%;
+				bottom:20px;
+				margin-left:-120px;
+			}
+			.baidu ol li{
+				width: 20px;
+				height: 20px;
+				background: lightblue;
+				border-radius:50%;
+				float: left;
+				margin-right:10px;
+				cursor: pointer;
+			}
+			.baidu ol li.active{
+				background: red;
+			}
+			#left,#right{
+				font-size: 60px;
+				color:#fff;
+				text-decoration: none;
+				position: absolute;
+				top:120px;
+				display: none;
+			}
+			#left{
+				left:20px;
+			}
+			#right{
+				right:20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="baidu">
+			<ul>
+				<li><img src="https://imgsa.baidu.com/news/crop%3D3%2C1%2C751%2C388/sign=4c48ab194036acaf4dafccbc41eaa121/a044ad345982b2b75705d1e43aadcbef76099b7c.jpg" alt="" title="1" /></li>
+				<li><img src="https://imgsa.baidu.com/news/q%3D100/sign=ab1a75dbac86c9170e035639f93c70c6/c995d143ad4bd1134d20261151afa40f4bfb0527.jpg" alt="" /></li>
+				<li><img src="https://imgsa.baidu.com/news/q%3D100/sign=3697b2273f9b033b2a88f8da25cf3620/9a504fc2d562853507607d029bef76c6a7ef6315.jpg" alt="" /></li>
+				<li><img src="https://imgsa.baidu.com/news/q%3D100/sign=bed91ffdfb1f3a295cc8d1cea924bce3/cc11728b4710b912fa7148ddc8fdfc0392452264.jpg" alt="" /></li>
+				<li><img src="https://imgsa.baidu.com/news/q%3D100/sign=7fdf0c57a6345982c38ae1923cf4310b/5fdf8db1cb134954e12170475d4e9258d1094ad2.jpg" alt="" /></li>
+				<li><img src="https://imgsa.baidu.com/news/q%3D100/sign=842cebdc30c79f3d89e1e0308aa1cdbc/5bafa40f4bfbfbede675985c73f0f736afc31fe0.jpg" alt="" /></li>
+				<li><img src="https://imgsa.baidu.com/news/q%3D100/sign=52760d0b3d7adab43bd01f43bbd4b36b/91529822720e0cf37da5f0d80146f21fbe09aa47.jpg" alt="" /></li>
+				<li><img src="https://imgsa.baidu.com/news/q%3D100/sign=cb3b67fea064034f09cdc6069fc27980/0bd162d9f2d3572c911f35ff8113632762d0c310.jpg" alt=""  title="8"/></li>
+			</ul>
+			<ol>
+				<li class="active"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ol>
+			
+			<a href="javascript:;" id="left">&lt;</a>
+			<a href="javascript:;" id="right">&gt;</a>
+		</div>
+		<script src="public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			/*
+			 思路：
+			 1.改变布局
+			 2.给ul设置宽度
+			 问题：按钮和图片的索引匹配问题
+			 3.给对应的按钮添加事件
+			 4.解决索引
+			*/
+			var baidu=document.querySelector('.baidu');
+			var picUl=baidu.getElementsByTagName('ul')[0];
+			var aBtns=document.getElementsByTagName('ol')[0].getElementsByTagName('li');//按钮
+			var aPics=picUl.getElementsByTagName('li');//图片
+			
+			var oLeft=document.getElementById('left');
+			var oRight=document.getElementById('right');
+			
+			//1.改变布局
+			var first=picUl.children[0].cloneNode(true);//将第一张图克隆一份。
+			var last=picUl.children[aPics.length-1].cloneNode(true);
+			picUl.insertBefore(last,picUl.children[0]);
+			picUl.appendChild(first);
+			
+			//2.给ul设置宽度
+			aPics=picUl.getElementsByTagName('li');//图片
+			var oneLiPicWidth=aPics[0].offsetWidth;
+			picUl.style.width=aPics.length*oneLiPicWidth+'px';
+			picUl.style.left=-oneLiPicWidth+'px';
+			
+			//3.给对应的按钮添加事件
+			var num=0;
+			var bstop=true;//只有开关为true，点击有效
+			for(var i=0;i<aBtns.length;i++){
+				aBtns[i].index=i;//0-7
+				aBtns[i].onclick=function(){
+					if(bstop){
+						bstop=false;
+						num=this.index;//当前按钮的索引
+						tabSwitch();
+						aBtns[num].className='active';//这边的类名的成立
+					}
+				}
+			}
+			//4.显示切换箭头
+			baidu.onmouseover=function(){
+				oLeft.style.display='block';
+				oRight.style.display='block';
+			}
+			
+			baidu.onmouseout=function(){
+				oLeft.style.display='none';
+				oRight.style.display='none';
+			}
+			//5.箭头点击
+			oRight.onclick=function(){
+				if(bstop){
+					bstop=false;
+					num++;
+					tabSwitch();
+					if(num==aBtns.length){//当num=8的时候，恢复最初布局，应该是第一个添加类。
+						aBtns[0].className='active';
+					}else{
+						aBtns[num].className='active';
+					}
+				}
+			}
+			
+			oLeft.onclick=function(){
+				if(bstop){
+					bstop=false;
+					num--;
+					tabSwitch();
+					if(num==-1){//当num=-1的时候,改变类名的设置。最好一个添加类名。
+						aBtns[aBtns.length-1].className='active';
+					}else{
+						aBtns[num].className='active';
+					}
+					document.title=num;
+				}
+			}
+			
+			function tabSwitch(){
+				for(var i=0;i<aBtns.length;i++){
+					aBtns[i].className='';
+				}
+				//aBtns[num].className='active';//num累加超过7没有className
+				move(picUl,{left:-oneLiPicWidth*(num+1)},function(){
+					if(num==aBtns.length){
+						picUl.style.left=-oneLiPicWidth+'px';
+						num=0;
+					}
+					if(num==-1){
+						picUl.style.left=-oneLiPicWidth*aBtns.length+'px';
+						num=aBtns.length-1;
+					}
+					bstop=true;//等到这里代表运动已经完成了。
+				});
+			}
+			
+			
+		</script>
+	</body>
+</html>
