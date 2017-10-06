@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.box{
+				width: 100px;
+				height:100px;
+				background: red;
+				border-radius: 50%;
+				position: absolute;
+				left:0px;
+				top:0px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box"></div>
+		<div style="width: 1px;height: 500px; background: black;position: absolute;left:600px;top:0px;"></div>
+		<script type="text/javascript">
+			var oDiv=document.querySelector('.box');
+			var speed=0;
+			var timer=null;
+			timer=setInterval(function(){//弹性运动
+				//if(oDiv.offsetLeft<600){
+					speed+=(600-oDiv.offsetLeft)/5; 
+					/*运动因子*/
+					speed*=0.7;//力的消耗
+				//}else{
+					//speed-=(oDiv.offsetLeft-600)/5;
+					if(Math.abs(speed)<1 && Math.abs((oDiv.offsetLeft-600))<1){//运动停止条件
+						clearInterval(timer);
+						oDiv.style.left=600+'px';
+					}
+				//}
+				oDiv.style.left=oDiv.offsetLeft+speed+'px';
+			},50);
+		</script>
+	</body>
+</html>
