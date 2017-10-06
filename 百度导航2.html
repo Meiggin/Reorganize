@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding: 0px;margin:0px;
+			}
+			ul{
+				list-style: none;
+			}
+			.menu-list{
+				width: 100%;
+			    height: 40px;
+			    background-color: #01204f;
+			    margin-top: 100px;
+			}
+			.menu-list ul{
+				width: 984px;
+				height: 40px;
+				line-height: 40px;
+				margin: 0 auto;
+				position: relative;
+			}
+			.menu-list ul li{
+				float: left;
+				z-index: 5; 
+				position: relative;
+			}
+			.menu-list ul li a{
+				color: #fff;
+			    text-decoration: none;
+			    display: block;
+			    height: 100%;
+			    font-size: 14px;
+			    line-height: 40px;
+			    font-weight: 700;
+			    padding: 0 10px;
+			    color: #fff;
+			    margin-right: 2px;
+			   
+			}
+			#mask{
+				position: absolute; 
+				height: 40px; 
+				overflow: hidden;
+				background:#c00;
+			}
+			.active{
+				background: #c00;
+			}
+		</style>
+	</head>
+	<body>
+		 <div class="menu-list">
+	        <ul>
+	            <div id="mask"></div><!--移动的盒子-->
+	            <li><a href="#" class="active">首页</a></li>
+	            <li><a href="#">百家号</a></li>
+	            <li><a href="#">国内</a></li>
+	            <li><a href="#">国际</a></li>
+	            <li><a href="#">军事</a></li>
+	            <li><a href="#">社会</a></li>
+	            <li><a href="#">财经</a></li>
+	            <li><a href="#">娱乐</a></li>
+	            <li><a href="#">体育</a></li>
+	            <li><a href="#">互联网</a></li>
+	            <li><a href="#">科技</a></li>
+	            <li><a href="#">游戏</a></li>
+	            <li><a href="#">时尚</a></li>
+	            <li><a href="#">女人</a></li>
+	            <li><a href="#">汽车</a></li>
+	            <li><a href="#">房产</a></li>
+	            <li><a href="#">个性推荐</a></li>
+	        </ul>
+	    </div>
+	    <script type="text/javascript">
+	    	var aLi=document.getElementsByTagName('li');
+	    	var oMask=document.getElementById('mask');
+	    	for(var i=0;i<aLi.length;i++){
+	    		aLi[i].onmouseover=function(){
+	    			oMask.style.width=this.getElementsByTagName('a')[0].offsetWidth+'px';
+	    			txmove(oMask,this.offsetLeft);//this.offsetLeft:当前点击的li的left值。
+	    		};
+	    		aLi[i].onmouseout=function(){
+	    			oMask.style.width=aLi[0].getElementsByTagName('a')[0].offsetWidth+'px';
+	    			txmove(oMask,0);
+	    		};
+	    	}
+	    	
+	    	
+	    	var timer=null;
+			function txmove(obj,target){
+				var speed=0;
+				clearInterval(timer);//一开始关闭定时器。
+				timer=setInterval(function(){//弹性运动
+					speed+=(target-obj.offsetLeft)/5; 
+					speed*=0.7;
+					if(Math.abs(speed)<1 && Math.abs((obj.offsetLeft-target))<1){
+						clearInterval(timer);
+						obj.style.left=target+'px';
+					}
+					obj.style.left=obj.offsetLeft+speed+'px';
+				},50);
+			}
+			
+			
+			
+			
+	    </script>
+	</body>
+</html>
