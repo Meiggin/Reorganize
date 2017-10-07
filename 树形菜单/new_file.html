@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{width:100px;height:200px;background: #000;position: absolute;left:0;}
+		</style>
+	</head>
+	<body>
+		<button>run</button>
+		<div></div>
+		<script src="jquery-1.11.3.js"></script>
+		<script>
+			$("button").click(function(){
+				$("div").animate({left:"+=20"},1000);
+			});
+			
+		</script>
+	</body>
+</html>
