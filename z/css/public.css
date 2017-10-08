@@ -1,0 +1,29 @@
+@charset "utf-8";
+/* CSS Document */
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,textarea,select,td{margin:0;padding:0;}
+body{font:12px  "宋体"; word-wrap:break-word;}
+a,u,s,del{color:#666;text-decoration:none;} 
+fieldset ,a img,.bor0 {border:0;}
+i,em,b{font-style:normal;font-weight:100;}
+li{list-style:none;}
+img{vertical-align:middle;}
+table{border-collapse:collapse;}
+input,textarea{outline:none;}
+textarea{resize:none;}
+.ind2{text-indent:2em;} 
+
+
+/*文本溢出出现省略号*/
+.over{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+/*图片垂直对齐的竖杠*/
+.valign:after{content:"";display:inline-block;width:0;height:100%;vertical-align:middle;}
+.valign img{vertical-align:middle;}
+
+
+/*万能清除法*/
+.clear{zoom:1;}/*清除ie的浮动*/
+.clear:before{content:"";display:table;}
+.clear:after{content:"";clear:both;display:block;}
+
+
