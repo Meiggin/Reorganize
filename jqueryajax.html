@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="box"></div>
+		<p id="results"><b>Results: </b> </p>
+		<form>
+		  <select name="single">
+		    <option>Single</option>
+		    <option>Single2</option>
+		  </select>
+		  <select name="multiple" multiple="multiple">
+		    <option selected="selected">Multiple</option>
+		    <option>Multiple2</option>
+		    <option selected="selected">Multiple3</option>
+		  </select><br/>
+		  <input type="checkbox" name="check" value="check1"/> check1
+		  <input type="checkbox" name="check" value="check2" checked="checked"/> check2
+		  <input type="radio" name="radio" value="radio1" checked="checked"/> radio1
+		  <input type="radio" name="radio" value="radio2"/> radio2
+		</form>
+		<script type="text/javascript">
+			//工具方法：$.方法();适用原生里面。
+			//实例方法：obj.方法(),jq对象下面的方法。
+			
+//			$.ajax(url,[settings]) ： 元素的ajax，包含下面的所有方法提供的功能,通过 HTTP 请求加载远程数据。
+//dataType
+//预期服务器返回的数据类型。如果不指定，jQuery 将自动根据 HTTP 包 MIME 信息来智能判断，比如XML MIME类型就被识别为XML。在1.4中，JSON就会生成一个JavaScript对象，而script则会执行这个脚本。随后服务器端返回的数据会根据这个值解析后，传递给回调函数。可用值: 
+//"xml": 返回 XML 文档，可用 jQuery 处理。
+//"html": 返回纯文本 HTML 信息；包含的script标签会在插入dom时执行。
+//"script": 返回纯文本 JavaScript 代码。不会自动缓存结果。除非设置了"cache"参数。'''注意：'''在远程请求时(不在同一个域下)，所有POST请求都将转为GET请求。(因为将使用DOM的script标签来加载)
+//"json": 返回 JSON 数据 。
+//"jsonp": JSONP 格式。使用 JSONP 形式调用函数时，如 "myurl?callback=?" jQuery 将自动替换 ? 为正确的函数名，以执行回调函数。
+//"text": 返回纯文本字符串
+
+			/*$.ajax({
+				type:'get',
+				url:'php1.php',
+				async:true,//是否异步。
+				data:{
+					name:'zhangsan'
+				},
+				dataType:'json',
+				success:function(data){
+					alert(typeof data);
+				},
+				error:function(e){
+					console.log(e.status)//404
+				}
+			});*/
+			
+			/*$.ajax({
+				type:'get',
+				url:'http://localhost/js1707/Day%2029/php1.php',
+				async:true,//是否异步。
+				data:{
+					name:'zhangsan'
+				},
+				dataType:'jsonp',//jsonp代表跨域，自动传递函数名给后端。
+				//jsonpCallback:'hehe',//自己约定函数名
+				success:function(data){
+					alert(data.title);
+				},
+				error:function(e){
+					console.log(e.status)//404
+				}
+			});*/
+			
+			
+//beforeSend(XHR)
+//发送请求前可修改 XMLHttpRequest 对象的函数，如添加自定义 HTTP 头。XMLHttpRequest 对象是唯一的参数。这是一个 Ajax 事件。如果返回false可以取消本次ajax请求。
+		/*$.ajax({
+			type:'get',
+			url:'html1.html',
+			async:true,//是否异步。
+			data:{
+				name:'zhangsan'
+			},
+			//dataType:'json',
+			beforeSend:function(){//发送请求前要做的事情。
+				$('.box').html('<strong>请求中......</strong>');
+			},
+			success:function(data){
+				$('.box').empty();//请求完成，去掉loading。
+				alert(data);
+			},
+			error:function(e){
+				console.log(e.status)//404
+			}
+		});
+*/
+//			load(url,[data],[callback]) ：导入/请求html的文件
+			/*$('.box').load('html1.html',function(d){//繁琐
+				$(this).append(d);
+			});*/
+			
+			//$('.box').load('html1.html');//简洁
+//			$.get(url,[data],[fn],[type]) ：get请求。
+//			$.getJSON(url,[data],[fn]) ：请求json格式的数据。
+			/*$.getJSON('php1.php',function(d){//返回一定是json数据
+				alert(d.title);
+			});*/
+//			$.getScript(url,[callback]) ： 请求js文件。
+//			$.post(url,[data],[fn],[type]) ：post请求。
+
+	//可读性比较强的ajax请求方式
+			/*$.ajax({
+				url:'http://127.0.0.1/js1707/Day%2029/php1.php',
+				data:{
+					name:'zhangsan'
+				},
+				dataType:'json'
+			}).done(function(d){//请求成功。
+				alert(d.title)
+			}).fail(function(d){//请求失败
+				alert(d.status);
+			});
+			
+			
+			
+			$.ajax({//jq1.5版本之后jq返回的是一个deferred（延迟）对象。
+				url:'http://127.0.0.1/js1707/Day%2029/php1.php',
+				dataType:'json'
+			}).done(function(d){//请求成功。
+				alert(d.title)
+			}).fail(function(d){//请求失败
+				alert(d.status);
+			});*/
+			
+			//$.when(deferreds) 
+			//$.when();参数必须是deferred对象   多次请求
+			/*$.when($.ajax('php1.php'),$.ajax('php2.php')).done(function(d1,d2){
+				console.log(d1);
+				console.log(d2);
+			}).fail(function(){
+				console.log('失败');//一个失败，走这里
+			});*/
+			
+			$("#results").append( $("form").serialize() );
+		</script>
+	</body>
+</html>
