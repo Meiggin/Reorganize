@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding:0px;
+				margin:0px;
+			}
+			#tab ul,#tab1 ul{
+				list-style: none;
+				height: 30px;
+				line-height: 30px;
+			}
+			#tab li,#tab1 li{
+				float: left;
+				border: 1px solid black;
+				margin-right: 5px;
+			}
+			#tab li a,#tab1 li a{
+				text-decoration: none;
+			}
+			#tab li.active,#tab1 li.active{
+				background: red;
+			}
+			#tab .main,#tab1 .main{
+				clear: both;
+			}
+			#tab .main .content,#tab1 .main .content{
+				width: 300px;
+				height: 200px;
+				border: 1px solid red;
+				display: none;
+			}
+			
+		</style>
+		<script src="jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="jquery.tab.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		
+		<div id="tab1"></div>
+		<script type="text/javascript">
+			$(function(){
+				$.tab({
+					id:'tab1',
+					data:{
+						btns:[11111,222222,33333],
+						divs:[11111111111111111,2222222222222,33333333333333]
+					},
+					//autoplay:true,
+					event:'mouseover',
+					delay:500
+				});
+			});
+		</script>
+	</body>
+</html>
