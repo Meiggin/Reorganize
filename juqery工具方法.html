@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="box">123456</div>
+		<script type="text/javascript">
+//数组和对象操作
+//$.each(object,[callback]) : 数组和对象的遍历
+
+/*var arr=[10,20,30,40];
+$.each(arr,function(index,value){
+	console.log(index+':'+value);
+});*/
+
+/*var obj={width:100,height:200,background:'red'};
+$.each(obj,function(index,value){
+	console.log(index+':'+value);
+});*/
+
+//$.extend([d],tgt,obj1,[objN]);//用一个或多个其他对象来扩展一个对象，返回被扩展的对象
+/*var obj1={width:100,height:200,background:'red'};
+var obj2={width:200,left:200};
+var obj={};
+
+$.extend(obj,obj1,obj2);
+console.log(obj);*/
+
+
+
+
+//$.grep(array,fn,[invert]);使用过滤函数过滤数组元素。返回值是数组
+//$.when(deferreds) //提供一种方法来执行一个或多个对象的回调函数，延迟对象通常表示异步事件。
+//$.makeArray(obj) //将类数组对象转换为数组对象
+//$.map(arr|obj,callback);将一个数组中的元素转换到另一个数组中。返回值是数组
+//$.inArray(val,arr,[from]) //确定第一个参数在数组中的位置，从0开始计数(如果没有找到则返回 -1 )。
+//$.toArray() 把jQuery集合中所有DOM元素恢复成一个数组。
+//$.merge(first,second) 合并两个数组
+//$.unique(array) 数组去重
+//$.parseJSON(json) :JSON.parse();
+//$.parseXML(data) : 将数据转换成xml对象
+
+
+//函数操作
+//$.noop 一个空函数
+//$.proxy(function,context) ;改this指向，修改上下文语境。
+
+var name='zhangsan';//全局变量
+var obj={
+	name:'wangwu',
+	age:100,
+	showName:function(){
+		alert(this.name);
+	}
+}
+//obj.showName();
+
+//$.proxy(obj.showName,window)();//zhangsan
+
+//测试操作
+//$.contains(c,c) : 一个DOM节点是否包含另一个DOM节点。(前面的父，后面子节点)
+//$.type(obj) ：检测obj的数据类型。
+//$.isarray(obj) 
+//$.isFunction(obj) 
+//$.isEmptyObject(obj) 
+//$.isPlainObject(obj) 纯粹的对象{}或者new Object()
+//$.isWindow(obj) 
+//$.isNumeric(value)1.7+ 
+//字符串操作
+//$.trim(str) ： 去字符串的首尾空格
+
+var str='            dsafa     sdf                 ';
+//alert('('+$.trim(str)+')');
+//URL
+//$.param(obj,[traditional]) ;将表单元素数组或者对象序列化
+//插件编写
+//$.error(message) :错误信息
+//$.fn.jquery ：jquery版本
+//$.error('错误信息在此');
+//alert($.fn.jquery);
+
+
+//jQuery.noConflict([ex]) ;//出让$控制权。
+//var $$=jQuery.noConflict();
+//alert($('.box').html());// $ is not a function
+//alert(jQuery('.box').html());//jQuery==$
+//alert($$('.box').html());//返回值就是$符号
+jQuery.noConflict();
+
+;(function($){
+	alert($('.box').html());
+})(jQuery)
+
+;(function($){
+	alert($('.box').html());
+})(jQuery)
+
+		</script>
+	</body>
+</html>
