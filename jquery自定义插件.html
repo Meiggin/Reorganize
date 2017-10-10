@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+//		插件机制
+//		$.fn.extend(object);  扩展jq实例方法
+//		$.extend(object);  扩展工具方法
+		/*jQuery.fn.extend({
+		  check: function() {
+		    return this.each(function() { this.checked = true; });
+		  },
+		  uncheck: function() {
+		    return this.each(function() { this.checked = false; });
+		  }
+		});*/
+		//插件外壳:实例方法
+		;(function($){
+			$.fn.extend({
+				checkqq:function(str){
+					return /^[1-9]\d{4,10}$/.test(str);
+				}
+			})
+		})(jQuery)
+		
+		;(function($){
+			$.extend({
+				checkqq:function(str){
+					return /^[1-9]\d{4,10}$/.test(str);
+				}
+			})
+		})(jQuery)
+		
+		</script>
+	</head>
+	<body>
+		请输入qq号码：<input type="text" /><span></span>
+		<script type="text/javascript">
+			$(function(){
+				/*$('input').on('blur',function(){
+					if($(this).checkqq($(this).val())){
+						$('span').html('√')
+					}else{
+						$('span').html('格式不正确');
+					}
+				});*/
+				/*$('input').on('blur',function(){
+					alert($.checkqq($('input').val()));
+				});*/
+			});
+		</script>
+	</body>
+</html>
