@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//callback:一个多用途的回调列表对象，提供了强大的的方式来管理回调函数列表。
+			
+			function fn1(){
+				alert('fn1');
+				return false;
+			}
+			
+			function fn2(){
+				alert('fn2');
+			}
+			
+			function fn3(){
+				alert('fn3');
+			}
+			
+			function fn4(){
+				alert('fn4');
+			}
+		
+			//$.Callback()对象  
+			//四个方法：add()追加    fire()触发   remove()移除   disable()禁用
+			//四个参数：once unique memory stopOnFalse
+			//once: 确保这个回调列表只执行一次,fire触发一次(像一个递延 Deferred). 
+			//memory: 保持以前的值和将添加到这个列表的后面的最新的值立即执行调用任何回调 (像一个递延 Deferred). 
+			//unique: 确保一次只能添加一个回调(所以有没有在列表中的重复). 
+			//stopOnFalse: 当一个回调返回false 时中断调用 
+			
+			var cal=$.Callbacks("once memory unique stopOnFalse");
+			cal.add(fn1);
+			cal.add(fn2);
+			cal.add(fn2);
+			cal.add(fn2);
+			cal.add(fn2);
+			cal.add(fn2);
+			cal.add(fn2);
+			cal.add(fn2);
+			//cal.remove(fn2);//移除
+			cal.add(fn3);
+			//cal.disable();//禁用
+			cal.fire();
+			cal.fire();
+			cal.add(fn4);
+			/*setTimeout(function(){
+				cal.fire();
+			},2000)*/
+			
+		</script>
+	</body>
+</html>
