@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//$.Deferred();：延迟到未来某个点。
+			//var def=$.Deferred();  def.resolve():成功-->done();
+			//var def=$.Deferred();  def.reject():失败-->fail();
+			function fn(){
+				var def=$.Deferred();
+				function fn1(){
+					alert('我是内部的函数');
+					//def.resolve();//成功
+					def.reject();//失败
+				}
+				setTimeout(fn1,2000);
+				return def;
+			}
+			
+			//$.ajax().done().fail();  ajax本身返回deferred对象。
+			//普通函数具有done().fail();
+			//done()和fail()  deferred对象下面的。
+			//alert('我是内部的函数')===>alert('我是done方法');
+			//jQuery.when(deferreds)
+			$.when(fn()).done(function(){//成功的回调
+				alert('我是done方法');
+			}).fail(function(){//失败的回调
+				alert('我是fail的方法');
+			});
+		</script>
+	</body>
+</html>
