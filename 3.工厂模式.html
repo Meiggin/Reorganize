@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function cratePerson(name,age){
+				var obj=new Object();
+				obj.name=name;
+				obj.age=age;
+				obj.showinfo=function(){
+					alert(obj.name+obj.age);
+				}
+				return obj;
+			}
+			
+			var p1=cratePerson('zhangsan',100).showinfo();
+			var p2=cratePerson('wangwu',200).showinfo();
+			
+			var p1=cratePerson('zhangsan',100);
+			var p2=cratePerson('wangwu',200);
+			
+			alert(p1 instanceof Object);//true
+			alert(p2 instanceof Object);//true
+		</script>
+	</body>
+</html>
