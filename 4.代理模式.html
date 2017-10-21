@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			function Girl(name){
+				this.name=name;
+			}
+			
+			function Boy(girl){
+				this.girl=girl;
+				this.sendloveletter=function(letter){
+					console.log(this.girl.name+','+letter);
+				}
+			}
+			
+			function HelpBoy(girl){//代理对象
+				this.girl=girl;
+				this.helpsendloveletter=function(letter){
+					new Boy(this.girl).sendloveletter(letter);
+				}
+			}
+			
+			//new Boy(new Girl('安红')).sendloveletter('暗喜欢你');
+			
+			new HelpBoy(new Girl('***')).helpsendloveletter('暗喜欢你');
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
