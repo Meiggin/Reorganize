@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<button>弹出窗口</button>
+		<script type="text/javascript">
+			var oBtn=document.querySelector('button');
+			/*var bstop=true;
+			
+			function dialog(){
+				var cdiv=document.createElement('div');
+				cdiv.style.cssText='width:200px;height:200px;background:blue;position:absolute;';
+				cdiv.style.left=parseInt(Math.random()*10)*100+'px';
+				cdiv.style.top=parseInt(Math.random()*6)*100+'px';
+				document.body.appendChild(cdiv);
+			}
+			
+			oBtn.onclick=function(){
+				if(bstop){
+					bstop=false;
+					dialog();
+				}
+			}*/
+			
+			/*var dialog=(function (){
+				var cdiv=document.createElement('div');
+				cdiv.style.cssText='width:200px;height:200px;background:blue;position:absolute;';
+				cdiv.style.left=parseInt(Math.random()*10)*100+'px';
+				cdiv.style.top=parseInt(Math.random()*6)*100+'px';
+				cdiv.style.display='none';
+				document.body.appendChild(cdiv);
+				return cdiv;//返回元素对象
+			})();
+			
+			oBtn.onclick=function(){
+				dialog.style.display='block';
+			}*/
+			
+			//根本不需要进行弹窗操作，因为弹窗总是一开始就被创建好，那么很有可能将白白浪费一些 DOM节点。
+			var dialog=(function (){
+				var cdiv;
+				return function(){
+					if(!cdiv){
+						cdiv=document.createElement('div');
+						cdiv.style.cssText='width:200px;height:200px;background:blue;position:absolute;';
+						cdiv.style.left=parseInt(Math.random()*10)*100+'px';
+						cdiv.style.top=parseInt(Math.random()*6)*100+'px';
+						cdiv.style.display='none';
+						document.body.appendChild(cdiv);
+					}
+					return cdiv;//返回元素对象
+				}
+			})();
+			
+			oBtn.onclick=function(){
+				var oDiv=dialog();
+				oDiv.style.display='block';
+			}
+			
+		</script>
+	</body>
+</html>
