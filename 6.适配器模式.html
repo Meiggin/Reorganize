@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			/*function sum(n1,n2){
+				return n1+n2;
+			}
+			
+			function add(n1,n2){
+				return sum(n1,n2);
+			}
+			
+			alert(add(1,2));*/
+			
+			/*'hangzhou':'0571',
+					'ningbo':'0574',
+					'wenzhou':'0572'*/
+			
+			function zhejiangcity(){//定义一个方法，输出浙江省城市名和编号
+				var zjcity=[
+				{
+					name:'hangzhou',
+					id:'0571'
+				},
+				{
+					name:'ningbo',
+					id:'0574'
+				},
+				{
+					name:'wenzhou',
+					id:'0572'
+				},
+				{
+					name:'poyang',
+					id:'0793'
+				}
+				];
+				
+				return zjcity;
+			}
+			
+			
+			var render=function(fn){
+				console.log('浙江的城市有：');
+				console.log(JSON.stringify(fn()));
+			}
+			
+			//render(zhejiangcity);
+			
+			/*var guangdongCity = {
+				shenzhen: 11,
+				guangzhou: 12,
+				zhuhai: 13
+			};*/
+			
+			function addressAdapter(olddata){//zhejiangcity()=olddata
+				var newdata={'jinghua':'0579'};
+				var olddata=olddata();//获取老的数据。
+				
+				for(var i=0,c;c=olddata[i];i++){//olddata:老数据    c={name:'hangzhou',id='0571'}
+					newdata[c.name] = c.id;
+				}
+				
+				return newdata;
+			}
+			
+			console.log(addressAdapter(zhejiangcity));
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
