@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body style="height: 2000px;">
+		<script type="text/javascript">
+//			var myImage = (function(){
+//				var imgNode = document.createElement( 'img' );//创建图片对象
+//				document.body.appendChild( imgNode );//追加
+//				
+//				return {
+//					setSrc: function( src ){
+//						imgNode.src = src;
+//					}
+//				}
+//			})();
+//			myImage.setSrc('https://imgsa.baidu.com/news/q%3D100/sign=59ea9919e0f81a4c2032e8c9e72b6029/00e93901213fb80e2e354aba3dd12f2eb83894f2.jpg');
+//	
+//			
+//			function myimage(src){
+//				var imgNode = document.createElement( 'img' );//创建图片对象
+//				imgNode.src=src
+//				document.body.appendChild( imgNode );//追加
+//			}
+//			
+//			myimage('https://imgsa.baidu.com/news/q%3D100/sign=77ce1185bf8f8c54e5d3c12f0a282dee/f9dcd100baa1cd11aa14a54bb212c8fcc3ce2d3f.jpg')
+
+			/*var myImage = (function(){
+				var imgNode = document.createElement( 'img' );//创建图片对象
+				document.body.appendChild( imgNode );//追加
+				
+				return {
+					setSrc: function( src ){
+						imgNode.src = src;
+					}
+				}
+			})();*/
+			
+			//代理方法应用被代理的方法
+			/*var proxyImage = (function(){
+				var img = new Image;
+				img.onload = function(){//图片加载完成
+					myImage.setSrc( this.src );//调用被代理的方法
+				}
+				return {
+						setSrc: function( src ){
+							myImage.setSrc( 'https://b-ssl.duitang.com/uploads/item/201603/17/20160317173334_jLzd2.thumb.700_0.gif' );
+							img.src = src;
+						}
+				}
+			})();
+			proxyImage.setSrc('https://imgsa.baidu.com/news/q%3D100/sign=59ea9919e0f81a4c2032e8c9e72b6029/00e93901213fb80e2e354aba3dd12f2eb83894f2.jpg')*/
+		
+			
+			
+			
+		</script>
+		<img src="" alt="" imgurl="https://imgsa.baidu.com/news/q%3D100/sign=59ea9919e0f81a4c2032e8c9e72b6029/00e93901213fb80e2e354aba3dd12f2eb83894f2.jpg" />
+	</body>
+</html>
