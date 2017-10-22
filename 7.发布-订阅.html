@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			html,body{
+				height: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			/*document.body.addEventListener('click',function(){
+				alert('2222222');
+			},false);
+			document.body.addEventListener('click',function(){
+				alert('3333333');
+			},false);
+			document.body.addEventListener('click',function(){
+				alert('4444444');
+			},false);
+			
+			document.body.click();//主动触发*/
+			
+			var salesOffices = {}; // 定义售楼处
+			salesOffices.clientList = []; // 缓存列表，存放订阅者的回调函数
+			
+			salesOffices.listen = function( fn ){ // 增加订阅者的方法
+				this.clientList.push( fn ); // 订阅的消息添加进缓存列表
+			};
+			salesOffices.trigger = function(){ // 发布消息
+				for( var i = 0, fn; fn = this.clientList[i]; i++){
+					fn.apply( this, arguments ); // (2) // arguments 是发布消息时带上的参数
+				}
+			};
+			
+			salesOffices.listen( function( price, squareMeter ){ // 小明订阅消息
+				console.log( '价格= ' + price );
+				console.log( 'squareMeter= ' + squareMeter );
+			});
+			
+			salesOffices.trigger( 2000000, 88 ); // 输出：200 万，88 平方米
+		</script>
+	</body>
+</html>
