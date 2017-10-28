@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%- include("./header.ejs",{kerwinname:"首页",isLeftButton:true})%>
+    <p>Welcome to 11111 <%= title %></p>
+
+    <p><%=  myinfo+"1111"%></p>
+    <p><%-  myinfo%></p>
+    <p><%- 10+20 %></p>
+    <p><%- isShow==true?'111111':"222222" %></p>
+
+    <ul>
+    	
+    	<%for(var i=0; i<list.length;i++){ %>
+    		<li><%= list[i]%></li>
+    	<%}%>
+
+    	<!-- dwadw -->
+    	<%# 上面是一个for 循环实例%>
+    </ul>
+  </body>
+</html>
