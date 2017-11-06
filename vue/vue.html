@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src='vue.js'></script>
+	<style>
+		.red{
+			background:red;
+		}
+		.yellow{
+			background: yellow;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		{{name}}
+		{{99*1}}
+		{{isShow?'aaaa':'bbbb'}}
+		<p>{{age}}</p>
+		<p>{{obj.a}}</p>
+		<p v-html='myhtml'></p>
+		<p :class="isShow?'red':'yellow'">属性绑定</p>
+
+		<p v-if='isShow'>动态创建和删除</p>
+		<p v-show='isShow'>动态影藏和显示</p>
+		<button @click='handleClick'>click</button>
+	</div>
+	<div id="box2">
+		{{name}}
+	</div>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el:'#box',
+			data:{
+				name:'jiangchao',
+				age:1000,
+				isShow:true,
+				obj:{
+					a:'aaaa',
+					b:'bbbb'
+				},
+				myhtml:"<a href='#'>asfasdf</a>"
+			},
+			methods:{
+				handleClick:function(){
+					console.log('CLICK');
+					this.isShow = !this.isShow;
+					this.name = '123123'
+				}
+			}
+		});
+		new Vue({
+			el:'#box2',
+			data:{
+				name:'1321321241'
+				
+			}
+		})
+	</script>
+</body>
+</html>

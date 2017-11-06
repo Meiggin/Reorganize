@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src='vue.js'></script>
+	<style type="text/css" media="screen">
+			.active{background: red;}
+			
+	</style>
+</head>
+<body>
+	<div id="box">
+		<ul>
+			<li v-for='data,index in datalist' @click='handleClick(index)' :class="currentIndex==index?'active':''" :key='12'>{{data}}----------------{{index}}</li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+	var vm = new Vue({
+		el:'#box',
+		data:{
+			datalist:['aaa','bbb','ccc','ddd','eee'],
+			currentIndex:0
+		},
+		methods:{
+			handleClick(index){
+				console.log(index)
+				this.currentIndex = index;
+			}
+		}
+	})
+	</script>
+</body>
+</html>

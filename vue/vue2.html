@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src='vue.js'></script>
+</head>
+<body>
+	<div id="box">
+		{{name.substring(0,1).toUpperCase()+name.substring(1)}}
+		<p>{{changeWord}}</p>
+		<p>{{changeWordMethod()}}</p>
+	</div>
+	<script type="text/javascript">
+	new Vue({
+		el:'#box',
+		data:{
+			name:'meiggin'
+		},
+		methods:{
+			changeWordMethod:function(){//每次使用调用一次
+				return this.name.substring(0,1).toUpperCase()+this.name.substring(1)
+			}
+		},
+		computed:{
+			changeWord:function(){//有缓存，重复使用只调用一次
+				return this.name.substring(0,1).toUpperCase()+this.name.substring(1)
+			}
+		}
+	})
+	</script>
+</body>
+</html>

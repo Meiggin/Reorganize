@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src='vue.js'></script>
+	<style type="text/css" media="screen">
+			.red{background: red;}
+			.yellow{background: yellow;}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<p :class="isShow?'red':'yellow'">动态切换class</p>
+		<p :class="{red:isShow}">动态切换class</p>
+		<button @click='handleClick'>click</button>
+	</div>
+	<script type="text/javascript">
+	var vm = new Vue({
+		el:'#box',
+		data:{
+			isShow:true
+		},
+		methods:{
+			handleClick(){
+				this.isShow = !this.isShow
+			}
+		}
+	})
+	</script>
+</body>
+</html>
