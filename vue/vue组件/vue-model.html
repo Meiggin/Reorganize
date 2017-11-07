@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src='vue.js'></script>
+</head>
+<body>
+<!-- 	<div id="box">
+		<input  v-model='message1' placeholder="edit me">
+		<p>Message is: {{ message1 }}</p>
+	</div> -->
+	
+<!-- /*<script type="text/javascript">
+		new Vue({
+			el:'#box',
+			data:{
+				message1:''
+			}
+		})
+	</script>*/ -->
+	<!-- ----------------------------------------- -->
+
+<!-- 	<div id="box">
+		<input type="checkbox" id="checkbox" v-model='checked'>
+		<label for='checkbox'>{{checked}}</label>
+	</div> -->
+<!-- 	<script type="text/javascript">
+		new Vue({
+			el:'#box',
+			data:{
+				checked : true
+			}
+		})
+	</script> -->
+
+	<!-- ---------------------------------------------------- -->
+	<div id="box">
+		<input type="checkbox" id="jack" value="jack" v-model="checkedNames">
+		<label for="jack">jack</label>
+		<input type="checkbox" id="john" value="john" v-model="checkedNames">
+		<label for="john">john</label>
+		<input type="checkbox" id="mike" value="mike" v-model="checkedNames">
+		<label for="mike">mike</label>
+		<br/>
+		<span>Checked  names:{{checkedNames}}</span>
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el:'#box',
+			data:{
+				checkedNames:[]
+			}
+		})
+	</script>					
+</body>
+</html>
