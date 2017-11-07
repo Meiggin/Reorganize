@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src='vue.js'></script>
+</head>
+<body>
+	<div id="example">
+		<meiggin></meiggin>
+		<meiggin></meiggin>
+		<meiggin></meiggin>
+		{{jiang}}
+	</div>
+	<script type="text/javascript">
+	//全局注册
+		/*Vue.component('meiggin',{
+			template:`
+				<p>哈哈哈哈</p>
+
+			`,
+			data(){
+				return {
+					name:'jiangchaocomponent'
+				}
+			}
+		})
+		new Vue({
+			el:'#box',
+			data:{
+				name:'jiangchao'
+			}
+		})
+		new Vue({
+			el:'#box2',
+
+		})*/
+		//局部注册
+		/*var meiggin = {
+			template:`
+			<p>哈哈哈</p>
+			`
+		}
+		new Vue({
+			el:'#box',
+			components:{
+				'meiggin':meiggin
+			}
+		})
+		new Vue({
+			el:'#box2',
+			components:{
+				'meiggin':meiggin
+			}
+		})*/
+
+		Vue.component('meiggin',{
+			template:`
+			<button v-on:click='counter+=1'>{{counter}}</button>
+			`,
+			data:function(){
+				return {
+					counter:0
+				}
+			}
+		})
+		new Vue({
+			el:'#example',
+			data:{
+
+				jiang:'haha'
+			}
+		})
+</script>
+</body>
+</html>
