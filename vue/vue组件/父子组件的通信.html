@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src='vue.js'></script>
+</head>
+<body>
+	<div id="box">
+		<meiggin :testname='name' :testshow="true"></meiggin>
+		<meiggin :testname='name2' :testshow="true"></meiggin>
+	</div>
+<!-- 	<div id="box">
+		<meiggin @jiangevent='handleParentClick' @jiangevent2='handleParentClick2'>
+			
+		</meiggin>
+	</div> -->
+	<script type="text/javascript">
+	//父=>子
+		var meiggin = {
+			template:`
+				<div>
+					{{testname}}<br/>
+					<p v-if='testshow'>
+					<button>left</button>
+					</p>
+				</div>
+			`,
+			props:['testname','testshow']
+		}
+		var vm = new Vue({
+			el:'#box',
+			data:{
+				name:'jiang',
+				name2:'chao'
+			},
+			components:{
+				meiggin:meiggin
+			}
+		})
+		//子=>父
+/*		var meiggin = {
+			template:`
+			<p>组件
+			<button @click='handleClick'>组件的click</button>
+			<button @click='handleClick2'>组件的click2</button>
+			</p>
+			`,
+			data(){
+				return {myname:'子组件定义的值',myname2:'子组件定义的值2'}
+			},
+			methods:{
+				handleClick(){
+					console.log('click')
+					//触发事件
+					this.$emit('jiangevent',this.myname)
+				},
+				handleClick2(){
+					console.log('click2')
+					//触发事件
+					this.$emit('jiangevent2',this.myname2)
+				}
+			}
+		}
+		var vm = new Vue({
+			el:'#box',
+			data:{
+
+			},
+			components:{
+				meiggin:meiggin
+			},
+			methods:{
+				handleParentClick(value){
+					console.log('parent click',value)
+				},
+				handleParentClick2(value2){
+					console.log('jiangchao',value2)
+				}
+			}
+		})*/
+	</script>
+</body>
+</html>
