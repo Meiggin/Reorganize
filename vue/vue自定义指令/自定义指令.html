@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src='js/vue.js'></script>
+</head>
+<body>
+	<div id="box">
+		<p v-meiggin="'red'">{{name}}</p>
+		<p v-meiggin="'red'">1111</p>
+		<p v-meiggin="colorp" v-if='isShow'>1111</p>
+		<p v-meiggin2>2222</p>
+	</div>
+	<script type="text/javascript">
+	Vue.directive('meiggin',{
+		inserted(el,binding){//第一次插入才会触发，指令的生命周期
+			console.log(el);
+			el.style.background=binding.value
+		},
+		update(el,binding){
+			el.style.background=binding.value
+		},
+		undate(){
+			console.log('undate')
+		}
+	})
+	var vm = new Vue({
+		el:'#box',
+		data:{
+			name:'jiangchao',
+			colorp:'black',
+			isShow:true
+		},
+		directives:{
+			meiggin2:{
+				inserted(el){
+					el.style.background='yellow'
+				}
+			}
+		}
+	})
+	</script>
+</body>
+</html>
