@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src='js/vue.js'></script>
+
+</head>
+<body>
+	<div id="box">
+		<p v-meiggin='color'>1111</p>
+	</div>
+	<script type="text/javascript">
+	Vue.directive('meiggin',function(el,binding){
+		el.style.background=binding.value
+	})
+
+		var vm = new Vue({
+			el:'#box',
+			data:{
+				color:'yellow'
+			}
+		})
+	</script>
+</body>
+</html>
