@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<link rel="stylesheet" type="text/css" href="dist/css/swiper.css">
+	<script type="text/javascript" src='js/vue.js'></script>
+	<script type="text/javascript" src='dist/js/swiper.js'></script>
+
+</head>
+<body>
+	<div id="box">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide" v-for="data,index in datalist" v-swipe='index'>
+					{{data}}
+				</div>
+			</div>
+			<div class="swiper-pagination">
+				
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		Vue.directive('swipe',{
+			inserted(el,binding,vnode){
+				console.log(binding.value)
+				if(binding.value==vnode.context.datalist.length-1){
+					console.log('创建完成')
+					var swiper = new Swiper('.swiper-container',{
+						pagination:'.swiper-pagination',
+						paginationClickable:true,
+						loop:true,
+						autoplay:true,
+						speed:2000
+					})
+				}
+			}
+		})
+
+		var vm = new Vue({
+			el:'#box',
+			data:{
+				datalist:[]
+			},
+			mounted(){
+				console.log('mounted');
+				setTimeout(()=>{
+					this.datalist=['111','222','333'];
+
+					
+					
+				},2000)
+			}
+		})
+	</script>
+</body>
+</html>
