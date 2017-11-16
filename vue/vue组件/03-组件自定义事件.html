@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+
+<script type="text/javascript" src="lib/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <hello @kerwinevent="handleParentClick"
+  
+        >
+          
+
+        </hello>
+    </div>
+   
+
+    <script type="text/javascript">
+       	
+      var hello = {
+        template:`
+          <div>hello 组件
+
+              <button @click="handleClick">hello组件的click
+              </button>
+          </div>
+        `,
+        data(){
+          return {
+            myname:"子组件中定义的值"
+          }
+        },
+
+        methods:{
+          handleClick(){
+            // console.log("click");
+            //触发事件
+            this.$emit("kerwinevent",this.myname)
+          }
+        }
+      }
+      var vm = new Vue({
+        el:"#box",
+
+        data:{
+
+        },
+
+        components:{
+          hello:hello
+        },
+
+        methods:{
+          handleParentClick(value){
+            console.log("parent click",value);
+          }
+        }
+
+      })
+   
+    </script>
+</body>
+</html>
