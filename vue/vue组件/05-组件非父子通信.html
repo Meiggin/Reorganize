@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+
+<script type="text/javascript" src="lib/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+       <helloa ></helloa>
+       <hellob></hellob>
+    </div>
+   
+
+    <script type="text/javascript">
+    	
+        var bus = new Vue(); //中央事件总线
+
+
+       var obja = {
+        template:`
+          <div>a 组件
+
+              <button @click="handleClick">click</button>
+          </div>
+          
+        `,
+        methods:{
+          handleClick(){
+            console.log("click");
+            bus.$emit("kerwinenvent","来自a组件的问候")
+          }
+        },
+
+        mounted(){
+          console.log("a组件 mounted");
+        }
+
+       }
+
+       var objb = {
+        template:`
+          <div>b 组件</div>
+        `,
+        mounted(){
+          //组件的生命周期函数,
+          console.log("b组件 mounted")
+          //监听事件
+          //
+          bus.$on("kerwinenvent",function(value){
+            console.log(value);
+          })
+        }
+       }
+       new Vue({
+        el:"#box",
+
+        data:{
+
+        },
+
+        components:{
+          helloa:obja,
+          hellob:objb
+        }
+       })
+
+
+
+       
+    </script>
+</body>
+</html>
