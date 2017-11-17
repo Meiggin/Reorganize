@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>zepto对比</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+	<script src="lib/zepto.min.js"></script>
+	<style>
+		div{
+			width: 100px;
+			height: 100px;
+			background: red;
+			padding: 10px;
+			border: 1px solid black;
+		}
+
+		.hidden {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="a">1-zepto</div>
+	<div class="hidden">hidden</div>
+
+	<script>
+		//1. Zepto 操作 ul 元素时，添加 id 会生效。
+
+
+		var $list = $('<ul><li>Zepto 插入</li></ul>', {
+	        id: 'insert-by-zepto'
+	    });
+	    $list.appendTo($('body'));
+
+
+	    //2. 使用 Zepto 时 load 事件的处理函数会执行。
+
+
+	    $script = $('<script />', {
+        	src:"http://zeptojs.com/zepto.js"
+    	});
+
+    	$script.appendTo($('body'));
+
+    	$script.on('load', function() {
+        	console.log('zepto script loaded');
+    	});
+
+   
+    	//3.在 Zepto 中，当 a 被点击后，依次弹出了内容为”a事件“和”b事件“的弹出框。说明虽然事件委托在.a上可是却也触发了.b上的委托。但是在 jQuery 中只会触发 .a 上面的委托。
+
+
+    	var $doc = $(document);
+
+		
+		$doc.on('click', '.a', function () {
+		    alert('a事件');
+		    // Class 'a' change to class 'b'
+		    $(this).removeClass('a').addClass('b');
+		});
+
+		
+		$doc.on('click', '.b', function () {
+		    alert('b事件');
+		});
+
+		//4.width() 区别
+		console.log($(".a").width()); //122  Zepto 由盒模型(box-sizing)决定
+
+		//5. offset区别
+		console.log($(".a").offset());
+
+		//6.Zepto 无法获取隐藏元素宽高
+
+		console.log($(".hidden").width());
+
+	</script>
+</body>
+</html>
+		

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>jquery 对比</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+	<script src="lib/jquery-1.11.1.js"></script>
+	<style>
+		body{
+			height: 2000px;
+		}
+		div{
+			width: 100px;
+			height: 100px;
+			background: red;
+			padding: 10px;
+			border: 1px solid black;
+		}
+
+		.hidden {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="a">1-query</div>
+	<div class="hidden">hidden</div>
+
+	<script>
+		//1. jquery 操作 ul 元素时，添加 id 会失效。
+
+
+		var $list = $('<ul><li>jQuery 插入</li></ul>', {
+	        id: 'insert-by-zepto',
+	    })
+
+	    // $list.attr("id","")
+	    $list.appendTo($('body'));
+
+
+	    //2. 使用 jQuery 时,script的 load 事件的处理函数不会执行（img的load函数可以正常调用）。
+	    // 用原生的方式解决
+
+	    $script = $('<script>', {
+        	src:"http://zeptojs.com/zepto.js"
+        	
+    	});
+
+    	$script.appendTo($('body'));
+
+    	$script.on('load', function() {
+        	console.log('jQuery script loaded');
+    	})
+
+
+
+    	//3.在 Zepto 中，当 a 被点击后，依次弹出了内容为”a事件“和”b事件“的弹出框。说明虽然事件委托在.a上可是却也触发了.b上的委托。但是在 jQuery 中只会触发 .a 上面的委托。
+
+    	var $doc = $(document);
+
+		$doc.on('click', '.a', function () {
+		    alert('a事件');
+		    // Class 'a' change to class 'b'
+		    $(this).removeClass('a').addClass('b');
+		});
+
+		
+		$doc.on('click', '.b', function () {
+		    alert('b事件');
+		});
+
+		//4.width() 区别
+		console.log($(".a").width()); //jQuery 会忽略盒模型，始终返回内容区域的宽/高(不包含padding、border)。
+
+//		$(".a").innerWidth();
+//		$(".a").outerWidth();
+//		$(".a").outerWidth(true);
+
+		//5. offset区别
+		console.log($(".a").offset());
+
+		// obj.offset(); obj.position();
+
+
+		//6.jQuery可以获取隐藏元素宽高
+
+		console.log($(".hidden").width());
+
+
+		
+	</script>
+</body>
+</html>
+		

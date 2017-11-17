@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+	<script src="lib/zepto.min.js"></script>
+	<style>
+		div{
+			width: 100px;
+			height: 100px;
+			background: red;
+			padding: 10px;
+			border: 1px solid black;
+		}
+
+		.hidden {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+<div class="a">1-zepto</div>
+	<div class="hidden">hidden</div>
+
+	<script>
+		$("div").html("hell0 world").on("click",function(){
+			alert(1111);
+		})
+	
+	</script>
+
+
+</body>
+</html>
