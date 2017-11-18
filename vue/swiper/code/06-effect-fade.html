@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Swiper demo</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="./dist/css/swiper.min.css">
+        <!-- Swiper JS -->
+    <script src="./dist/js/swiper.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <!-- Demo styles -->
+    <style>
+        *{margin:0px;padding: 0;}
+        html,body{
+            height: 100%;
+        }
+
+        html{
+            font-size: 20px;
+        }
+        .swiper-container{
+            width: 100%;
+            /* margin: 100px auto; */
+            height: 100%;
+            background: gray;
+        }
+
+
+       .swiper-slide{
+           position: relative;
+       }
+        .swiper-slide p{
+            position: absolute;
+            left:50%;
+            top:50%;
+            margin-left: -50px;
+            margin-top: -50px;
+            background-color: #14c145;
+            color:white;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"style="background: black" ><p>Slide 1</p></div>
+           <div class="swiper-slide"style="background: red" ><p>Slide 2</p></div>
+           <div class="swiper-slide"style="background: yellow" ><p>Slide 3</p></div>
+           <div class="swiper-slide"style="background: blue" ><p>Slide 4</p></div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+
+
+    <!-- Initialize Swiper -->
+    <script>
+ 
+    var swiper = new Swiper('.swiper-container',{
+    	pagination: '.swiper-pagination',
+        paginationClickable: true,
+        effect:"fade", //两页面切换的效果
+        loop:true,
+        direction:"vertical"
+    });
+    </script>
+</body>
+</html>
