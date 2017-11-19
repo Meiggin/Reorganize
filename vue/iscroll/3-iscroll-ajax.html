@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<title>iScroll demo: scrollbars</title>
+<!-- //1 .引入js  -->
+<script type="text/javascript" src="lib/jquery.min.js"></script>
+<script type="text/javascript" src="lib/iscroll-min.js"></script>
+
+
+	<style>
+
+		*{margin: 0px;padding:0px;}
+		html,body{
+			height: 100%;
+		}
+		
+		#wrapper{
+			height: 50%;
+			/* overflow: auto; */
+			overflow: hidden;
+			/*溢出隐藏*/
+
+			position: relative;
+			/* 修正滚动条的位置  */
+		}
+
+	</style>
+</head>
+<body >
+	<div id="wrapper">
+		<!-- 内容超出容器高度 -->
+		<ul>
+			
+		</ul>
+	</div>
+			
+	<script>
+		
+	var myscroll = new IScroll("#wrapper",{
+			mouseWheel: true,  //支持鼠标控制
+    		scrollbars: true   //支持显示滚动条
+    		
+	});
+
+
+	setTimeout(() => {
+	  	for(var i=0;i<30;i++){
+	  		$("<li>").html(`item`+i).appendTo($("#wrapper ul"));
+	  	}
+	  	// myscroll.refresh(); //更新数据
+	}, 2000)
+
+	//第一个参数可以是 dom 对象， 也可以是id
+
+	</script>
+</body>
+</html>
