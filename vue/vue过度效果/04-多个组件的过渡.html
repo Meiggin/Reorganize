@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css">
+  
+    *{
+      margin: 0px;
+      padding: 0px;
+    }
+
+    html,body{
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+    }
+   footer ul {
+    display: flex;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 40px;
+   }
+
+   footer ul li {
+    flex: 1;
+    text-align: center;
+    list-style: none;
+    height: 40px;
+    line-height: 40px;
+    background: gray;
+   }
+
+    .bounce-enter-active {
+    animation: bounce-in .5s;
+  }
+  .bounce-leave-active {
+    animation: bounce-in .5s reverse;
+  }
+  @keyframes bounce-in {
+    0%{
+      transform: translateX(100px);
+      opacity: 0;
+    }
+
+    100%{
+      transform: translateX(0px);
+      opacity: 1;
+    }
+  }
+</style>
+<script type="text/javascript" src="lib/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+
+    <transition name="bounce" mode="out-in">
+      <keep-alive>
+        <component :is="current"></component>
+      </keep-alive>
+
+    </transition>
+    <footer>
+
+
+     <ul>
+       <li @click="handleClick('home')"><a >首页</a></li>
+       <li @click="handleClick('list')"><a >列表页</a></li>  
+       <li @click="handleClick('shopcar')"><a >购物车页面</a></li>
+     </ul>
+
+     </footer>
+    </div>
+   
+
+    <script type="text/javascript">
+
+    var home={
+      template:`
+
+        <div>home页面
+            <input type="text"/>
+        </div>
+      `
+    }
+    var list2={
+      template:`
+
+        <div>list页面</div>
+      `
+    }
+    var shopcar={
+      template:`
+
+        <div>shopcar页面</div>
+      `
+    }
+      var vm = new Vue({
+        el:"#box",
+        data:{
+          current:"home"
+        },
+
+        components:{
+          home,
+          list:list2,
+          shopcar
+        },
+
+        methods:{
+          handleClick(value){
+            this.current = value;
+          }
+        }
+      })
+
+      //
+      //
+      //es6 对象简写
+      //
+      var obj = {
+        name:"kerwin",
+        getName:function(){
+
+        }
+      }
+
+
+
+      var name ="kerwin";
+      var obj  ={
+        name,
+        getName(){
+
+        }
+      }      
+    </script>
+</body>
+</html>
