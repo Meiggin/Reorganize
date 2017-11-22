@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="lib/swiper/css/swiper.css" rel="stylesheet">
+
+<script type="text/javascript" src="lib/vue.js"></script>
+<script type="text/javascript" src="lib/swiper/js/swiper.js"></script>
+</head>
+<body>
+    <div id="box">
+    	
+        <div class="swiper-container" >
+        <!-- //swiper-wrapper 就包裹所有轮播的页面 -->
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="data,index in datalist" v-swipe="index">
+              {{data}}
+            </div>
+        </div>
+        <!-- //加上下面这个div 就是加上分页器 -->
+        <div class="swiper-pagination"></div>
+    </div>
+    </div>	
+
+    <script type="text/javascript">
+          
+
+     Vue.directive("swipe",{
+      inserted(el,binding,vnode){
+        console.log(vnode.context.datalist);
+
+        if(binding.value==vnode.context.datalist.length-1){
+          console.log("所有的dom 都创建完了，做swiper初始化");
+
+          var swiper = new Swiper('.swiper-container',{
+                pagination: '.swiper-pagination', //初始化 分页器
+                paginationClickable: true, //分页器可以点击
+                loop: true,
+                autoplay:true,
+                speed:3000
+            });
+        }
+      }
+     })
+
+
+
+      var vm = new Vue({
+        el:"#box",
+        data:{
+          datalist:[]
+        },
+
+        mounted(){
+          console.log("mounted");
+          //ajax
+          setTimeout(() => {
+            this.datalist =["1111","2222","3333"];
+
+            
+          }, 2000)
+        }
+      })       
+
+
+    </script>
+</body>
+</html>
