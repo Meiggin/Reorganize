@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'microsoft yahei';
+    }
+    
+    html,
+    body {
+        width: 100%;
+    }
+    
+    #loutinav {
+        width: 35px;
+        position: fixed;
+        top: 100px;
+        left: 50px;
+        border: 1px solid #ddd;
+        display: none;
+    }
+    
+    #loutinav ul li {
+        width: 35px;
+        height: 32px;
+        border-bottom: 1px dotted #DDDDDD;
+        list-style: none;
+        font-size: 12px;
+        text-align: center;
+        position: relative;
+        cursor: pointer;
+        padding: 10px 0;
+        background: #918888;
+        color: #fff;
+    }
+    
+    #loutinav ul li span {
+        width: 35px;
+        height: 32px;
+        padding: 10px 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    
+    #loutinav ul li.last {
+        background: #5e4a4a;
+        color: #fff;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    #loutinav ul li.active span {
+        background: #c00;
+        color: #fff;
+        display: block;
+    }
+    
+    #loutinav ul li:hover span {
+        background: #c00;
+        color: #fff;
+        display: block;
+    }
+    
+    #header {
+        width: 1000px;
+        height: 1000px;
+        background: #cc6633;
+        margin: 0 auto;
+        font-size: 50px;
+        line-height: 1000px;
+        text-align: center;
+        color: #000;
+    }
+    
+    #main {
+        width: 1000px;
+        background: #66ff66;
+        margin: 0 auto;
+    }
+    
+    #main .louti {
+        height: 600px;
+        width: 1000px;
+        font-size: 50px;
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+        line-height: 600px;
+    }
+    
+    #footer {
+        width: 1000px;
+        height: 400px;
+        background: red;
+        margin: 0 auto;
+        font-size: 50px;
+        line-height: 400px;
+        text-align: center;
+        color: #000;
+    }
+    </style>
+    <script src="jquery.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id="loutinav">
+        <ul>
+            <li class="active"><span>享品质</span> </li>
+            <li><span>服饰美妆</span> </li>
+            <li><span>电脑数码</span> </li>
+            <li><span>3C运动</span> </li>
+            <li><span>爱吃</span> </li>
+            <li><span>母婴居家</span> </li>
+            <li><span>图书汽车</span> </li>
+            <li><span>虚拟</span> </li>
+            <li><span>还没逛够</span> </li>
+            <li class="last">顶部</li>
+        </ul>
+    </div>
+    <!--楼层内容开始-->
+    <div id="header">
+        网站头部(height:1000px)
+    </div>
+    
+    <div id="main">
+        <div class="louti" style="background: #cc0033;">
+            享品质
+        </div>
+        <div class="louti" style="background: #999933;">
+            服饰美妆
+        </div>
+        <div class="louti" style="background: #ccff33;">
+            电脑数码
+        </div>
+        <div class="louti" style="background: #006633;">
+            3C运动
+        </div>
+        <div class="louti" style="background: #6666cc;">
+            爱吃
+        </div>
+        <div class="louti" style="background: #ff6600;">
+            母婴居家
+        </div>
+        <div class="louti" style="background: #ffff00;">
+            图书汽车
+        </div>
+        <div class="louti" style="background: #3333ff;">
+            虚拟
+        </div>
+        <div class="louti" style="background: #ff00cc;">
+            还没逛够
+        </div>
+    </div>
+    <div id="footer">
+        网站底部
+    </div>
+    
+</body>
+<script type="text/javascript">
+	//1.通过scroll事件，控制左侧的楼梯显示与隐藏
+	$(window).scroll(function(){
+		//获取scrolltop值
+		var $scrolltop=$(window).scrollTop();
+		if($scrolltop>=800){
+			$('#loutinav').fadeIn(500);//fadeIn();
+		}else{
+			$('#loutinav').fadeOut(500);
+		}
+		//4.触发滚轮，让对应的楼梯，添加类名，进行切换标注。
+		$('#loutinav li').each(function(){
+			var $top=$('.louti').eq($(this).index()).offset().top+400;
+			if($top>$scrolltop){
+				$('#loutinav li').removeClass('active');
+				$('#loutinav li').eq($(this).index()).addClass('active');
+				return false;
+			}
+		})
+		
+		
+	});
+	//2.点击楼梯，获取对应的楼层的top，将top赋值给(html,body)下面scrolltop
+	//on(events,[selector],[data],fn)
+	$('#loutinav li').not('.last').on('click',function(){
+		$(this).addClass('active').siblings().removeClass('active');
+		var $index=$(this).index();//当前的索引
+		var $top=$('.louti').eq($index).offset().top;//当前楼梯对应的楼层的top值
+		$('html,body').animate({//赋值 
+			//document.documentElement.scrollTop || document.body.scrollTop
+			scrollTop:$top
+		},200);
+	});
+	//3.回到顶部
+	$('.last').on('click',function(){
+		$('html,body').animate({//赋值 
+			//document.documentElement.scrollTop || document.body.scrollTop
+			scrollTop:0
+		});
+	});
+	
+//	$('.louti').each(function(i,ele){
+//		console.log($(this).index());//当前索引
+//		return false;//返回 'false' 将停止循环 (就像在普通的循环中使用 'break')。返回 'true' 跳至下一个循环(就像在普通的循环中使用'continue')。
+//		/*console.log(i);//索引
+//		console.log(ele);//元素本身*/
+//		//console.log($(this).offset().top);//1000 1600  2200....
+//	});
+</script>
+</html>

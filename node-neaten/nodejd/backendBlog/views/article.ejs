@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<link rel="icon" href="//www.jd.com/favicon.ico">
+	<link rel='stylesheet' href='/bootstrap/css/bootstrap.css' />
+	<script type="text/javascript" src='/bootstrap/js/jquery-1.11.0.js'></script>
+	<script type="text/javascript" src='/bootstrap/js/bootstrap.js'></script>
+	<link type="text/css" rel="stylesheet" href="css/public.css" />
+
+</head>
+<body>
+
+	<nav class="navbar navbar-default" style='background: #f00f08;'>
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" style="color:#fff;"><%= title %></a>
+
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+				<form class="navbar-form navbar-right">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Search">
+					</div>
+					<button type="submit" class="btn btn-default">搜索</button>
+				</form>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#" style="color:#fff;">欢迎回来,<%= name%></a></li>
+					<li class="dropdown">
+						<a href="/logout" class="dropdown-toggle"  style="color:#fff;">注销 </a>
+					</li>
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+	<div class="container">
+		<%if(isNew){%>
+		<form method="post" action="/article">
+			<div class="form-group">
+				<label for="exampleInputEmail1">标题</label>
+				<input type="text" class="form-control" id="exampleInputEmail1" name="title" placeholder="title">
+			</div>
+			<div class="form-group">
+				<label for="exampleInputPassword1">内容</label>
+				<textarea class="form-control" rows="10" name="content"></textarea>
+			</div>
+
+			<button type="submit" class="btn btn-default">发表</button>
+		</form>
+		<%}else{%>
+		<form method="post" action="/article/fixed">
+			<div class="form-group">
+				<label for="exampleInputEmail1">标题</label>
+				<input type="text" class="form-control" id="exampleInputEmail1" name="title" placeholder="title" value="<%= info.title%>">
+			</div>
+			<div class="form-group">
+				<label for="exampleInputPassword1">内容</label>
+				<textarea class="form-control" rows="10" name="content"><%= info.content%></textarea>
+			</div>
+			<input type="hidden" name="id" value="<%= info._id%>" placeholder="">
+			<button type="submit" class="btn btn-default">修改</button>
+		</form>
+		<%}%>
+	</div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+.meiggin {
+  margin: 0 auto;
+  width: 1210px; }
+
+body {
+  font-size: 14px; }
+
+#header {
+  height: 110px;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 0 10px #999; }
+  #header .logo a {
+    width: 160px;
+    height: 50px;
+    float: left;
+    margin-top: 24px;
+    background: url(../images/icon.png) no-repeat; }
+  #header .logo span {
+    float: left;
+    height: 34px;
+    line-height: 34px;
+    font-size: 24px;
+    color: #333;
+    padding-left: 20px;
+    margin-top: 34px; }
+  #header .login_header {
+    font-size: 16px;
+    float: right;
+    margin-top: 55px;
+    color: #999; }
+    #header .login_header a {
+      color: #333; }
+
+#mian .mian_table {
+  margin: 50px auto 60px;
+  width: 830px; }
+  #mian .mian_table .mian_l {
+    width: 400px;
+    float: left; }
+    #mian .mian_table .mian_l form .input_tip {
+      color: #c5c5c5;
+      height: 27px;
+      font-size: 12px;
+      padding-top: 5px; }
+    #mian .mian_table .mian_l form label {
+      float: left;
+      width: 90px;
+      height: 52px;
+      line-height: 52px;
+      padding-left: 11px; }
+    #mian .mian_table .mian_l form input {
+      border: 0 none;
+      font-size: 14px;
+      width: 190px;
+      height: 19px;
+      padding-bottom: 11px;
+      padding-left: 20px;
+      padding-top: 26px; }
+    #mian .mian_table .mian_l form .mian_l_phone button {
+      position: absolute;
+      right: 3px;
+      top: 3px;
+      width: 110px;
+      height: 46px;
+      border: none;
+      background: #f2f2f2;
+      color: #333;
+      padding: 0; }
+    #mian .mian_table .mian_l form .mian_l_btn button {
+      width: 100%;
+      height: 54px;
+      color: #fff;
+      background: #e22;
+      border: 0;
+      font-size: 16px; }
+    #mian .mian_table .mian_l form .notice {
+      position: relative;
+      border: solid 1px #ddd;
+      width: 398px;
+      height: 52px;
+      z-index: 13; }
+    #mian .mian_table .mian_l form .mian_l_code {
+      position: relative;
+      border: solid 1px #ddd;
+      width: 398px;
+      height: 52px;
+      z-index: 0; }
+      #mian .mian_table .mian_l form .mian_l_code .boximg {
+        position: absolute;
+        right: 3px;
+        top: 3px;
+        width: 108px;
+        height: 44px;
+        cursor: pointer;
+        font: 14px/44px "";
+        text-align: center;
+        background: white;
+        border: 1px solid #ff0036; }
+  #mian .mian_table .mian_r {
+    float: left;
+    margin-left: 104px;
+    height: 605px;
+    padding-left: 90px;
+    border-left: solid 1px #e6e6e6; }
+    #mian .mian_table .mian_r .mian_r_t {
+      width: 160px;
+      height: 60px;
+      border-bottom: solid 1px #ddd;
+      margin-left: 30px; }
+      #mian .mian_table .mian_r .mian_r_t a {
+        display: block;
+        width: 160px;
+        height: 30px; }
+        #mian .mian_table .mian_r .mian_r_t a i {
+          display: inline-block;
+          width: 30px;
+          height: 29px;
+          vertical-align: middle;
+          margin-right: 15px;
+          background: url(../images/icon.png) 0 -50px no-repeat; }
+        #mian .mian_table .mian_r .mian_r_t a span {
+          vertical-align: middle; }
+    #mian .mian_table .mian_r .mian_r_b {
+      width: 160px;
+      margin-left: 30px;
+      margin-top: 30px; }
+      #mian .mian_table .mian_r .mian_r_b a {
+        display: block;
+        width: 170px;
+        height: 40px; }
+        #mian .mian_table .mian_r .mian_r_b a i {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          vertical-align: text-bottom;
+          margin-right: 15px;
+          float: left;
+          margin-top: 7px;
+          background: url(../images/icon.png) -50px -50px no-repeat; }
+
+.bottom .footer {
+  padding-bottom: 30px;
+  text-align: center; }
+  .bottom .footer a {
+    margin: 0px 10px; }
+  .bottom .footer .copyright {
+    margin: 10px 0; }
+
+/*# sourceMappingURL=login.css.map */

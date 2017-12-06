@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+
+    <link rel="stylesheet" href="/css/login.css"/>
+    <!-- <script src="/js/login.js"></script> -->
+  </head>
+  <body>
+    <%- include("./header.ejs",{kerwinname:"登录页面",isLeftButton:false})%>
+    <p>Welcome to login</p>
+
+    <form method="post"wa action="/login/validate">
+    	
+    	<input type="text" name="username"/>
+    	<input type="password" name="password"/>
+
+    	<button type="submit">登录</button>
+    </form>
+
+    <%if(isShowError){%>
+    <p>用户名和密码不匹配</p>
+
+    <%}%>
+  </body>
+</html>

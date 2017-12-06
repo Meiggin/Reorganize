@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<script src="/socket.io/socket.io.js"></script>
+
+</head>
+<body>
+    <h1>我是websocket 客户端</h1>
+
+    <input type="text" id="mytext"/>
+    <button id="mybtn">发送</button>
+    <script type="text/javascript">
+    	
+    	var name =prompt("请输入你的名字:");
+
+
+        var socket = io('http://localhost:3000');
+
+        socket.on("kerwinwelcome",function(msg){
+            console.log(msg);
+        })
+
+        socket.on("kerwinall",function(msg){
+            console.log(msg);
+        })
+
+    	var obtn = document.getElementById("mybtn");
+    	var otext= document.getElementById("mytext");
+    	obtn.onclick =function(){
+    		//给服务端发消息
+    		socket.emit("all",{name:name,info:otext.value})
+        }
+    </script>
+</body>	
+</html>

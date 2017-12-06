@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>京东——<%= title%></title>
+	<link rel="icon" href="//www.jd.com/favicon.ico">
+	<link type="text/css" rel="stylesheet" href="css/public.css" />
+	<link type="text/css" rel="stylesheet" href="css/register.css" />
+</head>
+<body>
+	<div class="meiggin top clear">
+		<div class="logo">
+			<a href="#">
+				<img src="images/logo-201305-b.png" />
+			</a>
+			<i></i>
+		</div>
+		<a href="#" class="top_r">
+			<i></i> 登陆页面，调查问卷
+		</a>
+	</div>
+	<div id="content" class="clear">
+		<div class="content_t">
+			<div class="content_t_wrap">
+				<i></i>
+				<p>
+					依据《网络安全法》，为保障您的账户安全和正常使用，请尽快完成手机号验证！ 新版
+					<a href="https://about.jd.com/privacy/" target="_blank" style="outline: rgb(109, 109, 109) none 0px;">《京东隐私政策》</a>已上线，将更有利于保护您的个人隐私。
+				</p>
+			</div>
+		</div>
+		<div class="content_b">
+			<div class="contentinput_wrap meiggin">
+				<div class="contentinput">
+					<div class="contentinput_l">
+						<a href="#">扫码登陆</a>
+					</div>
+					<div class="contentinput_r">
+						<a href="#">账户登录</a>
+					</div>
+					<div class="contentinput_box">
+						<div class="tab_t"></div>
+						<div class="tab_c">
+							<%if(isShow){%>
+							<div>
+								<i></i>
+								账户名或密码错误，请重新输入
+							</div>
+							<%}%>
+						</div>
+						<div class="tab_b">
+							<div class="form">
+								<form id="formlogin" method="post" action="/login">
+									<div class="form_1">
+										<label></label>
+										<input type="text" placeholder="邮箱/用户名/已验证手机" name="username" />
+										<span></span>
+									</div>
+									<div class="form_2">
+										<label></label>
+										<input type="password" placeholder="密码" name="password" />
+										<span></span>
+									</div>
+									<div class="form_3">
+										<input type="text" />
+										<img />
+										<a href="#">看不清换一张</a>
+									</div>
+									<div class="form_4">
+										<div class="safe">
+											<span>
+												<a href="#">忘记密码</a>
+											</span>
+										</div>
+									</div>
+									<div class="form_5">
+
+										<div class="form_btn">
+											<button id="submit" type="submit">
+												立即登陆
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="contentinput_b">
+						<ul>
+							<li>
+								<i></i>
+								<a href="#" class="c_qq">
+									<b class="QQ"></b>
+									<span>QQ</span>
+								</a>
+								<span>|</span>
+							</li>
+							<li>
+								<a href="#" class="c_weixin">
+									<b class="weixin"></b>
+									<span>微信</span>
+								</a>
+							</li>
+							<li  class="contentinput_b_li">
+								<div>
+									<div class="mian_l_btn">
+										<button id="loginNow" type="submit">
+											立即注册
+										</button>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="contentbg_wrap">
+				<div class="contentbg meiggin">
+					<div class="banner"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="meiggin bottom">
+		<div class="footer">
+			<div class="link">
+				<a href="#">关于我们</a>
+				|
+				<a href="#">联系我们</a>
+				|
+				<a href="#">人才招聘</a>
+				|
+				<a href="#">商家入驻</a>
+				|
+				<a href="#">广告服务</a>
+				|
+				<a href="#">手机京东</a>
+				|
+				<a href="#">友情链接</a>
+				|
+				<a href="#">销售联盟</a>
+				|
+				<a href="#">京东社区</a>
+				|
+				<a href="#">京东工艺</a>
+				|
+				<a href="#">English Site</a>
+			</div>
+			<div class="copyright">
+				Copyright&nbsp;©&nbsp;2004-2017&nbsp;&nbsp;京东JD.com&nbsp;版权所有
+			</div>
+		</div>
+	</div>	
+
+</body>
+
+</html>
